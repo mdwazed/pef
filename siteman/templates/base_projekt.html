@@ -1,0 +1,37 @@
+{% extends 'siteman_base_template.html' %}
+{% load static %}
+
+{% block left_nav %}
+<div class="left-nav-projekt">
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'siteman:project' %}">Project </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'siteman:haus' %}">Haus</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'siteman:wohnung' %}">Wohnung</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'siteman:rohbau' %}">Rohbau</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'siteman:wande' %}">Wände</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'siteman:abdictung' %}">Abdictung</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'siteman:decken' %}">Decken</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'siteman:versorgung' %}">Versorgung|Entsorgung</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'siteman:erweiterter' %}">Erweiterter Rohbau</a>
+      </li>
+    </ul>
+</div>
+
+{% endblock %}

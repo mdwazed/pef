@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="de">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>pef | Home</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/base_css.css' %}">
+</head>
+<body>
+
+    <div class="container">
+
+        <div class="top-banner" style="background-image: url({% static 'img/top-banner-background-transparent.png' %});">
+            <div class="logo">
+                <img src="{% static 'img/logo-pef.png' %}" alt="logo-pef">
+            </div>
+            <div class="head-line">
+                <h1>PEF Baustellenmanagement</h1>
+            </div>            
+        </div>
+        <div class="top-nav">
+            <ul class="nav justify-content-right">
+              <li class="nav-item">
+                <a class="nav-link active" id="top-nav-projekt" href="{% url 'siteman:home' %}">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" id="top-nav-projekt" href="{% url 'siteman:home_projekt' %}">Projekt</a>
+              </li>  
+              <li class="nav-item">
+                <a class="nav-link active" id="top-nav-erganzung" href="{% url 'siteman:home_erganzung' %}">Ergänzung</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="top-nav-progress" href="{% url 'siteman:home_progress' %}">Der Progress</a>
+              </li>            
+            </ul>
+        </div>
+        <div class="inner-container">
+          {% block left_nav %}
+
+          {% endblock %}
+            
+          <div class="content">
+              {% block content %}
+              {% endblock %}
+          </div>
+        </div>
+                
+        
+    </div>
+    
+  <script type="text/javascript" src="{% static 'js/test.js' %}"></script>    
+</body>
+</html>
