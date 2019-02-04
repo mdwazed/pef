@@ -26,6 +26,20 @@ def versorgung(request):
     return render(request, 'siteman/versorgung.html')
 def erweiterter(request):
     return render(request, 'siteman/erweiterter.html')
+# def gebaudeausrustung(request):
+#     return render(request, 'siteman/rohinstallation.html')
+def rohinstallation(request):
+    return render(request, 'siteman/rohinstallation.html')
+    # return HttpResponse('response returned')
+def sanitarausstattung(request):
+    return render(request, 'siteman/sanitarausstattung.html')
+def elektroausstattung(request):
+    return render(request, 'siteman/elektroausstattung.html')
+def entluftung(request):
+    return render(request, 'siteman/entluftung.html')
+def aufzuge(request):
+    return render(request, 'siteman/aufzuge.html')
+
 
 
 def home_erganzung(request):

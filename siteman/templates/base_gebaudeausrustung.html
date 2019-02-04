@@ -1,0 +1,19 @@
+{% extends 'base_projekt.html' %}
+{% load static %}
+
+{% block content%}
+    <h3> Projekt XXXX - Technische gebäudeausrüstung </h3>
+    <div class="inner-nav">
+        <nav class="nav nav-pills flex-column flex-sm-row">
+          <a class="flex-sm-fill text-sm-center nav-link" href="{% url 'siteman:rohinstallation' %}">Rohinstallation</a>
+          <a class="flex-sm-fill text-sm-center nav-link" href="{% url 'siteman:sanitarausstattung' %}">Sanitärausstattung</a>
+          <a class="flex-sm-fill text-sm-center nav-link" href="{% url 'siteman:elektroausstattung' %}"> Elektroausstattung</a>
+          <a class="flex-sm-fill text-sm-center nav-link" href="{% url 'siteman:entluftung' %}">Be- und Entlüftung</a>
+          <a class="flex-sm-fill text-sm-center nav-link" href="{% url 'siteman:aufzuge' %}">Aufzüge</a>
+        </nav>
+    </div>
+    {% block inner_content %}
+    {% endblock%}
+ 
+
+{% endblock %}

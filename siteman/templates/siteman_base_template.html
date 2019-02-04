@@ -20,7 +20,7 @@
             </div>            
         </div>
         <div class="top-nav">
-            <ul class="nav justify-content-right">
+            <ul class="nav justify-content-end">
               <li class="nav-item">
                 <a class="nav-link active" id="top-nav-projekt" href="{% url 'siteman:home' %}">Home</a>
               </li>
@@ -36,9 +36,12 @@
             </ul>
         </div>
         <div class="inner-container">
-          {% block left_nav %}
+          <div>
+            {% block left_nav %}
 
-          {% endblock %}
+            {% endblock %}
+          </div>
+          
             
           <div class="content">
               {% block content %}

@@ -8,6 +8,7 @@
     display: flex;
     flex-direction: column;
     font-size: 18px;
+    min-height: 80vh;
     /*border: 1px solid blue;*/
 }
 .inner-container {
@@ -33,17 +34,7 @@
     font-weight: bold;
 }
 
-/*---------------------------------*/
-/*-------- nav -------------*/
-/*-----------------------------------*/
 
-.card {
-    margin-top: 10px;
-}
-
-.card p {
-    margin-left: 30px;
-}
 
 /*---------------------------------*/
 /*-------- nav -------------*/
@@ -52,12 +43,12 @@
     margin-top: 10px;
     display: flex;
     flex-direction: row-reverse;
-    margin-right: 5%;
+    /*margin-right: 5%;*/
 }
 
 .top-nav a {
     color: #000;
-    transition: color 0.5s ease;
+    transition: color 0.3s ease;
 }
 
 .top-nav a:hover {
@@ -65,47 +56,53 @@
 }
 
 .top-nav li {
-    background-color: #FF8263;
+    /*background-color: #FF8263;*/
+    background-color: #AFD1FD;
 
     color: #000;
-    transition: background-color 0.5s ease;
+    transition: background-color 0.3s ease;
 }
 
 .top-nav li:hover {
-    background-color: #D3111A;
+    /*background-color: #D3111A;*/
+    background-color: #0F65D8;
     
 }
 
-.left-nav-projekt {
-    margin-top: 30px;
+.left-nav-projekt,
+.left-nav-erganzung {
+    margin-top: 65px;
     flex-basis: 20%;
     /*display: none;*/
 }
 
-.left-nav-projekt a {
+.left-nav-projekt a,
+.left-nav-erganzung a {
     color: #000;
-    transition: color 0.5s ease;
+    transition: color 0.3s ease;
 }
 
-.left-nav-projekt a:hover {
+.left-nav-projekt a:hover,
+.left-nav-erganzung a:hover {
     color: #fff;
 }
 
-.left-nav-projekt li {
-    background-color: #FF8263;
-
+.left-nav-projekt li,
+.left-nav-erganzung li {
+    background-color: #AFD1FD;
     color: #000;
-    transition: background-color 0.5s ease;
+    transition: background-color 0.3s ease;
 }
 
-.left-nav-projekt li:hover {
-    background-color: #D3111A;
+.left-nav-projekt li:hover,
+.left-nav-erganzung li:hover {
+    background-color: #0F65D8;
 }
 
-.left-nav-erganzung {
-    margin-top: 30px;
+/* .left-nav-erganzung {
+    margin-top: 65px;
     flex-basis: 20%;
-    /*display: none;*/
+    display: none;
 }
 
 .left-nav-erganzung a {
@@ -119,24 +116,60 @@
 
 .left-nav-erganzung li {
     background-color: #FF8263;
-
     color: #000;
     transition: background-color 0.5s ease;
 }
 
 .left-nav-erganzung li:hover {
     background-color: #D3111A;
+} */
+
+.inner-nav {
+
+}
+
+.inner-nav a {
+    /*background-color: #E7E5E3;*/
+    background-color: #C7DEFD;
+    color: #000;
+    transition: background-color 0.3s ease;
+}
+
+.inner-nav a:hover {
+    background-color: #82B8FD;
 }
 
 /*---------------------------------*/
 /*-------- input form  -------------*/
 /*-----------------------------------*/
 .input-group-prepend{
-    width: 20%;
+    width: 30%;
 }
 .input-group-text {
     width: 100%;
-    white-space: pre-wrap;
+    /*white-space: pre-wrap;*/
+    white-space: normal;
+}
+
+/*---------------------------------*/
+/*-------- card -------------*/
+/*-----------------------------------*/
+
+.card {
+    margin-top: 10px;
+}
+
+.card p {
+    margin-left: 30px;
+}
+
+.card-title {
+    color: #0F65D8;
+}
+
+.card-header {
+    /*color: #FF8263;*/
+    background-color: #C7DEFD;
 }
 
 /*---------------------------------*/
@@ -162,4 +195,8 @@
 .google-map img {
     width: 100%;
     padding-bottom: 30px;
+}
+
+.project-selection {
+    max-width: 50%;
 }

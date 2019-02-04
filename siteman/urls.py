@@ -28,4 +28,10 @@ urlpatterns = [
     path('erweiterter/', views.erweiterter, name='erweiterter'),    
     path('erg_erweiterter/', views.erg_erweiterter, name='erg_erweiterter'),
     path('home_progress/', views.home_progress, name='home_progress'),
+    # path('gebaudeausrustung/', views.gebaudeausrustung, name='gebaudeausrustung'),
+    path('rohinstallation/', views.rohinstallation, name='rohinstallation'),
+    path('sanitarausstattung/', views.sanitarausstattung, name='sanitarausstattung'),
+    path('elektroausstattung/', views.elektroausstattung, name='elektroausstattung'),
+    path('entluftung/', views.entluftung, name='entluftung'),
+    path('aufzuge/', views.aufzuge, name='aufzuge'),
 ]
