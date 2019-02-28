@@ -1,7 +1,55 @@
 {% extends 'base_projekt.html' %}
 
 {% block content%}
-    <h3> Haus </h3>
+    <h3 class="imp-heading"> Projekt: {{ projekt }} </h3>
+    <hr>
+    <div class="subcontainer">
+        <h4>Hauser</h4>
+        <table class="table table-sm table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">pk</th>
+                    <th scope="col">Haus Nr.</th>
+                    <th scope="col">Display Nr.</th>
+                    <th scope="col">Details</th>
+                    <th scope="col">Update</th>
+                    <th scope="col">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for haus in hauser %}
+                <tr>
+                    <th scope="row">{{ haus.pk }}</th>
+                    <td>{{ haus.haus_nr }}</td>
+                    <td>{{ haus.display_nr }}</td>
+                    <td><a href="{% url 'siteman:haus' %}">Details</a></td>
+                    <td><a href="{% url 'siteman:haus' %}">Update</a></td>
+                    <td><a href="{% url 'siteman:haus_delete' haus.pk %}">Delete</a></td>
+                </tr>
+                {% endfor %} 
+            </tbody>
+        </table>
+    </div>
+    <hr>
+    <div>
+        <h4 class="imp-heading">Add a new default haus to this projekt</h4>
+
+
+
+        <form action="{% url 'siteman:haus' %}" method="POST">
+            {% csrf_token %}
+            <table>
+                {{form.as_table}}
+            </table>
+            <div>
+                <input type="submit" value="Add" class="btn btn-primary">
+            </div>                                            
+                        
+        </form>
+
+    </div>
+    
+
     
 
 {% endblock %}

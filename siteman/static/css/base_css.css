@@ -11,6 +11,14 @@
     min-height: 80vh;
     /*border: 1px solid blue;*/
 }
+
+
+@media screen and (min-width: 1400px) {
+  .container {
+    max-width: 1380px;
+}
+}
+
 .inner-container {
     display: flex;
 }
@@ -34,7 +42,24 @@
     font-weight: bold;
 }
 
+/*---------------------------------*/
+/*-------- common style -------------*/
+/*-----------------------------------*/
 
+.imp-heading {
+    color:  #ff652f;
+}
+
+.custom-btn-right {
+    /*disply button to the right side of the form*/
+    display: flex; 
+    justify-content: flex-end;
+    margin-right: 10%;
+}
+
+.subcontainer {
+    max-width: 80%;
+}
 
 /*---------------------------------*/
 /*-------- nav -------------*/
@@ -99,30 +124,6 @@
     background-color: #0F65D8;
 }
 
-/* .left-nav-erganzung {
-    margin-top: 65px;
-    flex-basis: 20%;
-    display: none;
-}
-
-.left-nav-erganzung a {
-    color: #000;
-    transition: color 0.5s ease;
-}
-
-.left-nav-erganzung a:hover {
-    color: #fff;
-}
-
-.left-nav-erganzung li {
-    background-color: #FF8263;
-    color: #000;
-    transition: background-color 0.5s ease;
-}
-
-.left-nav-erganzung li:hover {
-    background-color: #D3111A;
-} */
 
 .inner-nav {
 
@@ -143,7 +144,7 @@
 /*-------- input form  -------------*/
 /*-----------------------------------*/
 .input-group-prepend{
-    width: 30%;
+    width: 20%;
 }
 .input-group-text {
     width: 100%;
@@ -197,6 +198,6 @@
     padding-bottom: 30px;
 }
 
-.project-selection {
+.projekt-selection {
     max-width: 50%;
 }

@@ -10,8 +10,13 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('home_projekt', views.home_projekt, name='home_projekt'),
     path('home_erganzung', views.home_erganzung, name='home_erganzung'),
-    path('project/', views.project, name='project'),
+    path('projekt/', views.projekt, name='projekt'),
     path('haus/', views.haus, name='haus'),
+    path('haus/delete/<int:pk>', views.haus_delete, name='haus_delete'), 
+
+    
+
+
     path('erg_haus/', views.erg_haus, name='erg_haus'),
     path('wohnung/', views.wohnung, name='wohnung'),
     path('erg_wohnung/', views.erg_wohnung, name='erg_wohnung'),
