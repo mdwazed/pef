@@ -3,7 +3,7 @@ All misc static functions goes here.
 import this file whereever need any of this functions
 """
 
-from .models import Projekt
+from .models import Projekt, Haus
 
 def get_current_projekt(request):
     """
@@ -15,3 +15,4 @@ def get_current_projekt(request):
     except KeyError:
         projekt = None
     return projekt 
+

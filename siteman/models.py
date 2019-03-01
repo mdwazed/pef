@@ -120,6 +120,14 @@ class Architekt_plan(models.Model):
     brandschutzkonzept = models.FileField(null=True, upload_to='plan_pdf', blank=True)
     energieausweis = models.FileField(null=True, upload_to='plan_pdf', blank=True)
 
+class Erdbau(Verantwortung):
+    """
+    ground work 
+    """
+    
+    erdbau = models.TextField(null=True, blank=True)
+    fundamentplan = models.FileField(null=True, upload_to='plan_pdf', blank=True)
+
 class Rohbau(Verantwortung):
     """
     common rohbau related task
@@ -135,6 +143,12 @@ class Rohbau(Verantwortung):
     treppen = models.TextField(null=True, blank=True)
     balkon = models.TextField(null=True, blank=True)
 
+
+class Dach(Verantwortung):
+    """
+    roof of the house
+    """
+    dach = models.TextField(null= True, blank=True)
 
 class Fenster(Verantwortung):
     """
@@ -154,50 +168,12 @@ class Fenster(Verantwortung):
     fensterbaenke = models.TextField(null=True, blank=True)
     rolllaeden = models.TextField(null=True, blank=True)
 
-class Fensterbanke(Verantwortung):
-    """
-    window base.
-    for stair case and wohnung
-    wohnung part may vary wohnung to wohnung
-    """
-    treppenhaus = models.TextField(null=True, blank=True)
-    wohnung = models.TextField(null=True, blank=True)
-
-
-class Trockenbau(Verantwortung):
-    """
-    dry wall. additional layer of wall/floor/ceiling.
-    will be foreign key of both haus and wohnung
-    """
-    # for haus and wohnung
-    waende = models.TextField(null=True, blank=True)
-    decken = models.TextField(null=True, blank=True)
-
 class Elektro(Verantwortung):
     """
     Electic connectin description of haus 
     will be ForeignKey of haus 
     """
     elektro = models.TextField(null=True, blank=True)
-
-
-class Raumbuch_elektro(Verantwortung):
-    """
-    electric fitting per room
-    ForeignKey of wohnung
-    """
-    bad = models.TextField(null=True, blank=True)
-    kueche = models.TextField(null=True, blank=True)
-    flur = models.TextField(null=True, blank=True)
-    wohnzimmer = models.TextField(null=True, blank=True)
-    gaeste_wc = models.TextField(null=True, blank=True)
-    schlafzimmer = models.TextField(null=True, blank=True)
-    kinderzimmer = models.TextField(null=True, blank=True)
-    abstellraum = models.TextField(null=True, blank=True)
-    schalterprogramm = models.TextField(null=True, blank=True)
-    tv_anschluss = models.TextField(null=True, blank=True)
-    telefon_anschluss = models.TextField(null=True, blank=True)
-    internet_anschluss = models.TextField(null=True, blank=True)
 
 class Sanitaer(Verantwortung):
     """
@@ -212,6 +188,58 @@ class Sanitaer(Verantwortung):
     spuele = models.TextField(null=True, blank=True)
     spuelmaschinenanschluss = models.TextField(null=True, blank=True)
     fussbodenheizung = models.TextField(null=True, blank=True)
+
+class Innenputz(Verantwortung):
+    """
+    inner plaster
+    may contian number of layers
+    """
+    innenputz_bad = models.TextField(null=True, blank=True)
+    innenputz_wohnraueme = models.TextField(null=True, blank=True)
+
+class Estrich(Verantwortung):
+    """
+    layer under the tiles
+    """
+    daemmplatten = models.TextField(null=True, blank=True)
+    estrich = models.TextField(null=True, blank=True)
+
+class Trockenbau(Verantwortung):
+    """
+    dry wall. additional layer of wall/floor/ceiling.
+    will be foreign key of both haus and wohnung
+    """
+    # for haus and wohnung
+    waende = models.TextField(null=True, blank=True)
+    decken = models.TextField(null=True, blank=True)
+
+class Maler(Verantwortung):
+    """
+    painting related description
+    painting can be plain paint, wall paper, inside/outside
+    """
+    tapete = models.TextField(null=True, blank=True)
+    farbe = models.TextField(null=True, blank=True)
+
+class Aussenputz(Verantwortung):
+    """
+    puter plaster
+    """
+    aussenputz = models.TextField(null=True, blank=True)
+    sockel = models.TextField(null=True, blank=True)
+
+class Fliesenleger(Verantwortung):
+    """
+    tiles for the haus and wohnung
+    """
+    # for the haus
+    treppenhaus = models.TextField(null=True, blank=True)
+    # for the individual wohnung
+    bad = models.TextField(null=True, blank=True)
+    wohnzimmer = models.TextField(null=True, blank=True)
+    abstellraum = models.TextField(null=True, blank=True)
+    esszimmer = models.TextField(null=True, blank=True)
+    keller = models.TextField(null=True, blank=True)
 
 class Bodenbelaege(Verantwortung):
     """
@@ -232,18 +260,35 @@ class Bodenbelaege(Verantwortung):
     kinderzimmer = models.TextField(null=True, blank=True)
     abstellraum = models.TextField(null=True, blank=True)
 
-class Fliesenleger(Verantwortung):
+class Schreiner(Verantwortung):
     """
-    tiles for the haus and wohnung
+    wood related work for haus and wohnung
     """
-    # for the haus
-    treppenhaus = models.TextField(null=True, blank=True)
-    # for the individual wohnung
-    bad = models.TextField(null=True, blank=True)
-    wohnzimmer = models.TextField(null=True, blank=True)
-    abstellraum = models.TextField(null=True, blank=True)
-    esszimmer = models.TextField(null=True, blank=True)
-    keller = models.TextField(null=True, blank=True)
+    haustuer = models.TextField(null=True, blank=True)
+    wohnungstuer = models.TextField(null=True, blank=True)
+    innentueren = models.TextField(null=True, blank=True)
+
+class Schlosser(Verantwortung):
+    """
+    lock standard for the haus and wohnung
+    """
+    eingangstuer = models.TextField(null=True, blank=True)
+    wohnungstuer = models.TextField(null=True, blank=True)
+    innentueren = models.TextField(null=True, blank=True)
+
+class Schliessanlage(Verantwortung):
+    """
+    door handle for haus and wohnung
+    """
+    schliessplan = models.TextField(null=True, blank=True)
+    # innenbaenke = models.TextField(null=True, blank=True)
+
+#  not really used till now. rather text field has been used to describe the air cooler option
+class Klimatisierung(Verantwortung):
+    """
+    air conditioning
+    """
+    klimatisierung = models.TextField(null=True, blank=True)
 
 class Sicherheitstechnik(Verantwortung):
     """
@@ -254,36 +299,11 @@ class Sicherheitstechnik(Verantwortung):
     sicherheitsschloesser = models.TextField(null=True, blank=True)
     schliesssystem = models.TextField(null=True, blank=True)
 
-class Schlosser(Verantwortung):
+class Aufzug(Verantwortung):
     """
-    lock standard for the haus and wohnung
+    description of lift
     """
-    eingangstuer = models.TextField(null=True, blank=True)
-    wohnungtuer = models.TextField(null=True, blank=True)
-    innentueren = models.TextField(null=True, blank=True)
-
-class Schreiner(Verantwortung):
-    """
-    wood related work for haus and wohnung
-    """
-    haustuer = models.TextField(null=True, blank=True)
-    wohnungstuer = models.TextField(null=True, blank=True)
-    innentueren = models.TextField(null=True, blank=True)
-
-class Schliessanlage(Verantwortung):
-    """
-    door handle for haus and wohnung
-    """
-    schliessplan = models.TextField(null=True, blank=True)
-    innenbaenke = models.TextField(null=True, blank=True)
-
-
-class Aussenputz(Verantwortung):
-    """
-    puter plaster
-    """
-    aussenputz = models.TextField(null=True, blank=True)
-    sockel = models.TextField(null=True, blank=True)
+    aufzug = models.TextField(null=True, blank=True)
 
 class Aussenanlagern(Verantwortung):
     """
@@ -297,7 +317,53 @@ class Aussenanlagern(Verantwortung):
     mulleinhausung = models.TextField(null=True, blank=True)
     einfriedung = models.TextField(null=True, blank=True)
     dachaufbau_tiefgarage_grundflache = models.TextField(null=True, blank=True)
-    dacchaufbau_tiefgarage_park_wegefkache = models.TextField(null=True, blank=True)
+    dachaufbau_tiefgarage_park_wegefkache = models.TextField(null=True, blank=True)
+
+class Fensterbanke(Verantwortung):
+    """
+    window base.
+    for stair case and wohnung
+    wohnung part may vary wohnung to wohnung
+    """
+    treppenhaus = models.TextField(null=True, blank=True)
+    wohnung = models.TextField(null=True, blank=True)
+
+class Raumbuch_elektro(Verantwortung):
+    """
+    electric fitting per room
+    ForeignKey of wohnung
+    """
+    bad = models.TextField(null=True, blank=True)
+    kueche = models.TextField(null=True, blank=True)
+    flur = models.TextField(null=True, blank=True)
+    wohnzimmer = models.TextField(null=True, blank=True)
+    gaeste_wc = models.TextField(null=True, blank=True)
+    schlafzimmer = models.TextField(null=True, blank=True)
+    kinderzimmer = models.TextField(null=True, blank=True)
+    abstellraum = models.TextField(null=True, blank=True)
+    schalterprogramm = models.TextField(null=True, blank=True)
+    tv_anschluss = models.TextField(null=True, blank=True)
+    telefon_anschluss = models.TextField(null=True, blank=True)
+    internet_anschluss = models.TextField(null=True, blank=True)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -313,54 +379,19 @@ class Choice_options(Verantwortung):
 
 
 
-class aufzug(Verantwortung):
-    """
-    description of lift
-    """
-    aufzug = models.TextField(null=True, blank=True)
-
-class Dach(Verantwortung):
-    """
-    roof of the house
-    """
-    dach = models.TextField(null= True, blank=True)
-
-class Maler(Verantwortung):
-    """
-    painting related description
-    painting can be plain paint, wall paper, inside/outside
-    """
-    tapete = models.TextField(null=True, blank=True)
-    farbe = models.TextField(null=True, blank=True)
 
 
-class Innenputz(Verantwortung):
-    """
-    inner plaster
-    may contian number of layers
-    """
-    innenputz_bad = models.TextField(null=True, blank=True)
-    innenputz_wohnraueme = models.TextField(null=True, blank=True)
 
-class Erdbau(Verantwortung):
-    """
-    ground work 
-    """
-    erdbau = models.TextField(null=True, blank=True)
-    fundamentplan = models.FileField(null=True, upload_to='plan_pdf', blank=True)
 
-class Estrich(Verantwortung):
-    """
-    layer under the tiles
-    """
-    daemmplatten = models.TextField(null=True, blank=True)
-    estrich = models.TextField(null=True, blank=True)
 
-class Klimatisierung(Verantwortung):
-    """
-    air conditioning
-    """
-    klimatisierung = models.TextField(null=True, blank=True)
+
+
+
+
+
+
+
+
 
 class Handwerker(models.Model):
     """

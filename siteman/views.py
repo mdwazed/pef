@@ -3,7 +3,7 @@ from django.http import HttpResponse
 
 from .models import (Projekt, Haus, Wohnung,) 
 from .forms import (ProjektForm, AddHausForm,)
-from . import misc_functions
+from . import misc_functions, default_creator
 
 # Create your views here.
 
@@ -56,14 +56,28 @@ def haus(request):
     """
 
     if request.method == "POST":
-        print('posted')
+        # print('posted')
         form = AddHausForm(request.POST)
         if form.is_valid():
+
             haus_nr = form.cleaned_data['haus_nr']
-            display_nr = form.cleaned_data['display_nr']
+            display_nr = form.cleaned_data['display_nr']            
             projekt_id =  request.session['current_projekt_id']
-            haus = Haus(haus_nr=haus_nr, display_nr=display_nr, projekt_id=projekt_id)
+            # 
+            # get all selected options for default text generations
+            # put them in dict and pass to the create default module 
+            # 
+            default_choices = {
+            'haus_nr' : haus_nr,
+            'display_nr' : display_nr,
+            'projekt_id' : projekt_id,
+
+            }
+            # init_haus = Haus(haus_nr=haus_nr, display_nr=display_nr, projekt_id=projekt_id)
+            #set defults values of all attributes of haus
+            haus = default_creator.create_default_haus(default_choices)
             haus.save()
+
     projekt =  misc_functions.get_current_projekt(request)
     if not projekt:
         raise ValueError('Keine projekt selected!')
