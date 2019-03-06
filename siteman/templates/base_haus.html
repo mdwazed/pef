@@ -1,0 +1,71 @@
+{% extends 'siteman_base_template.html' %}
+{% load static %}
+
+{% block left_nav %}
+<div class="left-nav-projekt">
+    <ul class="nav flex-column">
+      
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'siteman:wohnung' %}">Wohnungen</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'siteman:haus_erdbau' %}">Erdbau</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'siteman:haus_rohbau' %}">Rohbau</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'siteman:haus_dach' %}">Dach</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'siteman:haus_fenster' %}">Fenster</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'siteman:haus_elektro' %}">Elektro</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'siteman:haus_sanitaer' %}">Sanitaer</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'siteman:haus_innenputz' %}">Innenputz</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'siteman:haus_estrich' %}">Estrich</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'siteman:haus_trockenbau' %}">Trockenbau</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'siteman:haus_maler' %}">Maler</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'siteman:haus_aussenputz' %}">Aussenputz</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'siteman:haus_fliesenleger' %}">Fliesenleger</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'siteman:haus_bodenbelaege' %}">Bodenbelaege</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'siteman:wande' %}">Wände</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'siteman:abdictung' %}">Abdictung</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'siteman:decken' %}">Decken</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'siteman:versorgung' %}">Versorgung|Entsorgung</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'siteman:erweiterter' %}">Erweiterter Rohbau</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'siteman:rohinstallation' %}">Technische Gebäudeausrüstung</a>
+      </li>
+    </ul>
+</div>
+
+{% endblock %}

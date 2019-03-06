@@ -1,8 +1,11 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.urls import reverse
+from django.views.generic import DetailView, ListView
 
-from .models import (Projekt, Haus, Wohnung,) 
+from . import models 
 from .forms import (ProjektForm, AddHausForm,)
+from .components import Haus_fl
 from . import misc_functions, default_creator
 
 # Create your views here.
@@ -22,7 +25,7 @@ def home_projekt(request):
     # get the current project from session var
     projekt =  misc_functions.get_current_projekt(request)
     # get all running project to display in select option   
-    projekts = Projekt.objects.filter(projekt_status=True)
+    projekts = models.Projekt.objects.filter(projekt_status=True)
     context = {
     'projekt' : projekt,
     'projekts' : projekts,
@@ -42,7 +45,7 @@ def projekt(request):
     if projekt:
         projekt_form = ProjektForm(instance=projekt)
     else:
-        raise ValueError('Keine projekt selected!')
+        raise ValueError('Kein projekt selected!')
 
     context = {
     'form' : projekt_form,
@@ -67,21 +70,24 @@ def haus(request):
             # get all selected options for default text generations
             # put them in dict and pass to the create default module 
             # 
-            default_choices = {
-            'haus_nr' : haus_nr,
-            'display_nr' : display_nr,
-            'projekt_id' : projekt_id,
-
-            }
-            # init_haus = Haus(haus_nr=haus_nr, display_nr=display_nr, projekt_id=projekt_id)
-            #set defults values of all attributes of haus
-            haus = default_creator.create_default_haus(default_choices)
+            haus = Haus(haus_nr=haus_nr, display_nr=display_nr, projekt_id=projekt_id)
             haus.save()
+            default_choices = {
+            'haus' : haus,
+            }
+            
 
+            #set defults values of all attributes of haus
+            try:
+                haus = default_creator.create_default_haus_components(default_choices)
+                # save addl fields from default settings
+                haus.save()
+            except Exception as e:
+                print('One or more components could not be created', e)
     projekt =  misc_functions.get_current_projekt(request)
     if not projekt:
         raise ValueError('Keine projekt selected!')
-    hauser =  Haus.objects.filter(projekt=projekt).order_by('haus_nr')
+    hauser =  models.Haus.objects.filter(projekt=projekt).order_by('haus_nr')
     form = AddHausForm()
     context = {
     'projekt' : projekt,
@@ -95,8 +101,148 @@ def haus_delete(request, pk):
     """
     delete the corrasponsing house and all associated components of currently selected project.
     """
+    
 
     return HttpResponse('delete this haus'+ str(pk))
+
+def set_current_haus(request, haus_id):
+    """
+    set this haus as curent haus in the session var.
+    redirect to rohbau page
+    """
+    request.session['current_haus_id'] = haus_id
+    return HttpResponseRedirect(reverse('siteman:haus_erdbau'))
+
+def haus_rohbau(request):
+    """
+    description of rohbau of currently selected haus 
+    """
+    haus = misc_functions.get_current_haus(request)
+
+    context = {
+    'haus' : haus,
+    }
+    return render(request, 'siteman/haus/rohbau.html', context)
+
+def haus_erdbau(request):
+    """
+    erdbau views of currently selected haus
+    """
+    haus = misc_functions.get_current_haus(request)
+    context = {
+    'haus' : haus,
+    }
+    return render(request, 'siteman/haus/erdbau.html', context)
+
+def haus_dach(request):
+    """
+    erdbau views of currently selected haus
+    """
+    haus = misc_functions.get_current_haus(request)
+    context = {
+    'haus' : haus,
+    }
+    return render(request, 'siteman/haus/dach.html', context)
+
+def haus_fenster(request):
+    """
+    erdbau views of currently selected haus
+    """
+    haus = misc_functions.get_current_haus(request)
+    context = {
+    'haus' : haus,
+    }
+    return render(request, 'siteman/haus/fenster.html', context)
+
+def haus_elektro(request):
+    """
+    erdbau views of currently selected haus
+    """
+    haus = misc_functions.get_current_haus(request)
+    context = {
+    'haus' : haus,
+    }
+    return render(request, 'siteman/haus/elektro.html', context)
+
+def haus_sanitaer(request):
+    """
+    erdbau views of currently selected haus
+    """
+    haus = misc_functions.get_current_haus(request)
+    context = {
+    'haus' : haus,
+    }
+    return render(request, 'siteman/haus/sanitaer.html', context)
+
+def haus_innenputz(request):
+    """
+    erdbau views of currently selected haus
+    """
+    haus = misc_functions.get_current_haus(request)
+    context = {
+    'haus' : haus,
+    }
+    return render(request, 'siteman/haus/innenputz.html', context)
+
+def haus_estrich(request):
+    """
+    erdbau views of currently selected haus
+    """
+    haus = misc_functions.get_current_haus(request)
+    context = {
+    'haus' : haus,
+    }
+    return render(request, 'siteman/haus/estrich.html', context)
+
+def haus_trockenbau(request):
+    """
+    erdbau views of currently selected haus
+    """
+    haus = misc_functions.get_current_haus(request)
+    context = {
+    'haus' : haus,
+    }
+    return render(request, 'siteman/haus/trockenbau.html', context)
+
+def haus_maler(request):
+    """
+    erdbau views of currently selected haus
+    """
+    haus = misc_functions.get_current_haus(request)
+    context = {
+    'haus' : haus,
+    }
+    return render(request, 'siteman/haus/maler.html', context)
+
+def haus_aussenputz(request):
+    """
+    erdbau views of currently selected haus
+    """
+    haus = misc_functions.get_current_haus(request)
+    context = {
+    'haus' : haus,
+    }
+    return render(request, 'siteman/haus/aussenputz.html', context)
+
+def haus_fliesenleger(request):
+    """
+    erdbau views of currently selected haus
+    """
+    haus = misc_functions.get_current_haus(request)
+    context = {
+    'haus' : haus,
+    }
+    return render(request, 'siteman/haus/fliesenleger.html', context)
+
+def haus_bodenbelaege(request):
+    """
+    erdbau views of currently selected haus
+    """
+    haus = misc_functions.get_current_haus(request)
+    context = {
+    'haus' : haus,
+    }
+    return render(request, 'siteman/haus/bodenbelaege.html', context)
 
 def wohnung(request):
     return render(request, 'siteman/wohnung.html')

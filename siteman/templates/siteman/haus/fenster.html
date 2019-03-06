@@ -1,0 +1,45 @@
+{% extends 'base_haus.html' %}
+
+{% block content%}
+    <h3> Fenster: {{ haus }} </h3>
+    <div class="entry-form">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Kellergeschoss:</span>                
+            </div>
+            <textarea class="form-control" name="" id="" rows="3" disabled>{{ haus.fenster.kellergeschoss }}</textarea> 
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Erdgeschoss:</span>                
+            </div>
+            <textarea class="form-control" name="" id="" rows="3" disabled>{{ haus.fenster.erdgeschoss }}</textarea> 
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Regelgeschoss:</span>                
+            </div>
+            <textarea class="form-control" name="" id="" rows="3" disabled>{{ haus.fenster.regelgeschoss }}</textarea> 
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Dachgeschoss:</span>                
+            </div>
+            <textarea class="form-control" name="" id="" rows="3" disabled>{{ haus.fenster.dachgeschoss }}</textarea> 
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Treppenhaus:</span>                
+            </div>
+            <textarea class="form-control" name="" id="" rows="3" disabled>{{ haus.fenster.treppenhaus }}</textarea> 
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Tiefgarage:</span>                
+            </div>
+            <textarea class="form-control" name="" id="" rows="3" disabled>{{ haus.fenster.tiefgarage }}</textarea> 
+        </div>
+    </div>
+    
+
+{% endblock %}

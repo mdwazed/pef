@@ -1,0 +1,23 @@
+<!-- aussenputz page template at haus level -->
+
+{% extends 'base_haus.html' %}
+
+{% block content%}
+    <h3> Aussenputz: {{ haus }} </h3>
+    <div class="entry-form">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Aussenputz:</span>                
+            </div>
+            <textarea class="form-control" name="" id="" rows="3" disabled>{{ haus.aussenputz.aussenputz }}</textarea> 
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Sockel:</span>                
+            </div>
+            <textarea class="form-control" name="" id="" rows="3" disabled>{{ haus.aussenputz.sockel }}</textarea> 
+        </div>
+    </div>
+    
+
+{% endblock %}

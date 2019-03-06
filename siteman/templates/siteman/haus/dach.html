@@ -1,0 +1,17 @@
+<!-- Dach page template at haus level -->
+
+{% extends 'base_haus.html' %}
+
+{% block content%}
+    <h3> Dach: {{ haus }} </h3>
+    <div class="entry-form">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Dach:</span>                
+            </div>
+            <textarea class="form-control" name="" id="" rows="3" disabled>{{ haus.dach.dach }}</textarea> 
+        </div>
+    </div>
+    
+
+{% endblock %}

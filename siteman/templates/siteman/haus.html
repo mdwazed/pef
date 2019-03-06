@@ -1,6 +1,10 @@
 {% extends 'base_projekt.html' %}
 
-{% block content%}
+{% block left_nav %}
+
+{% endblock %}
+
+{% block content %}
     <h3 class="imp-heading"> Projekt: {{ projekt }} </h3>
     <hr>
     <div class="subcontainer">
@@ -12,7 +16,8 @@
                     <th scope="col">Haus Nr.</th>
                     <th scope="col">Display Nr.</th>
                     <th scope="col">Details</th>
-                    <th scope="col">Update</th>
+                    <th scope="col">Wohnungen</th>
+                    <!-- <th scope="col">Update</th> -->
                     <th scope="col">Delete</th>
                 </tr>
             </thead>
@@ -22,8 +27,9 @@
                     <th scope="row">{{ haus.pk }}</th>
                     <td>{{ haus.haus_nr }}</td>
                     <td>{{ haus.display_nr }}</td>
-                    <td><a href="{% url 'siteman:haus' %}">Details</a></td>
-                    <td><a href="{% url 'siteman:haus' %}">Update</a></td>
+                    <td><a href="{% url 'siteman:set_current_haus' haus.pk %}">Details</a></td>
+                    <td><a href="{% url 'siteman:haus' %}">Wohnungen</a></td>
+                    <!-- <td><a href="{% url 'siteman:haus' %}">Update</a></td> -->
                     <td><a href="{% url 'siteman:haus_delete' haus.pk %}">Delete</a></td>
                 </tr>
                 {% endfor %} 

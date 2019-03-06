@@ -1,6 +1,10 @@
 {% extends 'base_projekt.html' %}
 {% load static %}
 
+{% block left_nav %}
+
+{% endblock %}
+
 {% block content%}
     <h3> Projekt Information </h3>
     <form action="{% url 'siteman:projekt' %}" method="POST">
@@ -10,8 +14,9 @@
                 {{ form.as_table }}
             </table>
         </div>
-        <div class="custom-btn-right">
-            <input type="submit" value="Update" class="btn btn-primary">
+        <div class="custom-btn-right-container">
+            <a href="{% url 'siteman:home_projekt' %}" class="btn btn-primary custom-btn-right">Back</a>
+            <input type="submit" value="Update" class="btn btn-primary custom-btn-right">
         </div>
         
         

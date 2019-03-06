@@ -12,7 +12,21 @@ urlpatterns = [
     path('home_erganzung', views.home_erganzung, name='home_erganzung'),
     path('projekt/', views.projekt, name='projekt'),
     path('haus/', views.haus, name='haus'),
+    path('set_current_haus/<int:haus_id>', views.set_current_haus, name='set_current_haus'),
     path('haus/delete/<int:pk>', views.haus_delete, name='haus_delete'), 
+    path('haus_rohbau', views.haus_rohbau, name='haus_rohbau'), 
+    path('haus_erdbau', views.haus_erdbau, name='haus_erdbau'), 
+    path('haus_dach', views.haus_dach, name='haus_dach'), 
+    path('haus_fenster', views.haus_fenster, name='haus_fenster'), 
+    path('haus_elektro', views.haus_elektro, name='haus_elektro'), 
+    path('haus_sanitaer', views.haus_sanitaer, name='haus_sanitaer'), 
+    path('haus_innenputz', views.haus_innenputz, name='haus_innenputz'), 
+    path('haus_estrich', views.haus_estrich, name='haus_estrich'), 
+    path('haus_trockenbau', views.haus_trockenbau, name='haus_trockenbau'), 
+    path('haus_maler', views.haus_maler, name='haus_maler'), 
+    path('haus_aussenputz', views.haus_aussenputz, name='haus_aussenputz'), 
+    path('haus_fliesenleger', views.haus_fliesenleger, name='haus_fliesenleger'), 
+    path('haus_bodenbelaege', views.haus_bodenbelaege, name='haus_bodenbelaege'), 
 
     
 

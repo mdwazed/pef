@@ -1,0 +1,23 @@
+<!-- innenputz page template at haus level -->
+
+{% extends 'base_haus.html' %}
+
+{% block content%}
+    <h3> Innenputz: {{ haus }} </h3>
+    <div class="entry-form">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">innenputz_bad:</span>                
+            </div>
+            <textarea class="form-control" name="" id="" rows="3" disabled>{{ haus.innenputz.innenputz_bad }}</textarea> 
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">innenputz_wohnraueme:</span>                
+            </div>
+            <textarea class="form-control" name="" id="" rows="3" disabled>{{ haus.innenputz.innenputz_wohnraueme }}</textarea> 
+        </div>
+    </div>
+    
+
+{% endblock %}

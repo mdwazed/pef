@@ -1,0 +1,76 @@
+<!-- haus level rohbau template  -->
+
+{% extends 'base_haus.html' %}
+
+{% block content%}
+    <h3> Rohbau: {{ haus }} </h3>
+    <div class="entry-form">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Bodenplatte:</span>                
+            </div>
+            <textarea class="form-control" name="" id="" rows="3" disabled>{{ haus.rohbau.bodenplatte }}</textarea> 
+        </div>
+
+        <div class="input-group mb-3 entry-form">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Geschossdecken:</span>                
+            </div>
+            <textarea class="form-control" name="" id="" rows="3" disabled>{{ haus.rohbau.geschossdecken }}</textarea>
+        </div>
+
+        <div class="input-group mb-3 entry-form">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Aussenwande:</span>                
+            </div>
+            <textarea class="form-control" name="" id="" rows="3" disabled>{{ haus.rohbau.aussenwande }}</textarea>
+        </div>
+
+        <div class="input-group mb-3 entry-form">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Tiefgaragenrampe:</span>                
+            </div>
+            <textarea class="form-control" name="" id="" rows="3" disabled>{{ haus.rohbau.tiefgaragenrampe }}</textarea>
+        </div>
+        <div class="input-group mb-3 entry-form">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Tragendewande:</span>                
+            </div>
+            <textarea class="form-control" name="" id="" rows="3" disabled>{{ haus.rohbau.tragendewande }}</textarea>
+        </div>
+        <div class="input-group mb-3 entry-form">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Innenwande:</span>                
+            </div>
+            <textarea class="form-control" name="" id="" rows="3" disabled>{{ haus.rohbau.innenwande }}</textarea>
+        </div>
+        <div class="input-group mb-3 entry-form">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Nichttragendewande:</span>                
+            </div>
+            <textarea class="form-control" name="" id="" rows="3" disabled>{{ haus.rohbau.nichttragendewande }}</textarea>
+        </div>
+        <div class="input-group mb-3 entry-form">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Dach:</span>                
+            </div>
+            <textarea class="form-control" name="" id="" rows="3" disabled>{{ haus.rohbau.dach }}</textarea>
+        </div>
+        <div class="input-group mb-3 entry-form">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Treppen:</span>                
+            </div>
+            <textarea class="form-control" name="" id="" rows="3" disabled>{{ haus.rohbau.treppen }}</textarea>
+        </div>
+        <div class="input-group mb-3 entry-form">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Balkon:</span>                
+            </div>
+            <textarea class="form-control" name="" id="" rows="3" disabled>{{ haus.rohbau.balkon }}</textarea>
+        </div>
+
+        
+    </div>
+    
+
+{% endblock %}
