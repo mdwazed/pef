@@ -1,0 +1,55 @@
+{% extends 'siteman_base_template.html' %}
+{% load static %}
+
+{% block left_nav %}
+<div class="left-nav-projekt">
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'siteman:haus_wohnungen' %}">Wohnungen</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'siteman:wohnung_ubersicht' %}">Ubersicht</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'siteman:wohnung_fenster' %}">Fenster</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'siteman:wohnung_elektro' %}">Elektro</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'siteman:wohnung_raumbuch_elektro' %}">Raumbuch Elektro</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'siteman:wohnung_sanitaer' %}">Sanitaer</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="">Innenputz</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="">Estrich</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="">Trockenbau</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="">Maler</a>
+      </li>
+ 
+      <li class="nav-item">
+        <a class="nav-link" href="">Fliesenleger</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="">Bodenbelaege</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="">Turen</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="">Schlosser</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="">Schliessanlage</a>
+      </li>
+    </ul>
+</div>
+{% endblock %}

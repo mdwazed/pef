@@ -1,0 +1,35 @@
+{% extends 'siteman/base_wohnung.html' %}
+
+{% block content%}
+
+<div class="page-heading">
+    <h3 class="imp-heading"> Fenster: {{ wohnung }} </h3>
+    {{ wohnung.fenster }}
+</div>
+<div>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Fensterbanke</h5>
+            <p>{{ wohnung.fenster.fensterbaenke }}</p>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Rollladen</h5>
+            <p>{{ wohnung.fenster.rolllaeden }}</p>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Sonstiges</h5>
+            <p>{{ wohnung.fenster.sonstiges }}</p>
+        </div>
+    </div>
+    
+    {% if wohnung.fenster %}
+    <div class="custom-btn-right-container">
+        <a class="btn btn-primary" href="{% url 'siteman:wohnung_fenster_update' wohnung.fenster.pk %}">Update</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

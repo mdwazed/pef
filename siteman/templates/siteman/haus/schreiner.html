@@ -1,0 +1,29 @@
+<!-- schreiner/turen page template at haus level -->
+
+{% extends 'siteman/base_haus.html' %}
+
+{% block content%}
+    <div class="page-heading">
+        <h3 class="imp-heading"> Turen: {{ haus }} </h3>
+    </div>
+    <div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Haustuer</h5>
+                <p>{{ haus.schreiner.haustuer }}</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Sonstiges</h5>
+                <p>{{ haus.schreiner.sonstiges }}</p>
+            </div>
+        </div>
+        {% if haus.schreiner %}
+        <div class="custom-btn-right-container">
+            <a class="btn btn-primary" href="{% url 'siteman:haus_schreiner_update' haus.schreiner.pk %}">Update</a>
+        </div>
+        {% endif %}
+    </div>
+    
+{% endblock %}

@@ -1,0 +1,90 @@
+<!-- Raumbuch Elektro page template at wohnung level -->
+
+{% extends 'siteman/base_wohnung.html' %}
+
+{% block content%}
+    <div class="page-heading">
+        <h3 class="imp-heading">Raumbuch Elektro: {{ wohnung }}</h3>
+    </div>
+    <div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Bad</h5>
+                <p>{{ wohnung.raumbuch_elektro.bad }}</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Kuche</h5>
+                <p>{{ wohnung.raumbuch_elektro.kueche }}</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Flur</h5>
+                <p>{{ wohnung.raumbuch_elektro.flur }}</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Wohnzimmer</h5>
+                <p>{{ wohnung.raumbuch_elektro.wohnzimmer }}</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Gaeste_wc</h5>
+                <p>{{ wohnung.raumbuch_elektro.gaeste_wc }}</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Schlafzimmer</h5>
+                <p>{{ wohnung.raumbuch_elektro.schlafzimmer }}</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Kinderzimmer</h5>
+                <p>{{ wohnung.raumbuch_elektro.kinderzimmer }}</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Abstellraum</h5>
+                <p>{{ wohnung.raumbuch_elektro.abstellraum }}</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Schalterprogramm</h5>
+                <p>{{ wohnung.raumbuch_elektro.schalterprogramm }}</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Tv Anschluss</h5>
+                <p>{{ wohnung.raumbuch_elektro.tv_anschluss }}</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Telefon Anschluss</h5>
+                <p>{{ wohnung.raumbuch_elektro.telefon_anschluss }}</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">InternetAnschluss</h5>
+                <p>{{ wohnung.raumbuch_elektro.internet_anschluss }}</p>
+            </div>
+        </div>
+        {% if wohnung.raumbuch_elektro %}
+        <div class="custom-btn-right-container">
+            <a class="btn btn-primary" href="{% url 'siteman:wohnung_raumbuch_elektro_update' wohnung.raumbuch_elektro.pk %}">Update</a>
+        </div>
+        {% endif %}
+    </div>
+    
+
+{% endblock %}

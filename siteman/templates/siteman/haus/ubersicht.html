@@ -1,0 +1,126 @@
+<!-- summary information of a haus goes here -->
+
+{% extends 'siteman/base_haus.html' %}
+
+{% block content%}
+    <div class="page-heading">
+        <h3 class="imp-heading"> {{ haus }} </h3>
+    </div>
+    <div class="ubersicht">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Erdbau:</h5>
+                <p>{{ haus.erdbau.erdbau }}</p>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-body">
+                <h5>Rohbau:</h5>
+                <h6>Grundung:</h6>
+                <p>{{ haus.rohbau.grundung }}</p>
+                <h6>Geschossdecken:</h6>
+                <p>{{ haus.rohbau.geschossdecken }}</p>
+                <h6>Aussenwande kellergeschoss:</h6>
+                <p>{{ haus.rohbau.aussenwande_kellergeschoss }}</p>
+                <h6>Aussenwande EG,OG,DG:</h6>
+                <p>{{ haus.rohbau.aussenwande_eg_og_dg }}</p>
+                <h6>Tragendeinnenwande:</h6>
+                <p>{{ haus.rohbau.tragendeinnenwande }}</p>
+                <h6>Nichttragendeinnenwande:</h6>
+                <p>{{ haus.rohbau.nichttragendeinnenwande }}</p>
+                <h6>dach:</h6>
+                <p>{{ haus.rohbau.dach }}</p>
+                <h6>Treppen:</h6>
+                <p>{{ haus.rohbau.treppen }}</p>
+                <h6>balkon:</h6>
+                <p>{{ haus.rohbau.balkon }}</p>
+            </div>
+            
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5>Dach:</h5>
+                <p>{{ haus.dach.dach }}</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5>Fenster:</h5>
+                <h6>Kellergeschoss</h6>
+                <p>{{ haus.fenster.kellergeschoss }}</p>
+                <h6>Erdgeschoss</h6>
+                <p>{{ haus.fenster.erdgeschoss }}</p>
+                <h6>Regelgeschoss</h6>
+                <p>{{ haus.fenster.regelgeschoss }}</p>
+                <h6>Dachgeschoss</h6>
+                <p>{{ haus.fenster.dachgeschoss }}</p>
+                <h6>Treppenhaus</h6>
+                <p>{{ haus.fenster.treppenhaus }}</p>
+                <h6>Tiefgarage</h6>
+                <p>{{ haus.fenster.tiefgarage }}</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5>Elektro:</h5>
+                <p>{{ haus.elektro.elektro }}</p>
+            </div>
+            
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5>Sanitar:</h5>
+                <h6>Heizung</h6>
+                <p>{{ haus.sanitaer.heizung }}</p>
+                <h6>Entwasserung</h6>
+                <p>{{ haus.sanitaer.entwasserung }}</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5>Innenputz:</h5>
+                <h6>Innenputzbad</h6>
+                <p>{{ haus.innenputz.innenputz_bad }}</p>
+                <h6>Innenputzwohnraueme</h6>
+                <p>{{ haus.innenputz.innenputz_wohnraueme }}</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5>Estrich:</h5>
+                <h6>Daemmplatten</h6>
+                <p>{{ haus.estrich.daemmplatten }}</p>
+                <h6>Estrich</h6>
+                <p>{{ haus.estrich.estrich }}</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5>Trockenbau:</h5>
+                <h6>Wande</h6>
+                <p>{{ haus.trockenbau.wande }}</p>
+                <h6>Decken</h6>
+                <p>{{ haus.trockenbau.decken }}</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5>Maler:</h5>
+                <h6>Tapete</h6>
+                <p>{{ haus.maler.tapete }}</p>
+                <h6>Farbe</h6>
+                <p>{{ haus.maler.farbe }}</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5>Aussenputz:</h5>
+                <h6>Aussenputz</h6>
+                <p>{{ haus.aussenputz.aussenputz }}</p>
+                <h6>Sockel</h6>
+                <p>{{ haus.aussenputz.sockel }}</p>
+            </div>
+        </div>      
+    </div>
+{% endblock %}

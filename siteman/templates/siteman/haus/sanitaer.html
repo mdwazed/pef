@@ -1,22 +1,35 @@
-<!-- sanitaer page template at haus level -->
+<!-- Sanitar page template at haus level -->
 
-{% extends 'base_haus.html' %}
+{% extends 'siteman/base_haus.html' %}
 
 {% block content%}
-    <h3> Sanitar: {{ haus }} </h3>
-    <div class="entry-form">
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text">heizung:</span>                
+    <div class="page-heading">
+        <h3 class="imp-heading"> Sanitar: {{ haus }} </h3>
+    </div>
+    <div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Heizung</h5>
+                <p>{{ haus.sanitaer.heizung }}</p>
             </div>
-            <textarea class="form-control" name="" id="" rows="3" disabled>{{ haus.sanitaer.heizung }}</textarea> 
         </div>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text">abwasserung:</span>                
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Entwasserung</h5>
+                <p>{{ haus.sanitaer.entwasserung }}</p>
             </div>
-            <textarea class="form-control" name="" id="" rows="3" disabled>{{ haus.sanitaer.abwasserung }}</textarea> 
         </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Sonstiges</h5>
+                <p>{{ haus.sanitaer.sonstiges }}</p>
+            </div>
+        </div>
+        {% if haus.sanitaer %}
+        <div class="custom-btn-right-container">
+            <a class="btn btn-primary" href="{% url 'siteman:haus_sanitaer_update' haus.sanitaer.pk %}">Update</a>
+        </div>
+        {% endif %}
     </div>
     
 

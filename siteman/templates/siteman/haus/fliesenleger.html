@@ -1,15 +1,29 @@
-<!-- Fliesenleger page template at haus level -->
+<!-- fliesenleger page template at haus level -->
 
-{% extends 'base_haus.html' %}
+{% extends 'siteman/base_haus.html' %}
 
 {% block content%}
-    <h3> Fliesenleger: {{ haus }} </h3>
-    <div class="entry-form">
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text">Treppenhaus:</span>                
-            </div>
-            <textarea class="form-control" name="" id="" rows="3" disabled>{{ haus.fliesenleger.treppenhaus }}</textarea> 
-        </div>
+    <div class="page-heading">
+        <h3 class="imp-heading"> Fliesenleger: {{ haus }} </h3>
     </div>
+    <div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Treppenhaus</h5>
+                <p>{{ haus.fliesenleger.treppenhaus }}</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Sonstiges</h5>
+                <p>{{ haus.fliesenleger.sonstiges }}</p>
+            </div>
+        </div>
+        {% if haus.fliesenleger %}
+        <div class="custom-btn-right-container">
+            <a class="btn btn-primary" href="{% url 'siteman:haus_fliesenleger_update' haus.fliesenleger.pk %}">Update</a>
+        </div>
+        {% endif %}
+    </div>
+    
 {% endblock %}

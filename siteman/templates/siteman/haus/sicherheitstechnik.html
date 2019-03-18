@@ -1,0 +1,42 @@
+<!-- sicherheitstechnik page template at haus level -->
+
+{% extends 'siteman/base_haus.html' %}
+
+{% block content%}
+    <div class="page-heading">
+        <h3 class="imp-heading"> Sicherheitstechnik: {{ haus }} </h3>
+    </div>
+    <div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Alarmanlage</h5>
+                <p>{{ haus.sicherheitstechnik.alarmanlage }}</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Tuerschliesser</h5>
+                <p>{{ haus.sicherheitstechnik.tuerschliesser }}</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Sicherheitsschloesser</h5>
+                <p>{{ haus.sicherheitstechnik.sicherheitsschloesser }}</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Sonstiges</h5>
+                <p>{{ haus.sicherheitstechnik.sonstiges }}</p>
+            </div>
+        </div>
+        {% if haus.sicherheitstechnik %}
+        <div class="custom-btn-right-container">
+
+            <a class="btn btn-primary" href="{% url 'siteman:haus_sicherheitstechnik_update' haus.sicherheitstechnik.pk %}">Update</a>
+        </div>
+        {% endif %}
+    </div>
+    
+{% endblock %}

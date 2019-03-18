@@ -12,7 +12,7 @@
 
     <div class="container">
 
-        <div class="top-banner" style="background-image: url({% static 'img/top-banner-background-transparent.png' %});">
+        <div class="top-banner">
             <div class="logo">
                 <img src="{% static 'img/logo-pef.png' %}" alt="logo-pef">
             </div>
@@ -29,10 +29,10 @@
                 <a class="nav-link active" id="top-nav-projekt" href="{% url 'siteman:home_projekt' %}">Projekt</a>
               </li>  
               <li class="nav-item">
-                <a class="nav-link active" id="top-nav-erganzung" href="{% url 'siteman:home_erganzung' %}">Ergänzung</a>
+                <a class="nav-link active" id="top-nav-erganzung" href="#">Ergänzung</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" id="top-nav-progress" href="{% url 'siteman:home_progress' %}">Der Progress</a>
+                <a class="nav-link" id="top-nav-progress" href="#">Der Progress</a>
               </li>            
             </ul>
         </div>
@@ -48,10 +48,19 @@
               {% block content %}
               {% endblock %}
           </div>
+          
         </div>
-                
+        <footer>
+          {% block footer %}
+            <div>
+              <h4>--- All footer text goes here ---</h4>
+              <h6>like copyright and other things</h6>
+            </div>
+          {% endblock %}
+        </footer>        
         
     </div>
+    
     
   <script type="text/javascript" src="{% static 'js/main_js.js' %}"></script>    
 </body>

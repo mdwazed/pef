@@ -1,0 +1,18 @@
+<!-- dach update page template at haus level -->
+
+{% extends 'siteman/base_haus.html' %}
+
+{% block content%}
+    <div class="page-heading">
+        <h3 class="imp-heading"> update Dach {{ haus }} </h3>
+    </div>
+    <div>
+        <form method="POST">
+            {% csrf_token %}
+            <table>
+                {{ form.as_table }}
+            </table>
+            <input class="btn btn-primary" type="submit" value="Save">
+        </form>
+    </div>
+{% endblock %}

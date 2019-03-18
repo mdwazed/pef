@@ -1,0 +1,18 @@
+<!-- Raumbuch elektro update page template at wohnung level -->
+
+{% extends 'siteman/base_wohnung.html' %}
+
+{% block content%}
+    <div class="page-heading">
+        <h3 class="imp-heading"> Update Raumbuch Elektro </h3>
+    </div>
+    <div>
+        <form method="POST">
+            {% csrf_token %}
+            <table>
+                {{ form.as_table }}
+            </table>
+            <input class="btn btn-primary" type="submit" value="Save">
+        </form>
+    </div>
+{% endblock %}

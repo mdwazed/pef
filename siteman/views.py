@@ -1,12 +1,15 @@
-from django.shortcuts import render
+"""
+main views to create db ORM
+"""
+
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
-from django.views.generic import DetailView, ListView
+from django.views.generic import DetailView, ListView, UpdateView
 
-from . import models 
-from .forms import (ProjektForm, AddHausForm,)
+from . import models, forms, misc_functions, default_creator
 from .components import Haus_fl
-from . import misc_functions, default_creator
+
 
 # Create your views here.
 
@@ -15,17 +18,17 @@ def home(request):
 
 def home_projekt(request):
     """
-    display project set in current session
-    allow set another running project in surrent session
+    display current project set in current session
+    give option to set another running project in surrent session
     """
-    # set selected project in session var
+    # set selected project in session var if submitted
     if request.method == "POST":
         selected_projekt_id = request.POST['selected_projekt']
         request.session['current_projekt_id'] = selected_projekt_id
     # get the current project from session var
     projekt =  misc_functions.get_current_projekt(request)
     # get all running project to display in select option   
-    projekts = models.Projekt.objects.filter(projekt_status=True)
+    projekts = models.Projekt.objects.filter(projekt_status=True) # status true means curently running projekt
     context = {
     'projekt' : projekt,
     'projekts' : projekts,
@@ -34,16 +37,16 @@ def home_projekt(request):
 
 def projekt(request):
     """
-    Add/edit project related information.
+    Add/edit project related information from projekt details page
 
     """
     projekt =  misc_functions.get_current_projekt(request)
     if request.method == 'POST':
-        form = ProjektForm(request.POST, instance=projekt)
+        form = forms.ProjektForm(request.POST, instance=projekt)
         if form.is_valid():
             form.save()
     if projekt:
-        projekt_form = ProjektForm(instance=projekt)
+        projekt_form = forms.ProjektForm(instance=projekt)
     else:
         raise ValueError('Kein projekt selected!')
 
@@ -52,66 +55,134 @@ def projekt(request):
     }
     return render(request, 'siteman/projekt.html', context)
 
+"""
+##############################################################################
+#################### views related to haus only ##############################
+##############################################################################
+"""
+
 def haus(request):
     """
     display list of haus associated with selected project
-    add haus to a project with defalult values
+    add haus to a project with defalult settings
     """
 
     if request.method == "POST":
         # print('posted')
-        form = AddHausForm(request.POST)
+        form = forms.AddHausForm(request.POST)
         if form.is_valid():
-
+            projekt_id =  request.session['current_projekt_id']
             haus_nr = form.cleaned_data['haus_nr']
             display_nr = form.cleaned_data['display_nr']            
-            projekt_id =  request.session['current_projekt_id']
+            grundung = form.cleaned_data['grundung']
+            aussenwande_eg_og_dg = form.cleaned_data['aussenwande_eg_og_dg']
+            dach = form.cleaned_data['dach']
+            fenster_beschattung = form.cleaned_data['fenster_beschattung']
+
+
             # 
             # get all selected options for default text generations
             # put them in dict and pass to the create default module 
+            #in order to set the default values against each option.
             # 
-            haus = Haus(haus_nr=haus_nr, display_nr=display_nr, projekt_id=projekt_id)
+            haus = models.Haus(haus_nr=haus_nr, display_nr=display_nr, projekt_id=projekt_id)
             haus.save()
             default_choices = {
             'haus' : haus,
+            'grundung':grundung,
+            'aussenwande_eg_og_dg':aussenwande_eg_og_dg,
+            'dach':dach,
+            'fenster_beschattung': fenster_beschattung,
             }
-            
-
             #set defults values of all attributes of haus
             try:
                 haus = default_creator.create_default_haus_components(default_choices)
                 # save addl fields from default settings
                 haus.save()
             except Exception as e:
-                print('One or more components could not be created', e)
+                print('One or more haus components could not be created', e)
     projekt =  misc_functions.get_current_projekt(request)
     if not projekt:
         raise ValueError('Keine projekt selected!')
     hauser =  models.Haus.objects.filter(projekt=projekt).order_by('haus_nr')
-    form = AddHausForm()
+    form = forms.AddHausForm()
     context = {
     'projekt' : projekt,
     'hauser' : hauser,
     'form' : form,
     }         
-
     return render(request, 'siteman/haus.html', context)
 
-def haus_delete(request, pk):
-    """
-    delete the corrasponsing house and all associated components of currently selected project.
-    """
-    
-
-    return HttpResponse('delete this haus'+ str(pk))
-
-def set_current_haus(request, haus_id):
+def set_current_haus(request, haus_id, redirect):
     """
     set this haus as curent haus in the session var.
     redirect to rohbau page
     """
     request.session['current_haus_id'] = haus_id
-    return HttpResponseRedirect(reverse('siteman:haus_erdbau'))
+    if redirect == 'ubersicht':
+        return HttpResponseRedirect(reverse('siteman:haus_ubersicht'))
+    elif redirect == 'wohnungen':
+        return HttpResponseRedirect(reverse('siteman:haus_wohnungen'))
+
+def haus_ubersicht(request):
+    """
+    display summary information of the selected haus
+    """
+    haus = misc_functions.get_current_haus(request)
+    context = {
+    'haus' : haus,
+    }
+    return render(request, 'siteman/haus/ubersicht.html', context)
+
+
+def haus_wohnungen(request):
+    """
+    list all wohnung of current haus and
+    add new wohnung to the haus
+    """
+
+    haus = misc_functions.get_current_haus(request)
+    wohnung_list = models.Wohnung.objects.filter(haus=haus)
+    if request.method == 'POST':
+        form = forms.AddWohnungForm(request.POST)
+        if form.is_valid():
+            wohnung_nr = form.cleaned_data['wohnung_nr']
+            clients_name =form.cleaned_data['clients_name']
+            clients_address =form.cleaned_data['clients_address']
+            clients_email =form.cleaned_data['clients_email']
+            clients_tel =form.cleaned_data['clients_tel']
+            wohnung = models.Wohnung(haus=haus, wohnung_nr=wohnung_nr, clients_name=clients_name, clients_tel=clients_tel, clients_email=clients_email, clients_address=clients_address)
+            wohnung.save()
+            default_choices = {
+            'wohnung': wohnung,
+            }
+
+            try:
+                wohnung = default_creator.create_default_wohnung_components(default_choices)
+                # save addl fields from default settings
+                wohnung.save()
+            except Exception as e:
+                print('One or more wohnung components could not be created', e)
+
+    form = forms.AddWohnungForm()
+    context = {
+    'haus': haus,
+    'wohnung_list': wohnung_list,
+    'form':form,
+    }
+    return render(request, 'siteman/haus/wohnungen.html', context)
+
+def haus_delete(request, pk):
+    """
+    delete the corrasponsing house and all associated components of currently selected project.
+    """
+    haus = get_object_or_404(models.Haus, pk=pk)
+    try:
+        haus.delete()
+        return HttpResponseRedirect(reverse('siteman:haus'))
+    except Exception as e:
+        return HttpResponse("failed to delete objets" + str(e))
+
 
 def haus_rohbau(request):
     """
@@ -124,6 +195,14 @@ def haus_rohbau(request):
     }
     return render(request, 'siteman/haus/rohbau.html', context)
 
+class HausRohbauUpdateView(UpdateView):
+    model = models.Rohbau
+    template_name = 'siteman/haus/rohbau_update.html'
+    form_class = forms.RohbauModelForm
+
+    def get_success_url(self):
+        return reverse('siteman:haus_rohbau')
+
 def haus_erdbau(request):
     """
     erdbau views of currently selected haus
@@ -133,6 +212,15 @@ def haus_erdbau(request):
     'haus' : haus,
     }
     return render(request, 'siteman/haus/erdbau.html', context)
+
+class HausErdbauUpdateView(UpdateView):
+    model = models.Erdbau
+    template_name = 'siteman/haus/erdbau_update.html'
+    form_class = forms.ErdbauModelForm
+
+    def get_success_url(self):
+        return reverse('siteman:haus_erdbau')
+
 
 def haus_dach(request):
     """
@@ -144,6 +232,14 @@ def haus_dach(request):
     }
     return render(request, 'siteman/haus/dach.html', context)
 
+class HausDachUpdateView(UpdateView):
+    model = models.Dach
+    template_name = 'siteman/haus/dach_update.html'
+    form_class = forms.DachModelForm
+
+    def get_success_url(self):
+        return reverse('siteman:haus_dach')
+
 def haus_fenster(request):
     """
     erdbau views of currently selected haus
@@ -153,6 +249,14 @@ def haus_fenster(request):
     'haus' : haus,
     }
     return render(request, 'siteman/haus/fenster.html', context)
+
+class HausFensterUpdateView(UpdateView):
+    model = models.Fenster
+    template_name = 'siteman/haus/fenster_update.html'
+    form_class = forms.FensterModelForm
+
+    def get_success_url(self):
+        return reverse('siteman:haus_fenster')
 
 def haus_elektro(request):
     """
@@ -164,6 +268,15 @@ def haus_elektro(request):
     }
     return render(request, 'siteman/haus/elektro.html', context)
 
+class HausElektroUpdateView(UpdateView):
+    model = models.Elektro
+    template_name = 'siteman/haus/elektro_update.html'
+    form_class = forms.ElektroModelForm
+
+    def get_success_url(self):
+        return reverse('siteman:haus_elektro')
+
+
 def haus_sanitaer(request):
     """
     erdbau views of currently selected haus
@@ -173,6 +286,15 @@ def haus_sanitaer(request):
     'haus' : haus,
     }
     return render(request, 'siteman/haus/sanitaer.html', context)
+
+class HausSanitaerUpdateView(UpdateView):
+    model = models.Sanitaer
+    template_name = 'siteman/haus/sanitaer_update.html'
+    form_class = forms.SanitaerModelForm
+
+    def get_success_url(self):
+        return reverse('siteman:haus_sanitaer')
+
 
 def haus_innenputz(request):
     """
@@ -184,6 +306,14 @@ def haus_innenputz(request):
     }
     return render(request, 'siteman/haus/innenputz.html', context)
 
+class HausInnenputzUpdateView(UpdateView):
+    model = models.Innenputz
+    template_name = 'siteman/haus/innenputz_update.html'
+    form_class = forms.InnenputzModelForm
+
+    def get_success_url(self):
+        return reverse('siteman:haus_innenputz')
+
 def haus_estrich(request):
     """
     erdbau views of currently selected haus
@@ -193,6 +323,14 @@ def haus_estrich(request):
     'haus' : haus,
     }
     return render(request, 'siteman/haus/estrich.html', context)
+
+class HausEstrichUpdateView(UpdateView):
+    model = models.Estrich
+    template_name = 'siteman/haus/estrich_update.html'
+    form_class = forms.EstrichModelForm
+
+    def get_success_url(self):
+        return reverse('siteman:haus_estrich')
 
 def haus_trockenbau(request):
     """
@@ -204,6 +342,14 @@ def haus_trockenbau(request):
     }
     return render(request, 'siteman/haus/trockenbau.html', context)
 
+class HausTrockenbauUpdateView(UpdateView):
+    model = models.Trockenbau
+    template_name = 'siteman/haus/trockenbau_update.html'
+    form_class = forms.TrockenbauModelForm
+
+    def get_success_url(self):
+        return reverse('siteman:haus_trockenbau')
+
 def haus_maler(request):
     """
     erdbau views of currently selected haus
@@ -213,6 +359,14 @@ def haus_maler(request):
     'haus' : haus,
     }
     return render(request, 'siteman/haus/maler.html', context)
+
+class HausMalerUpdateView(UpdateView):
+    model = models.Maler
+    template_name = 'siteman/haus/maler_update.html'
+    form_class = forms.MalerModelForm
+
+    def get_success_url(self):
+        return reverse('siteman:haus_maler')
 
 def haus_aussenputz(request):
     """
@@ -224,6 +378,14 @@ def haus_aussenputz(request):
     }
     return render(request, 'siteman/haus/aussenputz.html', context)
 
+class HausAussenputzUpdateView(UpdateView):
+    model = models.Aussenputz
+    template_name = 'siteman/haus/aussenputz_update.html'
+    form_class = forms.AussenputzModelForm
+
+    def get_success_url(self):
+        return reverse('siteman:haus_aussenputz')
+
 def haus_fliesenleger(request):
     """
     erdbau views of currently selected haus
@@ -233,6 +395,14 @@ def haus_fliesenleger(request):
     'haus' : haus,
     }
     return render(request, 'siteman/haus/fliesenleger.html', context)
+
+class HausFliesenlegerUpdateView(UpdateView):
+    model = models.Fliesenleger
+    template_name = 'siteman/haus/fliesenleger_update.html'
+    form_class = forms.FliesenlegerModelForm
+
+    def get_success_url(self):
+        return reverse('siteman:haus_fliesenleger')
 
 def haus_bodenbelaege(request):
     """
@@ -244,58 +414,208 @@ def haus_bodenbelaege(request):
     }
     return render(request, 'siteman/haus/bodenbelaege.html', context)
 
-def wohnung(request):
-    return render(request, 'siteman/wohnung.html')
-def rohbau(request):
-    return render(request, 'siteman/rohbau.html')
-def wande(request):
-    return render(request, 'siteman/wande.html')
-def abdictung(request):
-    return render(request, 'siteman/abdictung.html')
-def decken(request):
-    return render(request, 'siteman/decken.html')
-def versorgung(request):
-    return render(request, 'siteman/versorgung.html')
-def erweiterter(request):
-    return render(request, 'siteman/erweiterter.html')
-# def gebaudeausrustung(request):
-#     return render(request, 'siteman/rohinstallation.html')
-def rohinstallation(request):
-    return render(request, 'siteman/rohinstallation.html')
-    # return HttpResponse('response returned')
-def sanitarausstattung(request):
-    return render(request, 'siteman/sanitarausstattung.html')
-def elektroausstattung(request):
-    return render(request, 'siteman/elektroausstattung.html')
-def entluftung(request):
-    return render(request, 'siteman/entluftung.html')
-def aufzuge(request):
-    return render(request, 'siteman/aufzuge.html')
+class HausBodenbelaegeUpdateView(UpdateView):
+    model = models.Bodenbelaege
+    template_name = 'siteman/haus/bodenbelaege_update.html'
+    form_class = forms.BodenbelaegeModelForm
+
+    def get_success_url(self):
+        return reverse('siteman:haus_bodenbelaege')
+
+def haus_schreiner(request):
+    """
+    erdbau views of currently selected haus
+    """
+    haus = misc_functions.get_current_haus(request)
+    context = {
+    'haus' : haus,
+    }
+    return render(request, 'siteman/haus/schreiner.html', context)
+
+class HausSchreinerUpdateView(UpdateView):
+    model = models.Schreiner
+    template_name = 'siteman/haus/schreiner_update.html'
+    form_class = forms.SchreinerModelForm
+
+    def get_success_url(self):
+        return reverse('siteman:haus_schreiner')
+
+def haus_schlosser(request):
+    """
+    erdbau views of currently selected haus
+    """
+    haus = misc_functions.get_current_haus(request)
+    context = {
+    'haus' : haus,
+    }
+    return render(request, 'siteman/haus/schlosser.html', context)
+
+class HausSchlosserUpdateView(UpdateView):
+    model = models.Schlosser
+    template_name = 'siteman/haus/schlosser_update.html'
+    form_class = forms.SchlosserModelForm
+
+    def get_success_url(self):
+        return reverse('siteman:haus_schlosser')
+
+def haus_schliessanlage(request):
+    """
+    erdbau views of currently selected haus
+    """
+    haus = misc_functions.get_current_haus(request)
+    context = {
+    'haus' : haus,
+    }
+    return render(request, 'siteman/haus/schliessanlage.html', context)
+
+class HausSchliessanlageUpdateView(UpdateView):
+    model = models.Schliessanlage
+    template_name = 'siteman/haus/schliessanlage_update.html'
+    form_class = forms.SchliessanlageModelForm
+
+    def get_success_url(self):
+        return reverse('siteman:haus_schliessanlage')
+
+def haus_sicherheitstechnik(request):
+    """
+    erdbau views of currently selected haus
+    """
+    haus = misc_functions.get_current_haus(request)
+    context = {
+    'haus' : haus,
+    }
+    return render(request, 'siteman/haus/sicherheitstechnik.html', context)
+
+class HausSicherheitstechnikUpdateView(UpdateView):
+    model = models.Sicherheitstechnik
+    template_name = 'siteman/haus/sicherheitstechnik_update.html'
+    form_class = forms.SicherheitstechnikModelForm
+
+    def get_success_url(self):
+        return reverse('siteman:haus_sicherheitstechnik')
+
+def haus_aussenanlagern(request):
+    """
+    erdbau views of currently selected haus
+    """
+    haus = misc_functions.get_current_haus(request)
+    context = {
+    'haus' : haus,
+    }
+    return render(request, 'siteman/haus/aussenanlagern.html', context)
+
+class HausAussenanlagernUpdateView(UpdateView):
+    model = models.Aussenanlagern
+    template_name = 'siteman/haus/aussenanlagern_update.html'
+    form_class = forms.AussenanlagernModelForm
+
+    def get_success_url(self):
+        return reverse('siteman:haus_aussenanlagern')
+
+"""
+##############################################################################
+###################  views related to wohnung ################################
+##############################################################################
+"""
+def set_current_wohnung(request, wohnung_id):
+    """
+    set this o=wohnung as curent wohnung in the session var.
+    redirect to wohnung ubersicht  page
+    """
+    print(wohnung_id)
+    request.session['current_wohnung_id'] = wohnung_id
+    return HttpResponseRedirect(reverse('siteman:wohnung_ubersicht'))
+
+def wohnung_delete(request, pk):
+    """
+    delete the corrasponsing wohnung and all associated components of currently selected haus.
+    """
+    wohnung = get_object_or_404(models.Wohnung, pk=pk)
+    try:
+        wohnung.delete()
+        return HttpResponseRedirect(reverse('siteman:haus_wohnungen'))
+    except Exception as e:
+        return HttpResponse("failed to delete objets" + str(e))
 
 
+def wohnung_ubersicht(request):
+    """
+    display summary information of the selected wohnung
+    """
+    wohnung = misc_functions.get_current_wohnung(request)
+    context = {
+    'wohnung' : wohnung,
+    }
+    return render(request, 'siteman/wohnung/ubersicht.html', context)
 
-def home_erganzung(request):
-    return render(request, 'siteman/home_erganzung.html')
-def erg_haus(request):
-    return render(request, 'siteman/erg_haus.html')
-def erg_wohnung(request):
-    return render(request, 'siteman/erg_wohnung.html') 
-def erg_rohbau(request):
-    return render(request, 'siteman/erg_rohbau.html')
-def erg_wande(request):
-    return render(request, 'siteman/erg_wande.html') 
-def erg_abdictung(request):
-    return render(request, 'siteman/erg_abdictung.html') 
-def erg_decken(request):
-    return render(request, 'siteman/erg_decken.html') 
-def erg_versorgung(request):
-    return render(request, 'siteman/erg_versorgung.html')
-def erg_erweiterter(request):
-    return render(request, 'siteman/erg_erweiterter.html')
+def wohnung_fenster(request):
+    """
+    display fenster information of the selected wohnung
+    """
+    wohnung = misc_functions.get_current_wohnung(request)
+    context = {
+    'wohnung' : wohnung,
+    }
+    return render(request, 'siteman/wohnung/fenster.html', context)
 
+class WohnungFensterUpdateView(UpdateView):
+    model = models.Fenster
+    template_name = 'siteman/wohnung/fenster_update.html'
+    form_class = forms.WohnungFensterModelForm
 
-def home_progress(request):
-    return render(request, 'siteman/home_progress.html')
+    def get_success_url(self):
+        return reverse('siteman:wohnung_fenster')
 
+def wohnung_elektro(request):
+    """
+    display elektro information of the selected wohnung
+    """
+    wohnung = misc_functions.get_current_wohnung(request)
+    context = {
+    'wohnung' : wohnung,
+    }
+    return render(request, 'siteman/wohnung/elektro.html', context)
 
+class WohnungElektroUpdateView(UpdateView):
+    model = models.Elektro
+    template_name = 'siteman/wohnung/elektro_update.html'
+    form_class = forms.WohnungElektroModelForm
 
+    def get_success_url(self):
+        return reverse('siteman:wohnung_elektro')
+
+def wohnung_raumbuch_elektro(request):
+    """
+    display raumbuch elektro information of the selected wohnung
+    """
+    wohnung = misc_functions.get_current_wohnung(request)
+    context = {
+    'wohnung' : wohnung,
+    }
+    return render(request, 'siteman/wohnung/raumbuch_elektro.html', context)
+
+class WohnungRaumbuchElektroUpdateView(UpdateView):
+    model = models.Raumbuch_elektro
+    template_name = 'siteman/wohnung/raumbuch_elektro_update.html'
+    form_class = forms.WohnungRuambuchElektroModelForm
+
+    def get_success_url(self):
+        return reverse('siteman:wohnung_raumbuch_elektro')
+
+def wohnung_sanitaer(request):
+    """
+    display elektro information of the selected wohnung
+    """
+    wohnung = misc_functions.get_current_wohnung(request)
+    context = {
+    'wohnung' : wohnung,
+    }
+    return render(request, 'siteman/wohnung/sanitaer.html', context)
+
+class WohnungSanitaerUpdateView(UpdateView):
+    model = models.Sanitaer
+    template_name = 'siteman/wohnung/sanitaer_update.html'
+    form_class = forms.WohnungSanitaerModelForm
+
+    def get_success_url(self):
+        return reverse('siteman:wohnung_sanitaer')

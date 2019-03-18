@@ -1,75 +1,90 @@
 <!-- haus level rohbau template  -->
 
-{% extends 'base_haus.html' %}
+{% extends 'siteman/base_haus.html' %}
 
 {% block content%}
-    <h3> Rohbau: {{ haus }} </h3>
-    <div class="entry-form">
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text">Bodenplatte:</span>                
+    <div class="page-heading">
+        <h3 class="imp-heading"> Rohbau: {{ haus }} </h3>
+    </div>
+    <div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Grundung:</h5>
+                <p>{{ haus.rohbau.grundung }}</p>
             </div>
-            <textarea class="form-control" name="" id="" rows="3" disabled>{{ haus.rohbau.bodenplatte }}</textarea> 
         </div>
-
-        <div class="input-group mb-3 entry-form">
-            <div class="input-group-prepend">
-                <span class="input-group-text">Geschossdecken:</span>                
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Geschossdecken:</h5>
+                <p>{{ haus.rohbau.geschossdecken }}</p>
             </div>
-            <textarea class="form-control" name="" id="" rows="3" disabled>{{ haus.rohbau.geschossdecken }}</textarea>
         </div>
-
-        <div class="input-group mb-3 entry-form">
-            <div class="input-group-prepend">
-                <span class="input-group-text">Aussenwande:</span>                
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Aussenwande kellergeschoss:</h5>
+                <p>{{ haus.rohbau.aussenwande_kellergeschoss }}</p>
             </div>
-            <textarea class="form-control" name="" id="" rows="3" disabled>{{ haus.rohbau.aussenwande }}</textarea>
         </div>
-
-        <div class="input-group mb-3 entry-form">
-            <div class="input-group-prepend">
-                <span class="input-group-text">Tiefgaragenrampe:</span>                
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Aussenwande EG, OG, DG:</h5>
+                <p>{{ haus.rohbau.aussenwande_eg_og_dg }}</p>
             </div>
-            <textarea class="form-control" name="" id="" rows="3" disabled>{{ haus.rohbau.tiefgaragenrampe }}</textarea>
         </div>
-        <div class="input-group mb-3 entry-form">
-            <div class="input-group-prepend">
-                <span class="input-group-text">Tragendewande:</span>                
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Tragendeinnenwande:</h5>
+                <p>{{ haus.rohbau.tragendeinnenwande }}</p>
             </div>
-            <textarea class="form-control" name="" id="" rows="3" disabled>{{ haus.rohbau.tragendewande }}</textarea>
         </div>
-        <div class="input-group mb-3 entry-form">
-            <div class="input-group-prepend">
-                <span class="input-group-text">Innenwande:</span>                
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Nichttragendeinnenwande:</h5>
+                <p>{{ haus.rohbau.nichttragendeinnenwande }}</p>
             </div>
-            <textarea class="form-control" name="" id="" rows="3" disabled>{{ haus.rohbau.innenwande }}</textarea>
         </div>
-        <div class="input-group mb-3 entry-form">
-            <div class="input-group-prepend">
-                <span class="input-group-text">Nichttragendewande:</span>                
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Tiefgaragenrampe:</h5>
+                <p>{{ haus.rohbau.tiefgaragenrampe }}</p>
             </div>
-            <textarea class="form-control" name="" id="" rows="3" disabled>{{ haus.rohbau.nichttragendewande }}</textarea>
         </div>
-        <div class="input-group mb-3 entry-form">
-            <div class="input-group-prepend">
-                <span class="input-group-text">Dach:</span>                
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Installationschachte:</h5>
+                <p>{{ haus.rohbau.installationschachte }}</p>
             </div>
-            <textarea class="form-control" name="" id="" rows="3" disabled>{{ haus.rohbau.dach }}</textarea>
         </div>
-        <div class="input-group mb-3 entry-form">
-            <div class="input-group-prepend">
-                <span class="input-group-text">Treppen:</span>                
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Dach:</h5>
+                <p>{{ haus.rohbau.dach }}</p>
             </div>
-            <textarea class="form-control" name="" id="" rows="3" disabled>{{ haus.rohbau.treppen }}</textarea>
+           
         </div>
-        <div class="input-group mb-3 entry-form">
-            <div class="input-group-prepend">
-                <span class="input-group-text">Balkon:</span>                
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Treppen:</h5>
+                <p>{{ haus.rohbau.treppen }}</p>
             </div>
-            <textarea class="form-control" name="" id="" rows="3" disabled>{{ haus.rohbau.balkon }}</textarea>
         </div>
-
-        
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Balkon:</h5>
+                <p>{{ haus.rohbau.balkon }}</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Sonstiges:</h5>
+                <p>{{ haus.rohbau.sonstiges }}</p>
+            </div>
+        </div>
+        {% if haus.rohbau %}
+        <div class="custom-btn-right-container">
+            <a class="btn btn-primary" href="{% url 'siteman:haus_rohbau_update' haus.rohbau.pk %}">Update</a>
+        </div>
+        {% endif %}
     </div>
     
 

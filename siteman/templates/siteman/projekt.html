@@ -1,4 +1,4 @@
-{% extends 'base_projekt.html' %}
+{% extends 'siteman_base_template.html' %}
 {% load static %}
 
 {% block left_nav %}
@@ -6,21 +6,24 @@
 {% endblock %}
 
 {% block content%}
-    <h3> Projekt Information </h3>
-    <form action="{% url 'siteman:projekt' %}" method="POST">
-        {% csrf_token %}
-        <div>
-            <table>
-                {{ form.as_table }}
-            </table>
-        </div>
-        <div class="custom-btn-right-container">
-            <a href="{% url 'siteman:home_projekt' %}" class="btn btn-primary custom-btn-right">Back</a>
-            <input type="submit" value="Update" class="btn btn-primary custom-btn-right">
-        </div>
-        
-        
-    </form>
+    <div class="page-heading">
+        <h3 class="imp-heading"> Projekt Information </h3>
+    </div>
+    <div class="gray-bkgrd">
+        <form action="{% url 'siteman:projekt' %}" method="POST">
+            {% csrf_token %}
+            <div>
+                <table>
+                    {{ form.as_table }}
+                </table>
+            </div>
+            <div class="custom-btn-right-container">
+                <a href="{% url 'siteman:home_projekt' %}" class="btn btn-primary custom-btn-right">Back</a>
+                <input type="submit" value="Update" class="btn btn-primary custom-btn-right">
+            </div>
+        </form>
+    </div>
+    
     <div class="google-map">
         <img src="{% static 'img/zuckerstr23.png' %}" alt="location map">
     </div>

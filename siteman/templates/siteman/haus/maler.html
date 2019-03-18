@@ -1,23 +1,35 @@
-<!-- maler page template at haus level -->
+<!-- Dach page template at haus level -->
 
-{% extends 'base_haus.html' %}
+{% extends 'siteman/base_haus.html' %}
 
 {% block content%}
-    <h3> Maler: {{ haus }} </h3>
-    <div class="entry-form">
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text">Tapete:</span>                
+    <div class="page-heading">
+        <h3 class="imp-heading"> Maler: {{ haus }} </h3>
+    </div>
+    <div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Tapete</h5>
+                <p>{{ haus.maler.tapete }}</p>
             </div>
-            <textarea class="form-control" name="" id="" rows="3" disabled>{{ haus.maler.tapete }}</textarea> 
         </div>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text">Farbe:</span>                
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Farbe</h5>
+                <p>{{ haus.maler.farbe }}</p>
             </div>
-            <textarea class="form-control" name="" id="" rows="3" disabled>{{ haus.maler.farbe }}</textarea> 
         </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Sonstiges</h5>
+                <p>{{ haus.maler.sonstiges }}</p>
+            </div>
+        </div>
+        {% if haus.maler %}
+        <div class="custom-btn-right-container">
+            <a class="btn btn-primary" href="{% url 'siteman:haus_maler_update' haus.maler.pk %}">Update</a>
+        </div>
+        {% endif %}
     </div>
     
-
 {% endblock %}

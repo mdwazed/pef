@@ -1,0 +1,48 @@
+<!-- 
+wohnungen page template at haus level
+lists all wohnung of the current selected haus
+ -->
+
+{% extends 'siteman/base_haus.html' %}
+
+{% block content%}
+    <div class="page-heading">
+        <h3 class="imp-heading"> Wohnungen: {{ haus }} </h3>
+    </div>
+    <div class="subcontainer card">
+        <table class="table table-sm table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">pk</th>
+                    <th scope="col">Wohnung Nr.</th>
+                    <th scope="col">Client</th>
+                    <th scope="col">Details</th>
+                    <th scope="col">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for wohnung in wohnung_list %}
+                <tr>
+                    <th scope="row">{{ wohnung.pk }}</th>
+                    <td>{{ wohnung.wohnung_nr }}</td>
+                    <td>{{ wohnung.clients_name }}</td>
+                    <td><a href="{% url 'siteman:set_current_wohnung' wohnung.pk %}">Details</a></td>
+                    <td><a href="{% url 'siteman:wohnung_delete' wohnung.pk %}">Delete</a></td>
+                </tr>
+                {% endfor %} 
+            </tbody>
+        </table>
+    </div>
+    <div class="subcontainer card">
+        <h4 class="imp-heading">Add new Wohnung</h4>
+        <form action="{% url 'siteman:haus_wohnungen' %}" method="POST">
+            {% csrf_token %}
+            <table>
+                {{form.as_table}}
+            </table>
+            <div>
+                <input type="submit" value="Add" class="btn btn-primary">
+            </div>                                            
+        </form>
+    </div>
+{% endblock %}

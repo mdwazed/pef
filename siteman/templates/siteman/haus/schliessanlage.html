@@ -1,0 +1,23 @@
+<!-- schliessanlage page template at haus level -->
+
+{% extends 'siteman/base_haus.html' %}
+
+{% block content%}
+    <div class="page-heading">
+        <h3 class="imp-heading"> Schliessanlage: {{ haus }} </h3>
+    </div>
+    <div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Schliessplan</h5>
+                <p>{{ haus.schliessanlage.schliessplan }}</p>
+            </div>
+        </div>
+        {% if haus.schliessanlage %}
+        <div class="custom-btn-right-container">
+            <a class="btn btn-primary" href="{% url 'siteman:haus_schliessanlage_update' haus.schliessanlage.pk %}">Update</a>
+        </div>
+        {% endif %}
+    </div>
+    
+{% endblock %}

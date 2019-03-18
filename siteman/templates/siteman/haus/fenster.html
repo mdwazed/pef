@@ -1,45 +1,69 @@
-{% extends 'base_haus.html' %}
+{% extends 'siteman/base_haus.html' %}
 
 {% block content%}
-    <h3> Fenster: {{ haus }} </h3>
-    <div class="entry-form">
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text">Kellergeschoss:</span>                
-            </div>
-            <textarea class="form-control" name="" id="" rows="3" disabled>{{ haus.fenster.kellergeschoss }}</textarea> 
-        </div>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text">Erdgeschoss:</span>                
-            </div>
-            <textarea class="form-control" name="" id="" rows="3" disabled>{{ haus.fenster.erdgeschoss }}</textarea> 
-        </div>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text">Regelgeschoss:</span>                
-            </div>
-            <textarea class="form-control" name="" id="" rows="3" disabled>{{ haus.fenster.regelgeschoss }}</textarea> 
-        </div>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text">Dachgeschoss:</span>                
-            </div>
-            <textarea class="form-control" name="" id="" rows="3" disabled>{{ haus.fenster.dachgeschoss }}</textarea> 
-        </div>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text">Treppenhaus:</span>                
-            </div>
-            <textarea class="form-control" name="" id="" rows="3" disabled>{{ haus.fenster.treppenhaus }}</textarea> 
-        </div>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text">Tiefgarage:</span>                
-            </div>
-            <textarea class="form-control" name="" id="" rows="3" disabled>{{ haus.fenster.tiefgarage }}</textarea> 
+
+<div class="page-heading">
+    <h3 class="imp-heading"> Fenster: {{ haus }} </h3>
+</div>
+<div>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Algemeine Information</h5>
+            <p>{{ haus.fenster.algemeine_information }}</p>
         </div>
     </div>
-    
-
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Beschattung</h5>
+            <p>{{ haus.fenster.beschattung }}</p>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Kellergeschoss</h5>
+            <p>{{ haus.fenster.kellergeschoss }}</p>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Erdgeschoss</h5>
+            <p>{{ haus.fenster.erdgeschoss }}</p>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Regelgeschoss</h5>
+            <p>{{ haus.fenster.regelgeschoss }}</p>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Dachgeschoss</h5>
+            <p>{{ haus.fenster.dachgeschoss }}</p>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Treppenhaus</h5>
+            <p>{{ haus.fenster.treppenhaus }}</p>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Tiefgarage</h5>
+            <p>{{ haus.fenster.tiefgarage }}</p>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Sonstiges</h5>
+            <p>{{ haus.fenster.sonstiges }}</p>
+        </div>
+    </div>
+    {% if haus.fenster %}
+    <div class="custom-btn-right-container">
+        <a class="btn btn-primary" href="{% url 'siteman:haus_fenster_update' haus.fenster.pk %}">Update</a>
+    </div>
+    {% endif %}
+</div>
 {% endblock %}

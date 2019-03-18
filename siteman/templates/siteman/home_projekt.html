@@ -1,4 +1,4 @@
-{% extends 'base_projekt.html' %}
+{% extends 'siteman_base_template.html' %}
 
 {% block left_nav %}
 
@@ -6,39 +6,40 @@
 
 {% block content%}
     {% if projekt %}
-    <h3 class="imp-heading"> Projekt : {{ projekt.projekt_name }} </h3>
-    <hr>
-    <h5>Addresse : {{ projekt.projekt_addresse }}</h5>    
-    <h5>Stadt : {{ projekt.projekt_stadt }}</h5>    
-    <h5> Num of haus: 00 </h5>    
-    <h5> Num of wohnung: 00 </h5>  
-    <a href="{% url 'siteman:projekt' %}" class="btn btn-primary" role="button" aria-pressed="true">Details</a>
-    <a href="{% url 'siteman:haus' %}" class="btn btn-primary" role="button" aria-pressed="true">Hauser</a>
-    {% endif %}
-    <hr>
-    
-    <div class="projekt-selection">
-        <div>
-            <h4>Select another projekt to work on ...</h4>
-        </div>
-        <div>
-            <form action="{% url 'siteman:home_projekt' %}" method="POST">
-                {% csrf_token %}
-                <div>
-                    <select class="form-control" name="selected_projekt">
-                        {% for p in projekts %}
-                            <option value="{{ p.pk }}">{{ p.projekt_name }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div>
-                    <input class="btn btn-primary" type="submit" value="Select">
-                </div>
-            </form> 
-        </div>
-        
-               
+    <div class="page-heading">
+        <h3 class="imp-heading"> Projekt : {{ projekt.projekt_name }} </h3>
     </div>
+    <div class="gray-bkgrd">
+        <h5>Addresse : {{ projekt.projekt_addresse }}</h5>    
+        <h5>Stadt : {{ projekt.projekt_stadt }}</h5>    
+        <h5> Num of haus: 00 </h5>    
+        <h5> Num of wohnung: 00 </h5>  
+        <a href="{% url 'siteman:projekt' %}" class="btn btn-primary" role="button" aria-pressed="true">Details</a>
+        <a href="{% url 'siteman:haus' %}" class="btn btn-primary" role="button" aria-pressed="true">Hauser</a>
+        {% endif %}
+        
+        <div class="projekt-selection">
+            <div>
+                <h4>Select another projekt to work on ...</h4>
+            </div>
+            <div>
+                <form action="{% url 'siteman:home_projekt' %}" method="POST">
+                    {% csrf_token %}
+                    <div>
+                        <select class="form-control" name="selected_projekt">
+                            {% for p in projekts %}
+                                <option value="{{ p.pk }}">{{ p.projekt_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div>
+                        <input class="btn btn-primary" type="submit" value="Select">
+                    </div>
+                </form> 
+            </div>
+        </div>
+    </div>
+
     
 
 

@@ -1,23 +1,35 @@
-<!-- erdbau page template at haus level -->
+<!-- Estrich page template at haus level -->
 
-{% extends 'base_haus.html' %}
+{% extends 'siteman/base_haus.html' %}
 
 {% block content%}
-    <h3> Estrich: {{ haus }} </h3>
-    <div class="entry-form">
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text">daemmplatten:</span>                
+    <div class="page-heading">
+        <h3 class="imp-heading"> Estrich: {{ haus }} </h3>
+    </div>
+    <div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Daemmplatten</h5>
+                <p>{{ haus.estrich.daemmplatten }}</p>
             </div>
-            <textarea class="form-control" name="" id="" rows="3" disabled>{{ haus.estrich.daemmplatten }}</textarea> 
         </div>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text">estrich:</span>                
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Estrich</h5>
+                <p>{{ haus.estrich.estrich }}</p>
             </div>
-            <textarea class="form-control" name="" id="" rows="3" disabled>{{ haus.estrich.estrich }}</textarea> 
         </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Sonstiges</h5>
+                <p>{{ haus.estrich.sonstiges }}</p>
+            </div>
+        </div>
+        {% if haus.estrich %}
+        <div class="custom-btn-right-container">
+            <a class="btn btn-primary" href="{% url 'siteman:haus_estrich_update' haus.estrich.pk %}">Update</a>
+        </div>
+        {% endif %}
     </div>
     
-
 {% endblock %}

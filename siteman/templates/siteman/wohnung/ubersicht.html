@@ -1,0 +1,20 @@
+<!-- summary information of a specific wohnung goes here -->
+
+{% extends 'siteman/base_wohnung.html' %}
+
+{% block content%}
+    <div class="page-heading">
+        <h3 class="imp-heading">{{ wohnung }}</h3>
+    </div>
+    <div class="ubersicht">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Kunden:</h5>
+                <p>Name:&nbsp&nbsp{{ wohnung.clients_name }}</p>
+                <p>Addresse:&nbsp&nbsp{{ wohnung.clients_address }}</p>
+                <p>Email:&nbsp&nbsp{{ wohnung.clients_email }}</p>
+                <p>Tel:&nbsp&nbsp{{ wohnung.clients_tel }}</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

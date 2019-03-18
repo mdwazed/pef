@@ -1,0 +1,30 @@
+<!-- Elektro page template at wohnung level -->
+
+{% extends 'siteman/base_wohnung.html' %}
+
+{% block content%}
+    <div class="page-heading">
+        <h3 class="imp-heading"> Elektro: </h3>
+    </div>
+    <div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Elektro</h5>
+                <p>{{ wohnung.elektro.elektro }}</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Sontiges</h5>
+                <p>{{ wohnung.elektro.sonstiges }}</p>
+            </div>
+        </div>
+        {% if wohnung.elektro %}
+        <div class="custom-btn-right-container">
+            <a class="btn btn-primary" href="{% url 'siteman:wohnung_elektro_update' wohnung.elektro.pk %}">Update</a>
+        </div>
+        {% endif %}
+    </div>
+    
+
+{% endblock %}

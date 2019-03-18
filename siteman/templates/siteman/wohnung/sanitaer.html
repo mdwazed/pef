@@ -1,0 +1,73 @@
+<!-- Sanitar page template at wohnung level -->
+
+{% extends 'siteman/base_wohnung.html' %}
+
+{% block content%}
+    <div class="page-heading">
+        <h3 class="imp-heading"> Sanitar: {{ wohnung }} </h3>
+    </div>
+    <div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">aussenzapfstelle</h5>
+                <p>{{ wohnung.sanitaer.aussenzapfstelle }}</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">dusche</h5>
+                <p>{{ wohnung.sanitaer.dusche }}</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">badewanne</h5>
+                <p>{{ wohnung.sanitaer.badewanne }}</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">waschbecken</h5>
+                <p>{{ wohnung.sanitaer.waschbecken }}</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">toilette</h5>
+                <p>{{ wohnung.sanitaer.toilette }}</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">waschmaschinenanschluss</h5>
+                <p>{{ wohnung.sanitaer.waschmaschinenanschluss }}</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">spuele</h5>
+                <p>{{ wohnung.sanitaer.spuele }}</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">spuelmaschinenanschluss</h5>
+                <p>{{ wohnung.sanitaer.spuelmaschinenanschluss }}</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">fussbodenheizung</h5>
+                <p>{{ wohnung.sanitaer.fussbodenheizung }}</p>
+            </div>
+        </div>
+      
+        {% if wohnung.sanitaer %}
+        <div class="custom-btn-right-container">
+            <a class="btn btn-primary" href="{% url 'siteman:wohnung_sanitaer_update' wohnung.sanitaer.pk %}">Update</a>
+        </div>
+        {% endif %}
+    </div>
+    
+
+{% endblock %}

@@ -1,23 +1,35 @@
-<!-- innenputz page template at haus level -->
+<!-- Innenputz page template at haus level -->
 
-{% extends 'base_haus.html' %}
+{% extends 'siteman/base_haus.html' %}
 
 {% block content%}
-    <h3> Innenputz: {{ haus }} </h3>
-    <div class="entry-form">
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text">innenputz_bad:</span>                
+    <div class="page-heading">
+        <h3 class="imp-heading"> Innenputz: {{ haus }} </h3>
+    </div>
+    <div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Innenputz-Bad</h5>
+                <p>{{ haus.innenputz.innenputz_bad }}</p>
             </div>
-            <textarea class="form-control" name="" id="" rows="3" disabled>{{ haus.innenputz.innenputz_bad }}</textarea> 
         </div>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text">innenputz_wohnraueme:</span>                
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Innenputz-wohnraueme</h5>
+                <p>{{ haus.innenputz.innenputz_wohnraueme }}</p>
             </div>
-            <textarea class="form-control" name="" id="" rows="3" disabled>{{ haus.innenputz.innenputz_wohnraueme }}</textarea> 
         </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Sonstiges</h5>
+                <p>{{ haus.innenputz.sonstiges }}</p>
+            </div>
+        </div>
+        {% if haus.innenputz %}
+        <div class="custom-btn-right-container">
+            <a class="btn btn-primary" href="{% url 'siteman:haus_innenputz_update' haus.innenputz.pk %}">Update</a>
+        </div>
+        {% endif %}
     </div>
     
-
 {% endblock %}

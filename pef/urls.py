@@ -20,7 +20,7 @@ from django.conf.urls.static import static
 # from django.shortcuts import include
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls, name=admin),
     path('siteman/', include('siteman.urls')),
 ]
 

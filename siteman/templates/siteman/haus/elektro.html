@@ -1,16 +1,29 @@
-<!-- elektro page template at haus level -->
+<!-- Elektro page template at haus level -->
 
-{% extends 'base_haus.html' %}
+{% extends 'siteman/base_haus.html' %}
 
 {% block content%}
-    <h3> Elektro: {{ haus }} </h3>
-    <div class="entry-form">
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text">Elektro:</span>                
+    <div class="page-heading">
+        <h3 class="imp-heading"> Elektro: {{ haus }} </h3>
+    </div>
+    <div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Elektro</h5>
+                <p>{{ haus.elektro.elektro }}</p>
             </div>
-            <textarea class="form-control" name="" id="" rows="3" disabled>{{ haus.elektro.elektro }}</textarea> 
         </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Sonstiges</h5>
+                <p>{{ haus.elektro.sonstiges }}</p>
+            </div>
+        </div>
+        {% if haus.elektro %}
+        <div class="custom-btn-right-container">
+            <a class="btn btn-primary" href="{% url 'siteman:haus_elektro_update' haus.elektro.pk %}">Update</a>
+        </div>
+        {% endif %}
     </div>
     
 

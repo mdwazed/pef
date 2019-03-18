@@ -1,23 +1,35 @@
-<!-- erdbau page template at haus level -->
+<!-- Trokenbau page template at haus level -->
 
-{% extends 'base_haus.html' %}
+{% extends 'siteman/base_haus.html' %}
 
 {% block content%}
-    <h3> Trockenbau: {{ haus }} </h3>
-    <div class="entry-form">
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text">Wande:</span>                
+    <div class="page-heading">
+        <h3 class="imp-heading"> Trockenbau: {{ haus }} </h3>
+    </div>
+    <div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Wande</h5>
+                <p>{{ haus.trockenbau.wande }}</p>
             </div>
-            <textarea class="form-control" name="" id="" rows="3" disabled>{{ haus.trockenbau.wande }}</textarea> 
         </div>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text">Decken:</span>                
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Decken</h5>
+                <p>{{ haus.trockenbau.decken }}</p>
             </div>
-            <textarea class="form-control" name="" id="" rows="3" disabled>{{ haus.trockenbau.decken }}</textarea> 
         </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Sonstiges</h5>
+                <p>{{ haus.trockenbau.sonstiges }}</p>
+            </div>
+        </div>
+        {% if haus.trockenbau %}
+        <div class="custom-btn-right-container">
+            <a class="btn btn-primary" href="{% url 'siteman:haus_trockenbau_update' haus.trockenbau.pk %}">Update</a>
+        </div>
+        {% endif %}
     </div>
     
-
 {% endblock %}
