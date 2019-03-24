@@ -113,6 +113,10 @@ class Erdbau(Verantwortung):
     erdbau = models.TextField(null=True, blank=True)
     fundamentplan = models.FileField(null=True, upload_to='plan_pdf', blank=True)
     sonstiges = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return ("Erdbau" + str(self.haus))
+
 class Rohbau(Verantwortung):
     """
     common rohbau related task
@@ -403,3 +407,29 @@ class Handwerker(models.Model):
 
     def __str__(self):
         return self.unternehmen
+
+class Plan(models.Model):
+    """
+    all pdf files goes here. 
+    catagorised as per components like erdbau, roh bau etc.
+    """
+    component_tuple = (
+        ('ar', 'Architeckt'),
+        ('eb', 'Erdbau'),
+        ('rb', 'Rohbau'),
+        ('fen', 'Fenster'),
+        ('elek', 'Elektro'),
+        ('sani', 'Sanitar'),
+        ('flie', 'Fliesenleger'),
+        ('boden', 'Bodenbelaege'),
+        ('turen', 'Turen'),
+        ('sanl', 'Schliessanlage'),
+        ('aanl', 'Aussenanlage'),
+        )
+    haus = models.ForeignKey(Haus, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    components = models.CharField(max_length=50, choices=component_tuple)
+    plan = models.FileField(null=True, upload_to='plan_pdf/', blank=True)
+
+    def __str__(self):
+        return self.name

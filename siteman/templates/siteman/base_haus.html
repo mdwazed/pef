@@ -5,10 +5,10 @@
 <div class="left-nav-projekt">
     <ul class="nav flex-column">
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'siteman:haus_ubersicht' %}">Ubersicht</a>
+        <a class="nav-link" href="{% url 'siteman:haus_wohnungen' %}">Wohnungen</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'siteman:haus_wohnungen' %}">Wohnungen</a>
+        <a class="nav-link" href="{% url 'siteman:haus_ubersicht' %}">Ubersicht</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="{% url 'siteman:haus_erdbau' %}">Erdbau</a>
@@ -63,7 +63,10 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" href="{% url 'siteman:haus_aussenanlagern' %}">Aussenanlagern</a>
-      </li>     
+      </li>   
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'siteman:plans' %}">Plans</a>
+      </li>  
     </ul>
 </div>
 {% endblock %}

@@ -1,0 +1,54 @@
+<!-- Fliesenleger page template at wohnung level -->
+
+{% extends 'siteman/base_wohnung.html' %}
+
+{% block content%}
+    <div class="page-heading">
+        <h3 class="imp-heading"> Fliesenleger: {{ wohnung }}</h3>
+    </div>
+    <div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Bad</h5>
+                <p>{{ wohnung.fliesenleger.bad }}</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Wohnzimmer</h5>
+                <p>{{ wohnung.fliesenleger.wohnzimmer }}</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">abstellraum</h5>
+                <p>{{ wohnung.fliesenleger.abstellraum }}</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Esszimmer</h5>
+                <p>{{ wohnung.fliesenleger.esszimmer }}</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Keller</h5>
+                <p>{{ wohnung.fliesenleger.keller }}</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Sonstiges</h5>
+                <p>{{ wohnung.fliesenleger.sonstiges }}</p>
+            </div>
+        </div>
+        {% if wohnung.fliesenleger %}
+        <div class="custom-btn-right-container">
+            <a class="btn btn-primary" href="{% url 'siteman:wohnung_fliesenleger_update' wohnung.fliesenleger.pk %}">Update</a>
+        </div>
+        {% endif %}
+    </div>
+    
+
+{% endblock %}

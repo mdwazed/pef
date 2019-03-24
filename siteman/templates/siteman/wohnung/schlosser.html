@@ -1,0 +1,36 @@
+<!-- Schlosser page template at wohnung level -->
+
+{% extends 'siteman/base_wohnung.html' %}
+
+{% block content%}
+    <div class="page-heading">
+        <h3 class="imp-heading"> Schlosser: {{ wohnung }}</h3>
+    </div>
+    <div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Wohnungstuer</h5>
+                <p>{{ wohnung.schlosser.wohnungstuer }}</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Innentueren</h5>
+                <p>{{ wohnung.schlosser.innentueren }}</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Sontiges</h5>
+                <p>{{ wohnung.schlosser.sonstiges }}</p>
+            </div>
+        </div>
+        {% if wohnung.schlosser %}
+        <div class="custom-btn-right-container">
+            <a class="btn btn-primary" href="{% url 'siteman:wohnung_schlosser_update' wohnung.schlosser.pk %}">Update</a>
+        </div>
+        {% endif %}
+    </div>
+    
+
+{% endblock %}

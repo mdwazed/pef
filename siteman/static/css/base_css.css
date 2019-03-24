@@ -164,6 +164,32 @@ footer h4, footer h6 {
     background-color: #0F65D8;
 }
 
+/*===========================*/
+.left-nav-wohnung {
+    margin-top: 65px;
+    flex-basis: 20%;
+    /*display: none;*/
+}
+
+.left-nav-wohnung a {
+    color: #000;
+    transition: color 0.3s ease;
+}
+
+.left-nav-wohnung a:hover {
+    color: #fff;
+}
+
+.left-nav-wohnung li {
+    background-color: #ffdc9a;
+    color: #000;
+    transition: background-color 0.3s ease;
+}
+
+.left-nav-wohnung li:hover {
+    background-color: #ffa803;
+}
+
 
 .inner-nav {
 

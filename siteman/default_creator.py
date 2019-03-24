@@ -52,6 +52,15 @@ def create_default_wohnung_components(default_choices):
     create_default_elektro(default_choices)
     create_default_sanitaer(default_choices)
     create_default_raumbuch_elektro(default_choices)
+    create_default_innenputz(default_choices)
+    create_default_estrich(default_choices)
+    create_default_trockenbau(default_choices)
+    create_default_maler(default_choices)
+    create_default_fliesenleger(default_choices)
+    create_default_bodenbelaege(default_choices)
+    create_default_schreiner(default_choices)
+    create_default_schlosser(default_choices)
+    create_default_schliessanlage(default_choices)
     return wohnung
 
 def create_default_architekt_plan(default_choices):
@@ -234,44 +243,85 @@ def create_default_sanitaer(default_choices):
 
 
 def create_default_innenputz(default_choices):
-    haus = default_choices['haus']
-    innenputz_bad = "Im Bereich der Dusche und Badewanne raumhoch gefliest, im Bereich der 1,20 m hohen Vorwandinstallation auf Höhe der Vorwand gefliest, incl. der oberen Ablagefläche. Übrige Flächen ohne Fliesen gemäß 6.2.1."
-    innenputz_wohnraueme = "Raufasertapete mit weißem Dispersionsanstrich. "
-    innenputz = models.Innenputz(haus=haus, innenputz_bad=innenputz_bad, innenputz_wohnraueme=innenputz_wohnraueme)
-    try:
-        innenputz.save()
-    except:
-        print('default innenputz creation failed')
+    if 'haus' in default_choices:        
+        haus = default_choices['haus']
+        innenputz_bad = " for haus  Im Bereich der Dusche und Badewanne raumhoch gefliest, im Bereich der 1,20 m hohen Vorwandinstallation auf Höhe der Vorwand gefliest, incl. der oberen Ablagefläche. Übrige Flächen ohne Fliesen gemäß 6.2.1."
+        innenputz_wohnraueme = " for haus Raufasertapete mit weißem Dispersionsanstrich. "
+        innenputz = models.Innenputz(haus=haus, innenputz_bad=innenputz_bad, innenputz_wohnraueme=innenputz_wohnraueme)
+        try:
+            innenputz.save()
+        except:
+            print('default innenputz creation failed for haus')
+    if 'wohnung' in default_choices:
+        wohnung = default_choices['wohnung']
+        innenputz_bad = " for wohnuhng Im Bereich der Dusche und Badewanne raumhoch gefliest, im Bereich der 1,20 m hohen Vorwandinstallation auf Höhe der Vorwand gefliest, incl. der oberen Ablagefläche. Übrige Flächen ohne Fliesen gemäß 6.2.1."
+        innenputz_wohnraueme = " for wohnung Raufasertapete mit weißem Dispersionsanstrich. "
+        innenputz = models.Innenputz(wohnung=wohnung, innenputz_bad=innenputz_bad, innenputz_wohnraueme=innenputz_wohnraueme)
+        try:
+            innenputz.save()
+        except:
+            print('default innenputz creation failed for wohnung')
 
 def create_default_estrich(default_choices):
-    haus = default_choices['haus']
-    daemmplatten = "Schwimmender Heizestrich auf Trittschall- und Wärmedämmplatten in den Wohnungen. Schwimmender Estrich im Treppenhaus, auch im Untergeschoß."
-    estrich = "Schwimmender Heizestrich auf Trittschall- und Wärmedämmplatten in den Wohnungen. Schwimmender Estrich im Treppenhaus, auch im Untergeschoß."
-    estrich_instance = models.Estrich(haus=haus, daemmplatten=daemmplatten, estrich=estrich)
-    try:
-        estrich_instance.save()
-    except:
-        print('default estrich  creation failed')
+    if 'haus' in default_choices:
+        haus = default_choices['haus']
+        daemmplatten = "Schwimmender Heizestrich auf Trittschall- und Wärmedämmplatten in den Wohnungen. Schwimmender Estrich im Treppenhaus, auch im Untergeschoß."
+        estrich = "Schwimmender Heizestrich auf Trittschall- und Wärmedämmplatten in den Wohnungen. Schwimmender Estrich im Treppenhaus, auch im Untergeschoß."
+        estrich_instance = models.Estrich(haus=haus, daemmplatten=daemmplatten, estrich=estrich)
+        try:
+            estrich_instance.save()
+        except:
+            print('default estrich  creation failed for haus')
+    if 'wohnung' in default_choices:
+        wohnung = default_choices['wohnung']
+        daemmplatten = "Schwimmender Heizestrich auf Trittschall- und Wärmedämmplatten in den Wohnungen. Schwimmender Estrich im Treppenhaus, auch im Untergeschoß."
+        estrich = "Schwimmender Heizestrich auf Trittschall- und Wärmedämmplatten in den Wohnungen. Schwimmender Estrich im Treppenhaus, auch im Untergeschoß."
+        estrich_instance = models.Estrich(wohnung=wohnung, daemmplatten=daemmplatten, estrich=estrich)
+        try:
+            estrich_instance.save()
+        except:
+            print('default estrich  creation failed for wohnung')
+
 
 def create_default_trockenbau(default_choices):
-    haus = default_choices['haus']
-    wande = "Tapezierfähig verputzt bzw. gespachtelt Qualitätsstufe Q2."
-    decken = "Tapezierfähig verputzt bzw. gespachtelt Qualitätsstufe Q2."
-    trockenbau_instance = models.Trockenbau(haus=haus, wande=wande, decken=decken)
-    try:
-        trockenbau_instance.save()
-    except:
-        print('default trocken creation failed')
+    if 'haus' in default_choices:
+        haus = default_choices['haus']
+        wande = "Tapezierfähig verputzt bzw. gespachtelt Qualitätsstufe Q2."
+        decken = "Tapezierfähig verputzt bzw. gespachtelt Qualitätsstufe Q2."
+        trockenbau_instance = models.Trockenbau(haus=haus, wande=wande, decken=decken)
+        try:
+            trockenbau_instance.save()
+        except:
+            print('default trocken creation failed for haus')
+    if 'wohnung' in default_choices:
+        wohnung = default_choices['wohnung']
+        wande = "Tapezierfähig verputzt bzw. gespachtelt Qualitätsstufe Q2."
+        decken = "Tapezierfähig verputzt bzw. gespachtelt Qualitätsstufe Q2."
+        trockenbau_instance = models.Trockenbau(wohnung=wohnung, wande=wande, decken=decken)
+        try:
+            trockenbau_instance.save()
+        except:
+            print('default trocken creation failed for wohung')
 
 def create_default_maler(default_choices):
-    haus = default_choices['haus']
-    tapete = "Raufasertapete "
-    farbe = "weißer Dispersionsanstrich."
-    maler_instance = models.Maler(haus=haus, tapete=tapete, farbe=farbe)
-    try:
-        maler_instance.save()
-    except:
-        print('default maler creation failed')
+    if 'haus' in default_choices:
+        haus = default_choices['haus']
+        tapete = "Raufasertapete "
+        farbe = "weißer Dispersionsanstrich."
+        maler_instance = models.Maler(haus=haus, tapete=tapete, farbe=farbe)
+        try:
+            maler_instance.save()
+        except:
+            print('default maler creation failed for haus')
+    if 'wohnung' in default_choices:
+        wohnung = default_choices['wohnung']
+        tapete = "Raufasertapete "
+        farbe = "weißer Dispersionsanstrich."
+        maler_instance = models.Maler(wohnung=wohnung, tapete=tapete, farbe=farbe)
+        try:
+            maler_instance.save()
+        except:
+            print('default maler creation failed for wohnung')
 
 def create_default_aussenputz(default_choices):
     haus = default_choices['haus']
@@ -285,70 +335,115 @@ def create_default_aussenputz(default_choices):
 
 
 def create_default_fliesenleger(default_choices):
-    haus = default_choices['haus']
-    treppenhaus = "Fliesen, Feinsteinzeug, etc."
-    bad = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias voluptates minima libero deserunt, placeat assumenda unde sapiente doloremque corporis, voluptate quia quaerat ut officiis! Numquam dolorum animi, laboriosam deserunt velit."
-    wohnzimmer = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias voluptates minima libero deserunt, placeat assumenda unde sapiente doloremque corporis, voluptate quia quaerat ut officiis! Numquam dolorum animi, laboriosam deserunt velit."
-    abstellraum = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias voluptates minima libero deserunt, placeat assumenda unde sapiente doloremque corporis, voluptate quia quaerat ut officiis! Numquam dolorum animi, laboriosam deserunt velit."
-    esszimmer = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias voluptates minima libero deserunt, placeat assumenda unde sapiente doloremque corporis, voluptate quia quaerat ut officiis! Numquam dolorum animi, laboriosam deserunt velit."
-    keller = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias voluptates minima libero deserunt, placeat assumenda unde sapiente doloremque corporis, voluptate quia quaerat ut officiis! Numquam dolorum animi, laboriosam deserunt velit."
-    fliesenleger_instance = models.Fliesenleger(haus=haus, treppenhaus=treppenhaus, bad=bad, wohnzimmer=wohnzimmer, abstellraum=abstellraum, esszimmer=esszimmer, keller=keller)
-    try:
-        fliesenleger_instance.save()
-    except:
-        print('default Fliesenleger creation failed')
+    if 'haus' in default_choices:
+        haus = default_choices['haus']
+        treppenhaus = "Fliesen, Feinsteinzeug, etc."
+        fliesenleger_instance = models.Fliesenleger(haus=haus, treppenhaus=treppenhaus,)
+        try:
+            fliesenleger_instance.save()
+        except:
+            print('default Fliesenleger creation failed for haus')
+    if 'wohnung' in default_choices:
+        wohnung = default_choices['wohnung']
+        bad = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias voluptates minima libero deserunt, placeat assumenda unde sapiente doloremque corporis, voluptate quia quaerat ut officiis! Numquam dolorum animi, laboriosam deserunt velit."
+        wohnzimmer = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias voluptates minima libero deserunt, placeat assumenda unde sapiente doloremque corporis, voluptate quia quaerat ut officiis! Numquam dolorum animi, laboriosam deserunt velit."
+        abstellraum = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias voluptates minima libero deserunt, placeat assumenda unde sapiente doloremque corporis, voluptate quia quaerat ut officiis! Numquam dolorum animi, laboriosam deserunt velit."
+        esszimmer = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias voluptates minima libero deserunt, placeat assumenda unde sapiente doloremque corporis, voluptate quia quaerat ut officiis! Numquam dolorum animi, laboriosam deserunt velit."
+        keller = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias voluptates minima libero deserunt, placeat assumenda unde sapiente doloremque corporis, voluptate quia quaerat ut officiis! Numquam dolorum animi, laboriosam deserunt velit."
+        fliesenleger_instance = models.Fliesenleger(wohnung=wohnung, bad=bad, wohnzimmer=wohnzimmer, abstellraum=abstellraum, esszimmer=esszimmer, keller=keller)
+        try:
+            fliesenleger_instance.save()
+        except:
+            print('default Fliesenleger creation failed for wohnung')
 
 def create_default_bodenbelaege(default_choices):
-    haus = default_choices['haus']
-    treppenhaus = "Naturstein Padang dunkel (G 654), geschliffen, auf den Treppen mit 3 cm starken Trittstufen und 2 cm starken Setzstufen, kein Untertritt, umlaufender Sockel, Hauseingang mit eingelassenem Fußabstreifer, Einfassung mit Alu-Rahmen, Größe ca. 120 x 80 cm."
-    tiefgarage = "Grauer Schutzanstrich, ölfest, mit umlaufend grau gestrichenem Sockel, h=30 cm."
-    bad = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias voluptates minima libero deserunt, placeat assumenda unde sapiente doloremque corporis, voluptate quia quaerat ut officiis! Numquam dolorum animi, laboriosam deserunt velit."
-    kueche = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias voluptates minima libero deserunt, placeat assumenda unde sapiente doloremque corporis, voluptate quia quaerat ut officiis! Numquam dolorum animi, laboriosam deserunt velit."
-    flur = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias voluptates minima libero deserunt, placeat assumenda unde sapiente doloremque corporis, voluptate quia quaerat ut officiis! Numquam dolorum animi, laboriosam deserunt velit."
-    wohnzimmer = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias voluptates minima libero deserunt, placeat assumenda unde sapiente doloremque corporis, voluptate quia quaerat ut officiis! Numquam dolorum animi, laboriosam deserunt velit."
-    gaeste_wc = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias voluptates minima libero deserunt, placeat assumenda unde sapiente doloremque corporis, voluptate quia quaerat ut officiis! Numquam dolorum animi, laboriosam deserunt velit."
-    schlafzimmer = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias voluptates minima libero deserunt, placeat assumenda unde sapiente doloremque corporis, voluptate quia quaerat ut officiis! Numquam dolorum animi, laboriosam deserunt velit."
-    kinderzimmer = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias voluptates minima libero deserunt, placeat assumenda unde sapiente doloremque corporis, voluptate quia quaerat ut officiis! Numquam dolorum animi, laboriosam deserunt velit."
-    abstellraum = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias voluptates minima libero deserunt, placeat assumenda unde sapiente doloremque corporis, voluptate quia quaerat ut officiis! Numquam dolorum animi, laboriosam deserunt velit."
-    bodenbelaege_instance = models.Bodenbelaege(haus=haus, treppenhaus=treppenhaus, tiefgarage=tiefgarage, bad=bad, kueche=kueche, flur=flur, wohnzimmer=wohnzimmer, gaeste_wc=gaeste_wc, schlafzimmer=schlafzimmer, kinderzimmer=kinderzimmer, abstellraum=abstellraum)
-    try:
-        bodenbelaege_instance.save()
-    except:
-        print('default Bodenbelaege creation failed')
+    if 'haus' in default_choices:
+        haus = default_choices['haus']
+        treppenhaus = "Naturstein Padang dunkel (G 654), geschliffen, auf den Treppen mit 3 cm starken Trittstufen und 2 cm starken Setzstufen, kein Untertritt, umlaufender Sockel, Hauseingang mit eingelassenem Fußabstreifer, Einfassung mit Alu-Rahmen, Größe ca. 120 x 80 cm."
+        tiefgarage = "Grauer Schutzanstrich, ölfest, mit umlaufend grau gestrichenem Sockel, h=30 cm."
+        
+        bodenbelaege_instance = models.Bodenbelaege(haus=haus, treppenhaus=treppenhaus, tiefgarage=tiefgarage,)
+        try:
+            bodenbelaege_instance.save()
+        except:
+            print('default Bodenbelaege creation failed for haus')
+    if 'wohnung' in default_choices:
+        wohnung = default_choices['wohnung']
+        bad = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias voluptates minima libero deserunt, placeat assumenda unde sapiente doloremque corporis, voluptate quia quaerat ut officiis! Numquam dolorum animi, laboriosam deserunt velit."
+        kueche = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias voluptates minima libero deserunt, placeat assumenda unde sapiente doloremque corporis, voluptate quia quaerat ut officiis! Numquam dolorum animi, laboriosam deserunt velit."
+        flur = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias voluptates minima libero deserunt, placeat assumenda unde sapiente doloremque corporis, voluptate quia quaerat ut officiis! Numquam dolorum animi, laboriosam deserunt velit."
+        wohnzimmer = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias voluptates minima libero deserunt, placeat assumenda unde sapiente doloremque corporis, voluptate quia quaerat ut officiis! Numquam dolorum animi, laboriosam deserunt velit."
+        gaeste_wc = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias voluptates minima libero deserunt, placeat assumenda unde sapiente doloremque corporis, voluptate quia quaerat ut officiis! Numquam dolorum animi, laboriosam deserunt velit."
+        schlafzimmer = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias voluptates minima libero deserunt, placeat assumenda unde sapiente doloremque corporis, voluptate quia quaerat ut officiis! Numquam dolorum animi, laboriosam deserunt velit."
+        kinderzimmer = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias voluptates minima libero deserunt, placeat assumenda unde sapiente doloremque corporis, voluptate quia quaerat ut officiis! Numquam dolorum animi, laboriosam deserunt velit."
+        abstellraum = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias voluptates minima libero deserunt, placeat assumenda unde sapiente doloremque corporis, voluptate quia quaerat ut officiis! Numquam dolorum animi, laboriosam deserunt velit."
+        bodenbelaege_instance = models.Bodenbelaege(wohnung=wohnung, bad=bad, kueche=kueche, flur=flur, wohnzimmer=wohnzimmer, gaeste_wc=gaeste_wc, schlafzimmer=schlafzimmer, kinderzimmer=kinderzimmer, abstellraum=abstellraum)
+        try:
+            bodenbelaege_instance.save()
+        except:
+            print('default Bodenbelaege creation failed for wohnung')
 
 def create_default_schreiner(default_choices):
-    haus = default_choices['haus']
-    haustuer = "Tuermodell, Schliessung, Farbe, Glas"
-    wohnungstuer = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias voluptates minima libero deserunt, placeat assumenda unde sapiente doloremque corporis, voluptate quia quaerat ut officiis! Numquam dolorum animi, laboriosam deserunt velit."
-    innentueren = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias voluptates minima libero deserunt, placeat assumenda unde sapiente doloremque corporis, voluptate quia quaerat ut officiis! Numquam dolorum animi, laboriosam deserunt velit."
+    if 'haus' in default_choices:
+        haus = default_choices['haus']
+        haustuer = "Tuermodell, Schliessung, Farbe, Glas"
+        schreiner_instance = models.Schreiner(haus=haus, haustuer=haustuer,)
+        try:
+            schreiner_instance.save()
+        except:
+            print('default schreiner creation failed for haus')
+    if 'wohnung' in default_choices:
+        wohnung = default_choices['wohnung']
+        wohnungstuer = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias voluptates minima libero deserunt, placeat assumenda unde sapiente doloremque corporis, voluptate quia quaerat ut officiis! Numquam dolorum animi, laboriosam deserunt velit."
+        innentueren = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias voluptates minima libero deserunt, placeat assumenda unde sapiente doloremque corporis, voluptate quia quaerat ut officiis! Numquam dolorum animi, laboriosam deserunt velit."
 
-    schreiner_instance = models.Schreiner(haus=haus, haustuer=haustuer, wohnungstuer=wohnungstuer, innentueren=innentueren)
-    try:
-        schreiner_instance.save()
-    except:
-        print('default schreiner creation failed')
+        schreiner_instance = models.Schreiner(wohnung=wohnung, wohnungstuer=wohnungstuer, innentueren=innentueren)
+        try:
+            schreiner_instance.save()
+        except:
+            print('default schreiner creation failed for wohnung')
     
 
 def create_default_schlosser(default_choices):
-    haus = default_choices['haus']
-    eingangstuer = "Weiße Vollspantüren, Fabr. Prüm oder gleichwertig, glatte Oberfläche, dreiseitiger Doppelfalz und Obentüreschließer mit Scherengestänge, Stahlzargen treppenhausseitig farbig lackiert, wohnungsseitig weiß lackiert, Schall-Ex-Element, Dichtungsprofile, Edelstahlbeschläge als Wechsel-Sicherheitsgarnitur mit Profilzylinder, Türspion."
-    wohnungstuer = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias voluptates minima libero deserunt, placeat assumenda unde sapiente doloremque corporis, voluptate quia quaerat ut officiis! Numquam dolorum animi, laboriosam deserunt velit."
-    innentueren = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias voluptates minima libero deserunt, placeat assumenda unde sapiente doloremque corporis, voluptate quia quaerat ut officiis! Numquam dolorum animi, laboriosam deserunt velit."
+    if 'haus' in default_choices:
+        haus = default_choices['haus']
+        eingangstuer = "Weiße Vollspantüren, Fabr. Prüm oder gleichwertig, glatte Oberfläche, dreiseitiger Doppelfalz und Obentüreschließer mit Scherengestänge, Stahlzargen treppenhausseitig farbig lackiert, wohnungsseitig weiß lackiert, Schall-Ex-Element, Dichtungsprofile, Edelstahlbeschläge als Wechsel-Sicherheitsgarnitur mit Profilzylinder, Türspion."
+        schlosser_instance = models.Schlosser(haus=haus, eingangstuer=eingangstuer,)
+        try:
+            schlosser_instance.save()
+        except:
+            print('default schlosser creation failed for haus')
+    if 'wohnung' in default_choices:
+        wohnung = default_choices['wohnung']
+        wohnungstuer = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias voluptates minima libero deserunt, placeat assumenda unde sapiente doloremque corporis, voluptate quia quaerat ut officiis! Numquam dolorum animi, laboriosam deserunt velit."
+        innentueren = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias voluptates minima libero deserunt, placeat assumenda unde sapiente doloremque corporis, voluptate quia quaerat ut officiis! Numquam dolorum animi, laboriosam deserunt velit."
 
-    schlosser_instance = models.Schlosser(haus=haus, eingangstuer=eingangstuer, wohnungstuer=wohnungstuer, innentueren=innentueren)
-    try:
-        schlosser_instance.save()
-    except:
-        print('default schlosser creation failed')
+        schlosser_instance = models.Schlosser(wohnung=wohnung, wohnungstuer=wohnungstuer, innentueren=innentueren)
+        try:
+            schlosser_instance.save()
+        except:
+            print('default schlosser creation failed for wohnung')
 
 def create_default_schliessanlage(default_choices):
-    haus = default_choices['haus']
-    schliessplan = "Profilzylinder für Hauseingang, Wohnungseingang, Kellerflure, Fahrradräume, Kinderwagenräume, Zugänge zu der Tiefgarage sowie Hausanschluss- und Heizraum, Knauf-Zylinder für die Fluchttüren."
-    schliessanlage_instance = models.Schliessanlage(haus=haus, schliessplan=schliessplan)
-    try:
-        schliessanlage_instance.save()
-    except:
-        print('default Schliessanlage creation failed')
+    if 'haus' in default_choices:
+        haus = default_choices['haus']
+        schliessplan = "Profilzylinder für Hauseingang, Wohnungseingang, Kellerflure, Fahrradräume, Kinderwagenräume, Zugänge zu der Tiefgarage sowie Hausanschluss- und Heizraum, Knauf-Zylinder für die Fluchttüren."
+        sonstiges = "sonstiges"
+        schliessanlage_instance = models.Schliessanlage(haus=haus, schliessplan=schliessplan, sonstiges=sonstiges)
+        try:
+            schliessanlage_instance.save()
+        except:
+            print('default Schliessanlage creation failed for haus')
+    if 'wohnung' in default_choices:
+        wohnung = default_choices['wohnung']
+        schliessplan = "Profilzylinder für Hauseingang, Wohnungseingang, Kellerflure, Fahrradräume, Kinderwagenräume, Zugänge zu der Tiefgarage sowie Hausanschluss- und Heizraum, Knauf-Zylinder für die Fluchttüren."
+        sonstiges = "sonstiges"
+        schliessanlage_instance = models.Schliessanlage(wohnung=wohnung, schliessplan=schliessplan, sonstiges=sonstiges)
+        try:
+            schliessanlage_instance.save()
+        except:
+            print('default Schliessanlage creation failed for wohnung')
+
 
 
 

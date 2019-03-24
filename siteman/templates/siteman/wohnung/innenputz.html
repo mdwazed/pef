@@ -1,0 +1,35 @@
+<!-- Innenputz page template at haus level -->
+
+{% extends 'siteman/base_wohnung.html' %}
+
+{% block content%}
+    <div class="page-heading">
+        <h3 class="imp-heading"> Innenputz: {{ wohnung }} </h3>
+    </div>
+    <div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Innenputz-Bad</h5>
+                <p>{{ wohnung.innenputz.innenputz_bad }}</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Innenputz-wohnraueme</h5>
+                <p>{{ wohnung.innenputz.innenputz_wohnraueme }}</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Sonstiges</h5>
+                <p>{{ wohnung.innenputz.sonstiges }}</p>
+            </div>
+        </div>
+        {% if wohnung.innenputz %}
+        <div class="custom-btn-right-container">
+            <a class="btn btn-primary" href="{% url 'siteman:wohnung_innenputz_update' wohnung.innenputz.pk %}">Update</a>
+        </div>
+        {% endif %}
+    </div>
+    
+{% endblock %}

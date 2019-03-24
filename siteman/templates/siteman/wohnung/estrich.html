@@ -1,0 +1,36 @@
+<!-- Elektro page template at wohnung level -->
+
+{% extends 'siteman/base_wohnung.html' %}
+
+{% block content%}
+    <div class="page-heading">
+        <h3 class="imp-heading"> Estrich:{{ wohnung }} </h3>
+    </div>
+    <div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Daemplatten</h5>
+                <p>{{ wohnung.estrich.daemmplatten }}</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Estrich</h5>
+                <p>{{ wohnung.estrich.estrich }}</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Sontiges</h5>
+                <p>{{ wohnung.estrich.sonstiges }}</p>
+            </div>
+        </div>
+        {% if wohnung.estrich %}
+        <div class="custom-btn-right-container">
+            <a class="btn btn-primary" href="{% url 'siteman:wohnung_estrich_update' wohnung.estrich.pk %}">Update</a>
+        </div>
+        {% endif %}
+    </div>
+    
+
+{% endblock %}

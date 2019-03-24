@@ -11,6 +11,8 @@ urlpatterns = [
     path('home_projekt', views.home_projekt, name='home_projekt'),
     path('projekt/', views.projekt, name='projekt'),
     path('haus/', views.haus, name='haus'),
+    path('plans', views.plans, name='plans'),
+    path('uplaod_plan', views.upload_plan, name='upload_plan'),
     path('set_current_haus/<int:haus_id>/<slug:redirect>', views.set_current_haus, name='set_current_haus'),
     path('haus/delete/<int:pk>', views.haus_delete, name='haus_delete'), 
     path('haus_ubersicht', views.haus_ubersicht, name='haus_ubersicht'), 
@@ -64,13 +66,23 @@ urlpatterns = [
     path('wohnung_raumbuch_elektro_update/<int:pk>', views.WohnungRaumbuchElektroUpdateView.as_view(), name='wohnung_raumbuch_elektro_update'),
     path('wohnung_sanitaer', views.wohnung_sanitaer, name='wohnung_sanitaer'), 
     path('wohnung_sanitaer_update/<int:pk>', views.WohnungSanitaerUpdateView.as_view(), name='wohnung_sanitaer_update'),
-
-
-
-
-
-
-
-
+    path('wohnung_innenputz', views.wohnung_innenputz, name='wohnung_innenputz'), 
+    path('wohnung_innenputz_update/<int:pk>', views.WohnungInnenputzUpdateView.as_view(), name='wohnung_innenputz_update'),
+    path('wohnung_estrich', views.wohnung_estrich, name='wohnung_estrich'), 
+    path('wohnung_estrich_update/<int:pk>', views.WohnungEstrichUpdateView.as_view(), name='wohnung_estrich_update'),
+    path('wohnung_trockenbau', views.wohnung_trockenbau, name='wohnung_trockenbau'), 
+    path('wohnung_trockenbau_update/<int:pk>', views.WohnungTrockenbauUpdateView.as_view(), name='wohnung_trockenbau_update'),
+    path('wohnung_maler', views.wohnung_maler, name='wohnung_maler'), 
+    path('wohnung_maler_update/<int:pk>', views.WohnungMalerUpdateView.as_view(), name='wohnung_maler_update'),
+    path('wohnung_fliesenleger', views.wohnung_fliesenleger, name='wohnung_fliesenleger'), 
+    path('wohnung_fliesenleger_update/<int:pk>', views.WohnungFliesenlegerUpdateView.as_view(), name='wohnung_fliesenleger_update'),
+    path('wohnung_bodenbelaege', views.wohnung_bodenbelaege, name='wohnung_bodenbelaege'), 
+    path('wohnung_bodenbelaege_update/<int:pk>', views.WohnungBodenbelaegeUpdateView.as_view(), name='wohnung_bodenbelaege_update'),
+    path('wohnung_schreiner', views.wohnung_schreiner, name='wohnung_schreiner'), 
+    path('wohnung_schreiner_update/<int:pk>', views.WohnungSchreinerUpdateView.as_view(), name='wohnung_schreiner_update'),
+    path('wohnung_schlosser', views.wohnung_schlosser, name='wohnung_schlosser'), 
+    path('wohnung_schlosser_update/<int:pk>', views.WohnungSchlosserUpdateView.as_view(), name='wohnung_schlosser_update'),
+    path('wohnung_schliessanlage', views.wohnung_schliessanlage, name='wohnung_schliessanlage'), 
+    path('wohnung_schliessanlage_update/<int:pk>', views.WohnungSchliessanlageUpdateView.as_view(), name='wohnung_schliessanlage_update'),
 
 ]

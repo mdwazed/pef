@@ -1,0 +1,125 @@
+<!-- Plans page template at haus level -->
+
+{% extends 'siteman/base_haus.html' %}
+
+{% block content%}
+    <div class="page-heading">
+        <h3 class="imp-heading"> Plans: {{ haus }} </h3>
+    </div>
+    <div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Architekt Plan</h5>
+                {% for plan in plans %}
+                    {% if plan.components == 'ar' %}
+                        <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a><span style="margin-right: 20px;"></span><a href="">Delete</a></p>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Erdbau</h5>
+                {% for plan in plans %}
+                    {% if plan.components == 'eb' %}
+                        <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a><span style="margin-right: 20px;"></span><a href="">Delete</a></p>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Rohbau</h5>
+                {% for plan in plans %}
+                    {% if plan.components == 'rb' %}
+                        <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a><span style="margin-right: 20px;"></span><a href="">Delete</a></p>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Fenster</h5>
+                {% for plan in plans %}
+                    {% if plan.components == 'fen' %}
+                        <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a><span style="margin-right: 20px;"></span><a href="">Delete</a></p>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Elektro</h5>
+                {% for plan in plans %}
+                    {% if plan.components == 'elek' %}
+                        <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a><span style="margin-right: 20px;"></span><a href="">Delete</a></p>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Sanitar</h5>
+                {% for plan in plans %}
+                    {% if plan.components == 'sani' %}
+                        <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a><span style="margin-right: 20px;"></span><a href="">Delete</a></p>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Fliesenleger</h5>
+                {% for plan in plans %}
+                    {% if plan.components == 'flie' %}
+                        <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a><span style="margin-right: 20px;"></span><a href="">Delete</a></p>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Bodenbelage</h5>
+                {% for plan in plans %}
+                    {% if plan.components == 'boden' %}
+                        <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a><span style="margin-right: 20px;"></span><a href="">Delete</a></p>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Turen</h5>
+                {% for plan in plans %}
+                    {% if plan.components == 'turen' %}
+                        <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a><span style="margin-right: 20px;"></span><a href="">Delete</a></p>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Schliessanlage</h5>
+                {% for plan in plans %}
+                    {% if plan.components == 'sanl' %}
+                        <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a><span style="margin-right: 20px;"></span><a href="">Delete</a></p>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Aussenanlage</h5>
+                {% for plan in plans %}
+                    {% if plan.components == 'aanl' %}
+                        <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a><span style="margin-right: 20px;"></span><a href="">Delete</a></p>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="custom-btn-right-container">
+            <a class="btn btn-primary" href="{% url 'siteman:upload_plan' %}">Upload Plan</a>
+        </div>
+    </div>
+    
+{% endblock %}

@@ -13,6 +13,12 @@
                 <p>{{ haus.schliessanlage.schliessplan }}</p>
             </div>
         </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Sonstiges</h5>
+                <p>{{ haus.schliessanlage.sonstiges }}</p>
+            </div>
+        </div>
         {% if haus.schliessanlage %}
         <div class="custom-btn-right-container">
             <a class="btn btn-primary" href="{% url 'siteman:haus_schliessanlage_update' haus.schliessanlage.pk %}">Update</a>

@@ -2,7 +2,7 @@
 main views to create db ORM
 """
 
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, get_list_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.views.generic import DetailView, ListView, UpdateView
@@ -55,6 +55,41 @@ def projekt(request):
     }
     return render(request, 'siteman/projekt.html', context)
 
+def plans(request):
+    haus = misc_functions.get_current_haus(request)
+    # plans = get_list_or_404(models.Plan, haus=haus)
+    plans = models.Plan.objects.filter(haus=haus)
+    context = {
+    'haus': haus,
+    'plans': plans
+    }
+    return render(request,'siteman/haus/plans.html', context)
+
+def upload_plan(request):
+    haus = misc_functions.get_current_haus(request)
+
+    if request.method == 'POST':
+        
+        form = forms.PlanUploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            # form.save()
+            name = form.cleaned_data['name']
+            components = form.cleaned_data['components']
+            plan = request.FILES['plan']
+            haus_pk = request.POST['haus']
+            haus = get_object_or_404(models.Haus, pk=haus_pk)
+            plan = models.Plan(haus=haus, name=name, components=components, plan=plan)
+            plan.save()
+            # return HttpResponse(request.FILES)
+            return HttpResponseRedirect(reverse('siteman:plans'))
+    form = forms.PlanUploadForm()
+    context ={
+    'form': form,
+    'haus': haus,
+    }
+    return render(request, 'siteman/plan_upload.html', context)
+
+
 """
 ##############################################################################
 #################### views related to haus only ##############################
@@ -87,6 +122,7 @@ def haus(request):
             # 
             haus = models.Haus(haus_nr=haus_nr, display_nr=display_nr, projekt_id=projekt_id)
             haus.save()
+            # key 'haus' determine in the default creator wheather the 'to be create' component is related to haus or not. 
             default_choices = {
             'haus' : haus,
             'grundung':grundung,
@@ -140,6 +176,9 @@ def haus_wohnungen(request):
     list all wohnung of current haus and
     add new wohnung to the haus
     """
+    # remove any set wohnung from sesion.
+    # prevent action on worng wohnung incase going back through back button in borwser
+    misc_functions.remove_current_wohnung(request)
 
     haus = misc_functions.get_current_haus(request)
     wohnung_list = models.Wohnung.objects.filter(haus=haus)
@@ -153,6 +192,7 @@ def haus_wohnungen(request):
             clients_tel =form.cleaned_data['clients_tel']
             wohnung = models.Wohnung(haus=haus, wohnung_nr=wohnung_nr, clients_name=clients_name, clients_tel=clients_tel, clients_email=clients_email, clients_address=clients_address)
             wohnung.save()
+            # key 'wohnung' detrmine whether to be create components is related to wohnung or not.
             default_choices = {
             'wohnung': wohnung,
             }
@@ -519,7 +559,7 @@ class HausAussenanlagernUpdateView(UpdateView):
 """
 def set_current_wohnung(request, wohnung_id):
     """
-    set this o=wohnung as curent wohnung in the session var.
+    set this wohnung as curent wohnung in the session var.
     redirect to wohnung ubersicht  page
     """
     print(wohnung_id)
@@ -604,7 +644,7 @@ class WohnungRaumbuchElektroUpdateView(UpdateView):
 
 def wohnung_sanitaer(request):
     """
-    display elektro information of the selected wohnung
+    display sanitar information of the selected wohnung
     """
     wohnung = misc_functions.get_current_wohnung(request)
     context = {
@@ -619,3 +659,165 @@ class WohnungSanitaerUpdateView(UpdateView):
 
     def get_success_url(self):
         return reverse('siteman:wohnung_sanitaer')
+
+def wohnung_innenputz(request):
+    """
+    display innenputz information of the selected wohnung
+    """
+    wohnung = misc_functions.get_current_wohnung(request)
+    context = {
+    'wohnung' : wohnung,
+    }
+    return render(request, 'siteman/wohnung/innenputz.html', context)
+
+class WohnungInnenputzUpdateView(UpdateView):
+    model = models.Innenputz
+    template_name = 'siteman/wohnung/innenputz_update.html'
+    form_class = forms.WohnungInnenputzModelForm
+
+    def get_success_url(self):
+        return reverse('siteman:wohnung_innenputz')
+
+def wohnung_estrich(request):
+    """
+    display estrich information of the selected wohnung
+    """
+    wohnung = misc_functions.get_current_wohnung(request)
+    context = {
+    'wohnung' : wohnung,
+    }
+    return render(request, 'siteman/wohnung/estrich.html', context)
+
+class WohnungEstrichUpdateView(UpdateView):
+    model = models.Estrich
+    template_name = 'siteman/wohnung/estrich_update.html'
+    form_class = forms.WohnungEstrichModelForm
+
+    def get_success_url(self):
+        return reverse('siteman:wohnung_estrich')
+
+def wohnung_trockenbau(request):
+    """
+    display trockenbau information of the selected wohnung
+    """
+    wohnung = misc_functions.get_current_wohnung(request)
+    context = {
+    'wohnung' : wohnung,
+    }
+    return render(request, 'siteman/wohnung/trockenbau.html', context)
+
+class WohnungTrockenbauUpdateView(UpdateView):
+    model = models.Trockenbau
+    template_name = 'siteman/wohnung/trockenbau_update.html'
+    form_class = forms.WohnungTrockenbauModelForm
+
+    def get_success_url(self):
+        return reverse('siteman:wohnung_trockenbau')
+
+def wohnung_maler(request):
+    """
+    display maler information of the selected wohnung
+    """
+    wohnung = misc_functions.get_current_wohnung(request)
+    context = {
+    'wohnung' : wohnung,
+    }
+    return render(request, 'siteman/wohnung/maler.html', context)
+
+class WohnungMalerUpdateView(UpdateView):
+    model = models.Maler
+    template_name = 'siteman/wohnung/maler_update.html'
+    form_class = forms.WohnungMalerModelForm
+
+    def get_success_url(self):
+        return reverse('siteman:wohnung_maler')
+
+def wohnung_fliesenleger(request):
+    """
+    display fliesenleger information of the selected wohnung
+    """
+    wohnung = misc_functions.get_current_wohnung(request)
+    context = {
+    'wohnung' : wohnung,
+    }
+    return render(request, 'siteman/wohnung/fliesenleger.html', context)
+
+class WohnungFliesenlegerUpdateView(UpdateView):
+    model = models.Fliesenleger
+    template_name = 'siteman/wohnung/fliesenleger_update.html'
+    form_class = forms.WohnungFliesenlegerModelForm
+
+    def get_success_url(self):
+        return reverse('siteman:wohnung_fliesenleger')
+
+def wohnung_bodenbelaege(request):
+    """
+    display fliesenleger information of the selected wohnung
+    """
+    wohnung = misc_functions.get_current_wohnung(request)
+    context = {
+    'wohnung' : wohnung,
+    }
+    return render(request, 'siteman/wohnung/bodenbelaege.html', context)
+
+class WohnungBodenbelaegeUpdateView(UpdateView):
+    model = models.Bodenbelaege
+    template_name = 'siteman/wohnung/bodenbelaege_update.html'
+    form_class = forms.WohnungBodenbelaegeModelForm
+
+    def get_success_url(self):
+        return reverse('siteman:wohnung_bodenbelaege')
+
+def wohnung_schreiner(request):
+    """
+    display schreiner/turen information of the selected wohnung
+    """
+    wohnung = misc_functions.get_current_wohnung(request)
+    context = {
+    'wohnung' : wohnung,
+    }
+    return render(request, 'siteman/wohnung/schreiner.html', context)
+
+class WohnungSchreinerUpdateView(UpdateView):
+    model = models.Schreiner
+    template_name = 'siteman/wohnung/schreiner_update.html'
+    form_class = forms.WohnungSchreinerModelForm
+
+    def get_success_url(self):
+        return reverse('siteman:wohnung_schreiner')
+
+def wohnung_schlosser(request):
+    """
+    display schlosser information of the selected wohnung
+    """
+    wohnung = misc_functions.get_current_wohnung(request)
+    context = {
+    'wohnung' : wohnung,
+    }
+    return render(request, 'siteman/wohnung/schlosser.html', context)
+
+class WohnungSchlosserUpdateView(UpdateView):
+    model = models.Schlosser
+    template_name = 'siteman/wohnung/schlosser_update.html'
+    form_class = forms.WohnungSchlosserModelForm
+
+    def get_success_url(self):
+        return reverse('siteman:wohnung_schlosser')
+
+def wohnung_schliessanlage(request):
+    """
+    display schliessanlage information of the selected wohnung
+    """
+    wohnung = misc_functions.get_current_wohnung(request)
+    context = {
+    'wohnung' : wohnung,
+    }
+    return render(request, 'siteman/wohnung/schliessanlage.html', context)
+
+class WohnungSchliessanlageUpdateView(UpdateView):
+    model = models.Schliessanlage
+    template_name = 'siteman/wohnung/schliessanlage_update.html'
+    form_class = forms.WohnungSchliessanlageModelForm
+
+    def get_success_url(self):
+        return reverse('siteman:wohnung_schliessanlage')
