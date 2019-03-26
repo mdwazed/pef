@@ -25,7 +25,7 @@ SECRET_KEY = 'h95w!82bn0kjqq1f6l2z4&f5scyu5k(km!b0^v6kfzi(e4=@jf'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '.mdwazed.com']
+ALLOWED_HOSTS = ['localhost', '.mdwazed.com', '127.0.0.1']
 
 
 # Application definition
@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'siteman'
+    'siteman.apps.SitemanConfig',
 ]
 
 MIDDLEWARE = [
