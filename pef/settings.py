@@ -25,7 +25,7 @@ SECRET_KEY = 'h95w!82bn0kjqq1f6l2z4&f5scyu5k(km!b0^v6kfzi(e4=@jf'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '.mdwazed.com']
 
 
 # Application definition
