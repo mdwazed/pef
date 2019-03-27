@@ -11,6 +11,7 @@ from . import models
 """
 
 def create_default_haus_components(default_choices):
+    print("------creating default haus--------")
     haus = default_choices['haus']
     # grundung = default_choices['grundung']
     # print(default_choices['fenster_beschattung'])    
@@ -43,6 +44,7 @@ def create_default_haus_components(default_choices):
     haus.trennwandsysteme = trennwandsysteme
     haus.klimatisierung = klimatisierung
     haus.aufzug = aufzug
+    print("------default haus creation complete--------")
     return haus 
 
 def create_default_wohnung_components(default_choices):
@@ -69,8 +71,8 @@ def create_default_architekt_plan(default_choices):
     architekt_instance = models.Architekt_plan(haus=haus, sonstiges=sonstiges)
     try:
         architekt_instance.save()
-    except:
-        print('default Architekt_plan creation failed')
+    except Exception as e:
+        print('default Architekt_plan creation failed' + str(e))
 
 def create_default_erdbau(default_choices):
     haus = default_choices['haus']

@@ -50,29 +50,54 @@ class PlanUploadForm(forms.ModelForm):
 ########################  Haus Form ###################################
 ########################################################################
 """
-# class AddHausForm(forms.Form):
-#     """
-#     get choices options from models.choice field to generate custom 
-#     defalut text.
-#     """
-#     qs_grundung = models.ChoiceFields.objects.filter(option_type='gr')
-#     choices_grundung = [(x.option, x.display) for x in qs_grundung]
-#     qs_aussenwande_ab_eg = models.ChoiceFields.objects.filter(option_type='aw_eg_og_dg')
-#     choices_aussenwande_ab_eg = [(x.option, x.display) for x in qs_aussenwande_ab_eg]
-#     qs_dach = models.ChoiceFields.objects.filter(option_type='dach')
-#     choices_dach = [(x.option, x.display) for x in qs_dach]
-#     qs_fenster_beschattung = models.ChoiceFields.objects.filter(option_type='fenster_beschattung')
-#     choices_fenster_beschattung = [(x.option, x.display) for x in qs_fenster_beschattung]
+class AddHausForm(forms.Form):
+    """
+    get choices options from models.choice field to generate custom 
+    defalut text.
+    """
+    # qs_grundung = models.ChoiceFields.objects.filter(option_type='gr')
+    # choices_grundung = [(x.option, x.display) for x in qs_grundung]
+    # qs_aussenwande_ab_eg = models.ChoiceFields.objects.filter(option_type='aw_eg_og_dg')
+    # choices_aussenwande_ab_eg = [(x.option, x.display) for x in qs_aussenwande_ab_eg]
+    # qs_dach = models.ChoiceFields.objects.filter(option_type='dach')
+    # choices_dach = [(x.option, x.display) for x in qs_dach]
+    # qs_fenster_beschattung = models.ChoiceFields.objects.filter(option_type='fenster_beschattung')
+    # choices_fenster_beschattung = [(x.option, x.display) for x in qs_fenster_beschattung]
 
+    # haus_nr = forms.CharField(label='Haus Nr.', max_length=10)
+    # display_nr = forms.CharField(label='Display Nr.', max_length=10)
+    # grundung = forms.ChoiceField(label='Grundung', choices=choices_grundung)
+    # aussenwande_eg_og_dg = forms.ChoiceField(label='Aussenwande ab EG', choices=choices_aussenwande_ab_eg)
+    # dach = forms.ChoiceField(label='Dach', choices=choices_dach)
+    # fenster_beschattung = forms.ChoiceField(label='Fenster Beschattung', choices=choices_fenster_beschattung)
 
-#     haus_nr = forms.CharField(label='Haus Nr.', max_length=10)
-#     display_nr = forms.CharField(label='Display Nr.', max_length=10)
-#     grundung = forms.ChoiceField(label='Grundung', choices=choices_grundung)
-#     aussenwande_eg_og_dg = forms.ChoiceField(label='Aussenwande ab EG', choices=choices_aussenwande_ab_eg)
-#     dach = forms.ChoiceField(label='Dach', choices=choices_dach)
-#     fenster_beschattung = forms.ChoiceField(label='Fenster Beschattung', choices=choices_fenster_beschattung)
+    haus_nr = forms.CharField(label='Haus Nr.', max_length=10)
+    display_nr = forms.CharField(label='Display Nr.', max_length=10)
+    grundung = forms.ChoiceField(label='Grundung')
+    aussenwande_eg_og_dg = forms.ChoiceField(label='Aussenwande ab EG')
+    dach = forms.ChoiceField(label='Dach')
+    fenster_beschattung = forms.ChoiceField(label='Fenster Beschattung')
 
-    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        qs_grundung = models.ChoiceFields.objects.filter(option_type='gr')
+        choices_grundung = [(x.option, x.display) for x in qs_grundung]
+        qs_aussenwande_ab_eg = models.ChoiceFields.objects.filter(option_type='aw_eg_og_dg')
+        choices_aussenwande_ab_eg = [(x.option, x.display) for x in qs_aussenwande_ab_eg]
+        qs_dach = models.ChoiceFields.objects.filter(option_type='dach')
+        choices_dach = [(x.option, x.display) for x in qs_dach]
+        qs_fenster_beschattung = models.ChoiceFields.objects.filter(option_type='fenster_beschattung')
+        choices_fenster_beschattung = [(x.option, x.display) for x in qs_fenster_beschattung]
+        print(choices_grundung)
+
+        # self.fields['grundung'] = forms.ChoiceField()
+        self.fields['grundung'].choices = choices_grundung
+        self.fields['aussenwande_eg_og_dg'].choices = choices_aussenwande_ab_eg
+        self.fields['dach'].choices = choices_dach
+        self.fields['fenster_beschattung'].choices = choices_fenster_beschattung
+    # def clean(self):
+    #     print("cleaning grundung")
+
 
 
 class ErdbauModelForm(forms.ModelForm):

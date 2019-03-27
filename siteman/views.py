@@ -105,6 +105,8 @@ def haus(request):
     if request.method == "POST":
         # print('posted')
         form = forms.AddHausForm(request.POST)
+        print(request.POST)  
+
         if form.is_valid():
             projekt_id =  request.session['current_projekt_id']
             haus_nr = form.cleaned_data['haus_nr']
@@ -136,18 +138,26 @@ def haus(request):
                 # save addl fields from default settings
                 haus.save()
             except Exception as e:
-                print('One or more haus components could not be created', e)
-    projekt =  misc_functions.get_current_projekt(request)
-    if not projekt:
-        raise ValueError('Keine projekt selected!')
-    hauser =  models.Haus.objects.filter(projekt=projekt).order_by('haus_nr')
-    form = forms.AddHausForm()
-    context = {
-    'projekt' : projekt,
-    'hauser' : hauser,
-    'form' : form,
-    }         
-    return render(request, 'siteman/haus.html', context)
+                print('One or more haus components could not be created', e)    
+            return HttpResponseRedirect(reverse('siteman:haus'))
+        else:
+            # print(forms.ValidationError)
+            return render(request, 'siteman/haus.html', {'form':form})
+
+
+    else:        
+        projekt =  misc_functions.get_current_projekt(request)
+        if not projekt:
+            raise ValueError('Keine projekt selected!')
+        hauser =  models.Haus.objects.filter(projekt=projekt).order_by('haus_nr')
+        form = forms.AddHausForm()
+        print("-------creating unbounded add haus form------")
+        context = {
+        'projekt' : projekt,
+        'hauser' : hauser,
+        'form' : form,
+        }         
+        return render(request, 'siteman/haus.html', context)
 
 def set_current_haus(request, haus_id, redirect):
     """
