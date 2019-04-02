@@ -101,6 +101,11 @@ footer h4, footer h6 {
 .ubersicht p{
     margin-left: 40px;
 }
+
+.upload-link-right {
+    text-align: right;
+}
+
 /*---------------------------------*/
 /*-------- nav -------------*/
 /*-----------------------------------*/

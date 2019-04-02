@@ -11,7 +11,7 @@ from . import models
 """
 
 def create_default_haus_components(default_choices):
-    print("------creating default haus--------")
+    # print("------creating default haus--------")
     haus = default_choices['haus']
     # grundung = default_choices['grundung']
     # print(default_choices['fenster_beschattung'])    
@@ -44,7 +44,7 @@ def create_default_haus_components(default_choices):
     haus.trennwandsysteme = trennwandsysteme
     haus.klimatisierung = klimatisierung
     haus.aufzug = aufzug
-    print("------default haus creation complete--------")
+    # print("------default haus creation complete--------")
     return haus 
 
 def create_default_wohnung_components(default_choices):

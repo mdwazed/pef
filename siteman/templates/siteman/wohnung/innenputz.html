@@ -7,24 +7,56 @@
         <h3 class="imp-heading"> Innenputz: {{ wohnung }} </h3>
     </div>
     <div>
+        {% if wohnung.innenputz.innenputz_bad %}
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Innenputz-Bad</h5>
+                <h5 class="card-title">Bad</h5>
                 <p>{{ wohnung.innenputz.innenputz_bad }}</p>
             </div>
+            <div class="card-body">
+                {% for plan in plans %}
+                    {% if plan.components == 'innenputz-innenputz_bad' %}
+                        <a href="{{ plan.plan.url }}">{{ plan.name }}</a></br>
+                    {% endif %}
+                {% endfor %}
+            </div>
         </div>
+        {% endif %}
+
+        {% if wohnung.innenputz.innenputz_wohnraueme %}
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Innenputz-wohnraueme</h5>
+                <h5 class="card-title">Wohnraueme</h5>
                 <p>{{ wohnung.innenputz.innenputz_wohnraueme }}</p>
             </div>
-        </div>
-        <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Sonstiges</h5>
-                <p>{{ wohnung.innenputz.sonstiges }}</p>
+                {% for plan in plans %}
+                    {% if plan.components == 'innenputz-innenputz_wohnraueme' %}
+                        <a href="{{ plan.plan.url }}">{{ plan.name }}</a></br>
+                    {% endif %}
+                {% endfor %}
             </div>
         </div>
+        {% endif %}
+
+        {% if wohnung.innenputz.sonstiges %}
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">sonstiges</h5>
+                <p>{{ wohnung.innenputz.sonstiges }}</p>
+            </div>
+            <div class="card-body">
+                {% for plan in plans %}
+                    {% if plan.components == 'innenputz-sonstiges' %}
+                        <a href="{{ plan.plan.url }}">{{ plan.name }}</a></br>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+
+      
         {% if wohnung.innenputz %}
         <div class="custom-btn-right-container">
             <a class="btn btn-primary" href="{% url 'siteman:wohnung_innenputz_update' wohnung.innenputz.pk %}">Update</a>

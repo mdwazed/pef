@@ -7,24 +7,49 @@
         <h3 class="imp-heading"> Maler: {{ wohnung }}</h3>
     </div>
     <div>
+        {% if wohnung.maler.tapete %}
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Tapete</h5>
                 <p>{{ wohnung.maler.tapete }}</p>
+                {% for plan in plans %}
+                {% if plan.components == 'maler-tapete' %}
+                    <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
+                {% endif %}
+            {% endfor %}
             </div>
         </div>
+        {% endif %}
+
+        {% if wohnung.maler.farbe %}
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Farbe</h5>
                 <p>{{ wohnung.maler.farbe }}</p>
+                {% for plan in plans %}
+                {% if plan.components == 'maler-farbe' %}
+                    <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
+                {% endif %}
+            {% endfor %}
             </div>
         </div>
+        {% endif %}
+
+        {% if wohnung.maler.sonstiges %}
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Sontiges</h5>
+                <h5 class="card-title">Sonstiges</h5>
                 <p>{{ wohnung.maler.sonstiges }}</p>
+                {% for plan in plans %}
+                {% if plan.components == 'maler-sonstiges' %}
+                    <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
+                {% endif %}
+            {% endfor %}
             </div>
         </div>
+        {% endif %}
+
+
         {% if wohnung.maler %}
         <div class="custom-btn-right-container">
             <a class="btn btn-primary" href="{% url 'siteman:wohnung_maler_update' wohnung.maler.pk %}">Update</a>

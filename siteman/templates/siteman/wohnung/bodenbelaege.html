@@ -7,60 +7,132 @@
         <h3 class="imp-heading"> Bodenbelaege: {{ wohnung }}</h3>
     </div>
     <div>
+        {% if wohnung.bodenbelaege.bad %}
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Bad</h5>
                 <p>{{ wohnung.bodenbelaege.bad }}</p>
+                {% for plan in plans %}
+                {% if plan.components == 'bodenbelaege-bad' %}
+                    <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
+                {% endif %}
+            {% endfor %}
             </div>
         </div>
+        {% endif %}
+
+        {% if wohnung.bodenbelaege.kueche %}
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Kuche</h5>
                 <p>{{ wohnung.bodenbelaege.kueche }}</p>
+                {% for plan in plans %}
+                {% if plan.components == 'bodenbelaege-kueche' %}
+                    <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
+                {% endif %}
+            {% endfor %}
             </div>
         </div>
+        {% endif %}
+
+        {% if wohnung.bodenbelaege.flur %}
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Flur</h5>
                 <p>{{ wohnung.bodenbelaege.flur }}</p>
+                {% for plan in plans %}
+                {% if plan.components == 'bodenbelaege-flur' %}
+                    <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
+                {% endif %}
+            {% endfor %}
             </div>
         </div>
+        {% endif %}
+
+        {% if wohnung.bodenbelaege.wohnzimmer %}
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Wohnzimmer</h5>
                 <p>{{ wohnung.bodenbelaege.wohnzimmer }}</p>
+                {% for plan in plans %}
+                {% if plan.components == 'bodenbelaege-wohnzimmer' %}
+                    <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
+                {% endif %}
+            {% endfor %}
             </div>
         </div>
+        {% endif %}
+
+        {% if wohnung.bodenbelaege.gaeste_wc %}
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Gaste-wc</h5>
+                <h5 class="card-title">Gaeste Wc</h5>
                 <p>{{ wohnung.bodenbelaege.gaeste_wc }}</p>
+                {% for plan in plans %}
+                {% if plan.components == 'bodenbelaege-gaeste_wc' %}
+                    <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
+                {% endif %}
+            {% endfor %}
             </div>
         </div>
+        {% endif %}
+
+        {% if wohnung.bodenbelaege.schlafzimmer %}
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Schlafzimmer</h5>
                 <p>{{ wohnung.bodenbelaege.schlafzimmer }}</p>
+                {% for plan in plans %}
+                {% if plan.components == 'bodenbelaege-schlafzimmer' %}
+                    <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
+                {% endif %}
+            {% endfor %}
             </div>
         </div>
+        {% endif %}
+
+        {% if wohnung.bodenbelaege.kinderzimmer %}
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Kinderzimmer</h5>
                 <p>{{ wohnung.bodenbelaege.kinderzimmer }}</p>
+                {% for plan in plans %}
+                {% if plan.components == 'bodenbelaege-kinderzimmer' %}
+                    <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
+                {% endif %}
+            {% endfor %}
             </div>
         </div>
+        {% endif %}
+
+        {% if wohnung.bodenbelaege.abstellraum %}
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Abstellraum</h5>
                 <p>{{ wohnung.bodenbelaege.abstellraum }}</p>
+                {% for plan in plans %}
+                {% if plan.components == 'bodenbelaege-abstellraum' %}
+                    <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
+                {% endif %}
+            {% endfor %}
             </div>
         </div>
+        {% endif %}
+
+        {% if wohnung.bodenbelaege.sonstiges %}
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Sonstiges</h5>
                 <p>{{ wohnung.bodenbelaege.sonstiges }}</p>
+                {% for plan in plans %}
+                {% if plan.components == 'bodenbelaege-sonstiges' %}
+                    <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
+                {% endif %}
+            {% endfor %}
             </div>
         </div>
+        {% endif %}
+
         {% if wohnung.bodenbelaege %}
         <div class="custom-btn-right-container">
             <a class="btn btn-primary" href="{% url 'siteman:wohnung_bodenbelaege_update' wohnung.bodenbelaege.pk %}">Update</a>

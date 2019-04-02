@@ -35,9 +35,16 @@ class ProjektForm(forms.ModelForm):
             'projekt_enddatum' : forms.SelectDateWidget(empty_label="-"),
         }
 
+"""
+########################################################################
+########################  Haus Form ###################################
+########################################################################
+"""
+
+
 class PlanUploadForm(forms.ModelForm):
     """
-    upload pdf plan
+    upload pdf plan for haus
     """
     # haus_qs = models.objects.filter(haus=haus)
     # haus = forms.ModelChoiceField(queryset=, widget=forms.HiddenInput())
@@ -45,32 +52,12 @@ class PlanUploadForm(forms.ModelForm):
         model = models.Plan
         fields = ['name', 'components', 'plan',]
 
-"""
-########################################################################
-########################  Haus Form ###################################
-########################################################################
-"""
+
 class AddHausForm(forms.Form):
     """
     get choices options from models.choice field to generate custom 
     defalut text.
     """
-    # qs_grundung = models.ChoiceFields.objects.filter(option_type='gr')
-    # choices_grundung = [(x.option, x.display) for x in qs_grundung]
-    # qs_aussenwande_ab_eg = models.ChoiceFields.objects.filter(option_type='aw_eg_og_dg')
-    # choices_aussenwande_ab_eg = [(x.option, x.display) for x in qs_aussenwande_ab_eg]
-    # qs_dach = models.ChoiceFields.objects.filter(option_type='dach')
-    # choices_dach = [(x.option, x.display) for x in qs_dach]
-    # qs_fenster_beschattung = models.ChoiceFields.objects.filter(option_type='fenster_beschattung')
-    # choices_fenster_beschattung = [(x.option, x.display) for x in qs_fenster_beschattung]
-
-    # haus_nr = forms.CharField(label='Haus Nr.', max_length=10)
-    # display_nr = forms.CharField(label='Display Nr.', max_length=10)
-    # grundung = forms.ChoiceField(label='Grundung', choices=choices_grundung)
-    # aussenwande_eg_og_dg = forms.ChoiceField(label='Aussenwande ab EG', choices=choices_aussenwande_ab_eg)
-    # dach = forms.ChoiceField(label='Dach', choices=choices_dach)
-    # fenster_beschattung = forms.ChoiceField(label='Fenster Beschattung', choices=choices_fenster_beschattung)
-
     haus_nr = forms.CharField(label='Haus Nr.', max_length=10)
     display_nr = forms.CharField(label='Display Nr.', max_length=10)
     grundung = forms.ChoiceField(label='Grundung')
@@ -88,15 +75,12 @@ class AddHausForm(forms.Form):
         choices_dach = [(x.option, x.display) for x in qs_dach]
         qs_fenster_beschattung = models.ChoiceFields.objects.filter(option_type='fenster_beschattung')
         choices_fenster_beschattung = [(x.option, x.display) for x in qs_fenster_beschattung]
-        print(choices_grundung)
+        # print(choices_grundung)
 
-        # self.fields['grundung'] = forms.ChoiceField()
         self.fields['grundung'].choices = choices_grundung
         self.fields['aussenwande_eg_og_dg'].choices = choices_aussenwande_ab_eg
         self.fields['dach'].choices = choices_dach
         self.fields['fenster_beschattung'].choices = choices_fenster_beschattung
-    # def clean(self):
-    #     print("cleaning grundung")
 
 
 
@@ -329,18 +313,43 @@ class AddWohnungForm(forms.Form):
     clients_email = forms.CharField(label='Clients Email', max_length=50, required=False)
     clients_tel = forms.CharField(label='Clients Tel', max_length=50, required=False)
 
+class WohnungPlanUploadForm(forms.ModelForm):
+    """
+    upload pdf plan for haus
+    """
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['components'].widget = forms.HiddenInput()
+    class Meta:
+        model = models.WohnungPlan
+        fields = ['name', 'components', 'plan',]
 
 class WohnungFensterModelForm(forms.ModelForm):
+    """
+    ACHTUNG: uploaded file objects for this fields refer to this objects by prefix-fieldname 
+    as html name. Be very careful before changing the preifx and html name attributes of any field.
+    """
+
+    prefix = 'fenster'
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['fensterbaenke'].widget.attrs.update(cols='80', rows='5')
         self.fields['rolllaeden'].widget.attrs.update(cols='80', rows='5')
         self.fields['sonstiges'].widget.attrs.update(cols='80', rows='5')
+        
     class Meta:
         model = models.Fenster
+     
         fields = ['fensterbaenke', 'rolllaeden', 'sonstiges']
 
+
 class WohnungElektroModelForm(forms.ModelForm):
+    """
+    ACHTUNG: uploaded file objects for this fields refer to this objects by prefix-fieldname 
+    as html name. Be very careful before changing the preifx and html name attributes of any field.
+    """
+
+    prefix = 'elektro'
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['elektro'].widget.attrs.update(cols='80', rows='5')
@@ -350,6 +359,12 @@ class WohnungElektroModelForm(forms.ModelForm):
         fields = ['elektro', 'sonstiges']
 
 class WohnungRuambuchElektroModelForm(forms.ModelForm):
+    """
+    ACHTUNG: uploaded file objects for this fields refer to this objects by prefix-fieldname 
+    as html name. Be very careful before changing the preifx and html name attributes of any field.
+    """
+
+    prefix = 'raumbuch_elektro'
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['bad'].widget.attrs.update(cols='80', rows='7')
@@ -370,6 +385,12 @@ class WohnungRuambuchElektroModelForm(forms.ModelForm):
         'kinderzimmer','abstellraum','schalterprogramm','tv_anschluss','telefon_anschluss','internet_anschluss']
 
 class WohnungSanitaerModelForm(forms.ModelForm):
+    """
+    ACHTUNG: uploaded file objects for this fields refer to this objects by prefix-fieldname 
+    as html name. Be very careful before changing the preifx and html name attributes of any field.
+    """
+
+    prefix = 'sanitaer'
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['aussenzapfstelle'].widget.attrs.update(cols='80', rows='5')
@@ -388,6 +409,12 @@ class WohnungSanitaerModelForm(forms.ModelForm):
         'waschmaschinenanschluss', 'spuele', 'spuelmaschinenanschluss', 'fussbodenheizung', 'sonstiges' ]
 
 class WohnungInnenputzModelForm(forms.ModelForm):
+    """
+    ACHTUNG: uploaded file objects for this fields refer to this objects by prefix-fieldname 
+    as html name. Be very careful before changing the preifx and html name attributes of any field.
+    """
+
+    prefix = 'innenputz'
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['innenputz_bad'].widget.attrs.update(cols='80', rows='5')
@@ -398,6 +425,12 @@ class WohnungInnenputzModelForm(forms.ModelForm):
         fields = ['innenputz_bad', 'innenputz_wohnraueme', 'sonstiges' ]
 
 class WohnungEstrichModelForm(forms.ModelForm):
+    """
+    ACHTUNG: uploaded file objects for this fields refer to this objects by prefix-fieldname 
+    as html name. Be very careful before changing the preifx and html name attributes of any field.
+    """
+
+    prefix = 'estrich'
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['daemmplatten'].widget.attrs.update(cols='80', rows='5')
@@ -408,6 +441,12 @@ class WohnungEstrichModelForm(forms.ModelForm):
         fields = ['daemmplatten', 'estrich', 'sonstiges' ]
 
 class WohnungTrockenbauModelForm(forms.ModelForm):
+    """
+    ACHTUNG: uploaded file objects for this fields refer to this objects by prefix-fieldname 
+    as html name. Be very careful before changing the preifx and html name attributes of any field.
+    """
+
+    prefix = 'trockenbau'
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['wande'].widget.attrs.update(cols='80', rows='5')
@@ -418,6 +457,12 @@ class WohnungTrockenbauModelForm(forms.ModelForm):
         fields = ['wande', 'decken', 'sonstiges' ]
 
 class WohnungMalerModelForm(forms.ModelForm):
+    """
+    ACHTUNG: uploaded file objects for this fields refer to this objects by prefix-fieldname 
+    as html name. Be very careful before changing the preifx and html name attributes of any field.
+    """
+
+    prefix = 'maler'
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['tapete'].widget.attrs.update(cols='80', rows='5')
@@ -428,6 +473,12 @@ class WohnungMalerModelForm(forms.ModelForm):
         fields = ['tapete', 'farbe', 'sonstiges' ]
 
 class WohnungFliesenlegerModelForm(forms.ModelForm):
+    """
+    ACHTUNG: uploaded file objects for this fields refer to this objects by prefix-fieldname 
+    as html name. Be very careful before changing the preifx and html name attributes of any field.
+    """
+
+    prefix = 'fliesenleger'
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['bad'].widget.attrs.update(cols='80', rows='5')
@@ -441,6 +492,12 @@ class WohnungFliesenlegerModelForm(forms.ModelForm):
         fields = ['bad', 'wohnzimmer', 'abstellraum','esszimmer', 'keller', 'sonstiges']
 
 class WohnungBodenbelaegeModelForm(forms.ModelForm):
+    """
+    ACHTUNG: uploaded file objects for this fields refer to this objects by prefix-fieldname 
+    as html name. Be very careful before changing the preifx and html name attributes of any field.
+    """
+
+    prefix = 'bodenbelaege'
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['bad'].widget.attrs.update(cols='80', rows='5')
@@ -457,6 +514,12 @@ class WohnungBodenbelaegeModelForm(forms.ModelForm):
         fields = ['bad', 'kueche', 'flur', 'wohnzimmer', 'gaeste_wc', 'schlafzimmer', 'kinderzimmer','abstellraum', 'sonstiges']
 
 class WohnungSchreinerModelForm(forms.ModelForm):
+    """
+    ACHTUNG: uploaded file objects for this fields refer to this objects by prefix-fieldname 
+    as html name. Be very careful before changing the preifx and html name attributes of any field.
+    """
+
+    prefix = 'schreiner'
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['wohnungstuer'].widget.attrs.update(cols='80', rows='5')
@@ -467,6 +530,12 @@ class WohnungSchreinerModelForm(forms.ModelForm):
         fields = ['wohnungstuer', 'innentueren', 'sonstiges']
 
 class WohnungSchlosserModelForm(forms.ModelForm):
+    """
+    ACHTUNG: uploaded file objects for this fields refer to this objects by prefix-fieldname 
+    as html name. Be very careful before changing the preifx and html name attributes of any field.
+    """
+
+    prefix = 'schlosser'
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['wohnungstuer'].widget.attrs.update(cols='80', rows='5')
@@ -477,6 +546,12 @@ class WohnungSchlosserModelForm(forms.ModelForm):
         fields = ['wohnungstuer', 'innentueren', 'sonstiges']
 
 class WohnungSchliessanlageModelForm(forms.ModelForm):
+    """
+    ACHTUNG: uploaded file objects for this fields refer to this objects by prefix-fieldname 
+    as html name. Be very careful before changing the preifx and html name attributes of any field.
+    """
+
+    prefix = 'schliessanlage'
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['schliessplan'].widget.attrs.update(cols='80', rows='5')

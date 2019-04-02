@@ -7,78 +7,172 @@
         <h3 class="imp-heading">Raumbuch Elektro: {{ wohnung }}</h3>
     </div>
     <div>
+        {% if wohnung.raumbuch_elektro.bad %}
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Bad</h5>
                 <p>{{ wohnung.raumbuch_elektro.bad }}</p>
+           
+                {% for plan in plans %}
+                    {% if plan.components == 'raumbuch_elektro-bad' %}
+                        <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
+                    {% endif %}
+                {% endfor %}
             </div>
         </div>
+        {% endif %}
+
+        {% if wohnung.raumbuch_elektro.kuche %}
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Kuche</h5>
                 <p>{{ wohnung.raumbuch_elektro.kueche }}</p>
+        
+                {% for plan in plans %}
+                    {% if plan.components == 'raumbuch_elektro-kuche' %}
+                        <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
+                    {% endif %}
+                {% endfor %}
             </div>
         </div>
+        {% endif %}
+
+        {% if wohnung.raumbuch_elektro.flur %}
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Flur</h5>
                 <p>{{ wohnung.raumbuch_elektro.flur }}</p>
+            
+                {% for plan in plans %}
+                    {% if plan.components == 'raumbuch_elektro-flur' %}
+                        <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
+                    {% endif %}
+                {% endfor %}
             </div>
         </div>
+        {% endif %}
+
+        {% if wohnung.raumbuch_elektro.wohnzimmer %}
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Wohnzimmer</h5>
                 <p>{{ wohnung.raumbuch_elektro.wohnzimmer }}</p>
+       
+                {% for plan in plans %}
+                    {% if plan.components == 'raumbuch_elektro-wohnzimmer' %}
+                        <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
+                    {% endif %}
+                {% endfor %}
             </div>
         </div>
+        {% endif %}
+
+        {% if wohnung.raumbuch_elektro.gaeste_wc %}
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Gaeste_wc</h5>
+                <h5 class="card-title">Gaste WC</h5>
                 <p>{{ wohnung.raumbuch_elektro.gaeste_wc }}</p>
+           
+                {% for plan in plans %}
+                    {% if plan.components == 'raumbuch_elektro-gaeste_wc' %}
+                        <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
+                    {% endif %}
+                {% endfor %}
             </div>
         </div>
+        {% endif %}
+
+        {% if wohnung.raumbuch_elektro.sclafzimmer %}
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Schlafzimmer</h5>
+                <h5 class="card-title">Schlaf Zimmer</h5>
                 <p>{{ wohnung.raumbuch_elektro.schlafzimmer }}</p>
+            
+                {% for plan in plans %}
+                    {% if plan.components == 'raumbuch_elektro-schlafzimmer' %}
+                        <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
+                    {% endif %}
+                {% endfor %}
             </div>
         </div>
+        {% endif %}
+
+        {% if wohnung.raumbuch_elektro.kinderzimmer %}
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Kinderzimmer</h5>
+                <h5 class="card-title">Kinder Zimmer</h5>
                 <p>{{ wohnung.raumbuch_elektro.kinderzimmer }}</p>
+            
+                {% for plan in plans %}
+                    {% if plan.components == 'raumbuch_elektro-kinderzimmer' %}
+                        <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
+                    {% endif %}
+                {% endfor %}
             </div>
         </div>
+        {% endif %}
+
+        {% if wohnung.raumbuch_elektro.abstellraum %}
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Abstellraum</h5>
                 <p>{{ wohnung.raumbuch_elektro.abstellraum }}</p>
+            
+                {% for plan in plans %}
+                    {% if plan.components == 'raumbuch_elektro-abstellraum' %}
+                        <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
+                    {% endif %}
+                {% endfor %}
             </div>
         </div>
+        {% endif %}
+
+        {% if wohnung.raumbuch_elektro.schalterprogramm %}
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Schalterprogramm</h5>
                 <p>{{ wohnung.raumbuch_elektro.schalterprogramm }}</p>
+            
+                {% for plan in plans %}
+                    {% if plan.components == 'raumbuch_elektro-schalterprogramm' %}
+                        <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
+                    {% endif %}
+                {% endfor %}
             </div>
         </div>
+        {% endif %}
+
+        {% if wohnung.raumbuch_elektro.tv_anschluss %}
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Tv Anschluss</h5>
+                <h5 class="card-title">tv_anschluss</h5>
                 <p>{{ wohnung.raumbuch_elektro.tv_anschluss }}</p>
+            
+                {% for plan in plans %}
+                    {% if plan.components == 'raumbuch_elektro-tv_anschluss' %}
+                        <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
+                    {% endif %}
+                {% endfor %}
             </div>
         </div>
+        {% endif %}
+
+        {% if wohnung.raumbuch_elektro.telefon_anschluss %}
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Telefon Anschluss</h5>
+                <h5 class="card-title">telefon_anschluss</h5>
                 <p>{{ wohnung.raumbuch_elektro.telefon_anschluss }}</p>
+            
+                {% for plan in plans %}
+                    {% if plan.components == 'raumbuch_elektro-telefon_anschluss' %}
+                        <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
+                    {% endif %}
+                {% endfor %}
             </div>
         </div>
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">InternetAnschluss</h5>
-                <p>{{ wohnung.raumbuch_elektro.internet_anschluss }}</p>
-            </div>
-        </div>
+        {% endif %}
+
+
         {% if wohnung.raumbuch_elektro %}
         <div class="custom-btn-right-container">
             <a class="btn btn-primary" href="{% url 'siteman:wohnung_raumbuch_elektro_update' wohnung.raumbuch_elektro.pk %}">Update</a>

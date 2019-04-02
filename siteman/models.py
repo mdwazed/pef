@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import FileExtensionValidator
 
 # Create your models here.
 class Projekt(models.Model):
@@ -385,14 +386,14 @@ class Raumbuch_elektro(Verantwortung):
     sonstiges = models.TextField(null=True, blank=True)
 
 
-
-class Choice_options(Verantwortung):
-    """
-    universal table for all choices of the system.
-    choice_type field determines which are the data will be visible for a particular choice.  
-    """
-    choice_option = models.CharField(max_length=100, blank=True)
-    choice_type = models.CharField(max_length=100, blank=True)
+############ possible duplicate ########################
+# class Choice_options(Verantwortung):
+#     """
+#     universal table for all choices of the system.
+#     choice_type field determines which are the data will be visible for a particular choice.  
+#     """
+#     choice_option = models.CharField(max_length=100, blank=True)
+#     choice_type = models.CharField(max_length=100, blank=True)
 
 
 
@@ -410,26 +411,53 @@ class Handwerker(models.Model):
 
 class Plan(models.Model):
     """
-    all pdf files goes here. 
+    all pdf files related to haus goes here. 
     catagorised as per components like erdbau, roh bau etc.
     """
     component_tuple = (
-        ('ar', 'Architeckt'),
-        ('eb', 'Erdbau'),
-        ('rb', 'Rohbau'),
-        ('fen', 'Fenster'),
-        ('elek', 'Elektro'),
-        ('sani', 'Sanitar'),
-        ('flie', 'Fliesenleger'),
-        ('boden', 'Bodenbelaege'),
-        ('turen', 'Turen'),
-        ('sanl', 'Schliessanlage'),
-        ('aanl', 'Aussenanlage'),
+            ('ar', 'Architeckt'),
+            ('eb', 'Erdbau'),
+            ('rb', 'Rohbau'),
+            ('fen', 'Fenster'),
+            ('elek', 'Elektro'),
+            ('sani', 'Sanitar'),
+            ('flie', 'Fliesenleger'),
+            ('boden', 'Bodenbelaege'),
+            ('turen', 'Turen'),
+            ('sanl', 'Schliessanlage'),
+            ('aanl', 'Aussenanlage'),
         )
     haus = models.ForeignKey(Haus, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     components = models.CharField(max_length=50, choices=component_tuple)
-    plan = models.FileField(null=True, upload_to='plan_pdf/', blank=True)
+    plan = models.FileField(null=True, upload_to='haus/plan_pdf/', blank=True, validators=[FileExtensionValidator(allowed_extensions=['pdf', 'jpg'])])
+
+    def __str__(self):
+        return self.name
+
+class WohnungPlan(models.Model):
+    """
+    all pdf and images files related to wohnung goes here. 
+    catagorised as per components and subcomponents like flisenlage_bad, raumbuch_elektro_kuche.
+    """
+    component_tuple = (
+            ('ar', 'Architeckt'),
+            ('eb', 'Erdbau'),
+            ('rb', 'Rohbau'),
+            ('fen', 'Fenster'),
+            ('elek', 'Elektro'),
+            ('sani', 'Sanitar'),
+            ('flie', 'Fliesenleger'),
+            ('boden', 'Bodenbelaege'),
+            ('turen', 'Turen'),
+            ('sanl', 'Schliessanlage'),
+            ('aanl', 'Aussenanlage'),
+            ('w_fb', 'wohnung Fensterbanke'),
+        )
+    wohnung = models.ForeignKey(Wohnung, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    components = models.CharField(max_length=50,)
+    plan = models.FileField(null=True, upload_to='wohnung/plan_pdf/', blank=True, validators=[FileExtensionValidator(allowed_extensions=['pdf', 'jpg'])])
 
     def __str__(self):
         return self.name

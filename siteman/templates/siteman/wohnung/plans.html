@@ -1,0 +1,30 @@
+<!-- Plans page template at wohnung level -->
+
+{% extends 'siteman/base_wohnung.html' %}
+
+{% block content%}
+    <div class="page-heading">
+        <h3 class="imp-heading"> Plans: {{ wohnung }} </h3>
+    </div>
+    <div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Plan</h5>
+                <table>
+                    {% for plan in plans %}
+                    <tr>
+                        <td><a href="{{ plan.plan.url }}">{{ plan.name }}</a></td>
+                        <td><a href="">Delete</a></td>
+                        <td>{{ plan.components }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+        
+        <div class="custom-btn-right-container">
+            <a class="btn btn-primary" href="{% url 'siteman:upload_wohnung_plan' 'generics' %}">Upload Plan</a>
+        </div>
+    </div>
+    
+{% endblock %}

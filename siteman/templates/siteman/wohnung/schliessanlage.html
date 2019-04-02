@@ -7,18 +7,35 @@
         <h3 class="imp-heading"> Schliessanlage: {{ wohnung }} </h3>
     </div>
     <div>
+        {% if wohnung.schliessanlage.schliessplan %}
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Schliessplan</h5>
                 <p>{{ wohnung.schliessanlage.schliessplan }}</p>
+                {% for plan in plans %}
+                {% if plan.components == 'schliessanlage-schliessplan' %}
+                    <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
+                {% endif %}
+            {% endfor %}
             </div>
         </div>
+        {% endif %}
+
+        {% if wohnung.schliessanlage.sonstiges %}
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Sontiges</h5>
+                <h5 class="card-title">Sonstiges</h5>
                 <p>{{ wohnung.schliessanlage.sonstiges }}</p>
+                {% for plan in plans %}
+                {% if plan.components == 'schliessanlage-sonstiges' %}
+                    <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
+                {% endif %}
+            {% endfor %}
             </div>
         </div>
+        {% endif %}
+
+
         {% if wohnung.schliessanlage %}
         <div class="custom-btn-right-container">
             <a class="btn btn-primary" href="{% url 'siteman:wohnung_schliessanlage_update' wohnung.schliessanlage.pk %}">Update</a>

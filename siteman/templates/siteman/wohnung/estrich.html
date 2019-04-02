@@ -7,24 +7,49 @@
         <h3 class="imp-heading"> Estrich:{{ wohnung }} </h3>
     </div>
     <div>
+        {% if wohnung.estrich.daemmplatten %}
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Daemplatten</h5>
                 <p>{{ wohnung.estrich.daemmplatten }}</p>
             </div>
+                {% for plan in plans %}
+                {% if plan.components == 'estrich-daemmplatten' %}
+                    <a href="{{ plan.plan.url }}">{{ plan.name }}</a></br>
+                {% endif %}
+            {% endfor %}
         </div>
+        {% endif %}
+
+        {% if wohnung.estrich.estrich %}
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Estrich</h5>
+                <h5 class="card-title">estrich</h5>
                 <p>{{ wohnung.estrich.estrich }}</p>
             </div>
+                {% for plan in plans %}
+                {% if plan.components == 'estrich-estrich' %}
+                    <a href="{{ plan.plan.url }}">{{ plan.name }}</a></br>
+                {% endif %}
+            {% endfor %}
         </div>
+        {% endif %}
+
+        {% if wohnung.estrich.sonstiges %}
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Sontiges</h5>
+                <h5 class="card-title">sonstiges</h5>
                 <p>{{ wohnung.estrich.sonstiges }}</p>
             </div>
+                {% for plan in plans %}
+                {% if plan.components == 'estrich-sonstiges' %}
+                    <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
+                {% endif %}
+            {% endfor %}
         </div>
+        {% endif %}
+
+
         {% if wohnung.estrich %}
         <div class="custom-btn-right-container">
             <a class="btn btn-primary" href="{% url 'siteman:wohnung_estrich_update' wohnung.estrich.pk %}">Update</a>

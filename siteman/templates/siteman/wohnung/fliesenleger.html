@@ -6,49 +6,96 @@
     <div class="page-heading">
         <h3 class="imp-heading"> Fliesenleger: {{ wohnung }}</h3>
     </div>
-    <div>
+        {% if wohnung.fliesenleger.bad %}
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Bad</h5>
                 <p>{{ wohnung.fliesenleger.bad }}</p>
+                {% for plan in plans %}
+                {% if plan.components == 'fliesenleger-bad' %}
+                    <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
+                {% endif %}
+            {% endfor %}
             </div>
         </div>
+        {% endif %}
+
+        {% if wohnung.fliesenleger.wohnzimmer %}
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Wohnzimmer</h5>
+                <h5 class="card-title">wohnzimmer</h5>
                 <p>{{ wohnung.fliesenleger.wohnzimmer }}</p>
+                {% for plan in plans %}
+                {% if plan.components == 'fliesenleger-wohnzimmer' %}
+                    <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
+                {% endif %}
+            {% endfor %}
             </div>
         </div>
+        {% endif %}
+
+        {% if wohnung.fliesenleger.abstellraum %}
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">abstellraum</h5>
                 <p>{{ wohnung.fliesenleger.abstellraum }}</p>
+                {% for plan in plans %}
+                {% if plan.components == 'fliesenleger-abstellraum' %}
+                    <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
+                {% endif %}
+            {% endfor %}
             </div>
         </div>
+        {% endif %}
+
+        {% if wohnung.fliesenleger.esszimmer %}
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Esszimmer</h5>
+                <h5 class="card-title">esszimmer</h5>
                 <p>{{ wohnung.fliesenleger.esszimmer }}</p>
+                {% for plan in plans %}
+                {% if plan.components == 'fliesenleger-esszimmer' %}
+                    <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
+                {% endif %}
+            {% endfor %}
             </div>
         </div>
+        {% endif %}
+
+        {% if wohnung.fliesenleger.keller %}
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Keller</h5>
+                <h5 class="card-title">keller</h5>
                 <p>{{ wohnung.fliesenleger.keller }}</p>
+                {% for plan in plans %}
+                {% if plan.components == 'fliesenleger-keller' %}
+                    <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
+                {% endif %}
+            {% endfor %}
             </div>
         </div>
+        {% endif %}
+
+        {% if wohnung.fliesenleger.sonstiges %}
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Sonstiges</h5>
+                <h5 class="card-title">sonstiges</h5>
                 <p>{{ wohnung.fliesenleger.sonstiges }}</p>
+                {% for plan in plans %}
+                {% if plan.components == 'fliesenleger-sonstiges' %}
+                    <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
+                {% endif %}
+            {% endfor %}
             </div>
         </div>
+        {% endif %}
+
         {% if wohnung.fliesenleger %}
         <div class="custom-btn-right-container">
             <a class="btn btn-primary" href="{% url 'siteman:wohnung_fliesenleger_update' wohnung.fliesenleger.pk %}">Update</a>
         </div>
         {% endif %}
-    </div>
+    
     
 
 {% endblock %}

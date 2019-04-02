@@ -7,24 +7,48 @@
         <h3 class="imp-heading"> Trockenbau:{{ wohnung }} </h3>
     </div>
     <div>
+        {% if wohnung.trockenbau.wande %}
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Wande</h5>
                 <p>{{ wohnung.trockenbau.wande }}</p>
+                {% for plan in plans %}
+                {% if plan.components == 'trockenbau-wande' %}
+                    <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
+                {% endif %}
+            {% endfor %}
             </div>
         </div>
+        {% endif %}
+
+        {% if wohnung.trockenbau.decken %}
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Decken</h5>
                 <p>{{ wohnung.trockenbau.decken }}</p>
+                {% for plan in plans %}
+                {% if plan.components == 'trockenbau-decken' %}
+                    <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
+                {% endif %}
+            {% endfor %}
             </div>
         </div>
+        {% endif %}
+
+        {% if wohnung.trockenbau.sonstiges %}
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Sontiges</h5>
+                <h5 class="card-title">Sonstiges</h5>
                 <p>{{ wohnung.trockenbau.sonstiges }}</p>
+                {% for plan in plans %}
+                {% if plan.components == 'trockenbau-sonstiges' %}
+                    <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
+                {% endif %}
+            {% endfor %}
             </div>
         </div>
+        {% endif %}
+
         {% if wohnung.trockenbau %}
         <div class="custom-btn-right-container">
             <a class="btn btn-primary" href="{% url 'siteman:wohnung_trockenbau_update' wohnung.trockenbau.pk %}">Update</a>

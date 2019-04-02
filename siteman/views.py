@@ -10,6 +10,8 @@ from django.views.generic import DetailView, ListView, UpdateView
 from . import models, forms, misc_functions, default_creator
 from .components import Haus_fl
 
+import os
+
 
 # Create your views here.
 
@@ -55,7 +57,17 @@ def projekt(request):
     }
     return render(request, 'siteman/projekt.html', context)
 
+"""
+##############################################################################
+#################### views related to haus only ##############################
+##############################################################################
+"""
+
+
 def plans(request):
+    """
+    display all plans related to a haus 
+    """
     haus = misc_functions.get_current_haus(request)
     # plans = get_list_or_404(models.Plan, haus=haus)
     plans = models.Plan.objects.filter(haus=haus)
@@ -82,19 +94,14 @@ def upload_plan(request):
             plan.save()
             # return HttpResponse(request.FILES)
             return HttpResponseRedirect(reverse('siteman:plans'))
+        else:
+            return render(request, 'siteman/haus/plan_upload.html', {'form': form, 'haus': haus})
     form = forms.PlanUploadForm()
     context ={
     'form': form,
     'haus': haus,
     }
-    return render(request, 'siteman/plan_upload.html', context)
-
-
-"""
-##############################################################################
-#################### views related to haus only ##############################
-##############################################################################
-"""
+    return render(request, 'siteman/haus/plan_upload.html', context)
 
 def haus(request):
     """
@@ -105,7 +112,7 @@ def haus(request):
     if request.method == "POST":
         # print('posted')
         form = forms.AddHausForm(request.POST)
-        print(request.POST)  
+        # print(request.POST)  
 
         if form.is_valid():
             projekt_id =  request.session['current_projekt_id']
@@ -151,7 +158,7 @@ def haus(request):
             raise ValueError('Keine projekt selected!')
         hauser =  models.Haus.objects.filter(projekt=projekt).order_by('haus_nr')
         form = forms.AddHausForm()
-        print("-------creating unbounded add haus form------")
+        # print("-------creating unbounded add haus form------")
         context = {
         'projekt' : projekt,
         'hauser' : hauser,
@@ -572,9 +579,64 @@ def set_current_wohnung(request, wohnung_id):
     set this wohnung as curent wohnung in the session var.
     redirect to wohnung ubersicht  page
     """
-    print(wohnung_id)
+    # print(wohnung_id)
     request.session['current_wohnung_id'] = wohnung_id
     return HttpResponseRedirect(reverse('siteman:wohnung_ubersicht'))
+
+def wohnung_plans(request):
+    """
+    display all plans related to a wohnung
+    """
+    wohnung = misc_functions.get_current_wohnung(request)
+    # plans = get_list_or_404(models.Plan, haus=haus)
+    plans = models.WohnungPlan.objects.filter(wohnung=wohnung)
+    context = {
+    'wohnung': wohnung,
+    'plans': plans
+    }
+    return render(request,'siteman/wohnung/plans.html', context)
+
+def upload_wohnung_plan(request, component):
+    """
+    upload wohnung related plan and image
+    """
+    wohnung = misc_functions.get_current_wohnung(request)
+
+    if request.method == 'POST':
+        
+        form = forms.WohnungPlanUploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            # form.save()
+            name = form.cleaned_data['name']
+            # file_name, file_ext = os.path.splitext(name) 
+            # print(file_name + file_ext)
+            # if file_ext != 'pdf' or 
+
+            components = form.cleaned_data['components']
+            # components = component
+            plan = request.FILES['plan']
+            wohnung_pk = request.POST['wohnung']
+            wohnung = get_object_or_404(models.Wohnung, pk=wohnung_pk)
+            plan = models.WohnungPlan(wohnung=wohnung, name=name, components=components, plan=plan)
+            plan.save()
+            # return HttpResponse(request.FILES)
+            return HttpResponseRedirect(reverse('siteman:wohnung_plans'))
+        else:
+            context ={
+            'form': form,
+            'wohnung': wohnung,
+            'components': component,
+            }
+            return render(request, 'siteman/wohnung/plan_upload.html', context)
+
+    form = forms.WohnungPlanUploadForm()
+    context ={
+    'form': form,
+    'wohnung': wohnung,
+    'components': component,
+    }
+    return render(request, 'siteman/wohnung/plan_upload.html', context)
+
 
 def wohnung_delete(request, pk):
     """
@@ -603,8 +665,10 @@ def wohnung_fenster(request):
     display fenster information of the selected wohnung
     """
     wohnung = misc_functions.get_current_wohnung(request)
+    plans = models.WohnungPlan.objects.filter(wohnung=wohnung)
     context = {
     'wohnung' : wohnung,
+    'plans': plans,
     }
     return render(request, 'siteman/wohnung/fenster.html', context)
 
@@ -621,8 +685,10 @@ def wohnung_elektro(request):
     display elektro information of the selected wohnung
     """
     wohnung = misc_functions.get_current_wohnung(request)
+    plans = models.WohnungPlan.objects.filter(wohnung=wohnung)
     context = {
     'wohnung' : wohnung,
+    'plans': plans,
     }
     return render(request, 'siteman/wohnung/elektro.html', context)
 
@@ -639,8 +705,10 @@ def wohnung_raumbuch_elektro(request):
     display raumbuch elektro information of the selected wohnung
     """
     wohnung = misc_functions.get_current_wohnung(request)
+    plans = models.WohnungPlan.objects.filter(wohnung=wohnung)
     context = {
     'wohnung' : wohnung,
+    'plans': plans,
     }
     return render(request, 'siteman/wohnung/raumbuch_elektro.html', context)
 
@@ -657,8 +725,10 @@ def wohnung_sanitaer(request):
     display sanitar information of the selected wohnung
     """
     wohnung = misc_functions.get_current_wohnung(request)
+    plans = models.WohnungPlan.objects.filter(wohnung=wohnung)
     context = {
     'wohnung' : wohnung,
+    'plans': plans,
     }
     return render(request, 'siteman/wohnung/sanitaer.html', context)
 
@@ -675,8 +745,10 @@ def wohnung_innenputz(request):
     display innenputz information of the selected wohnung
     """
     wohnung = misc_functions.get_current_wohnung(request)
+    plans = models.WohnungPlan.objects.filter(wohnung=wohnung)
     context = {
     'wohnung' : wohnung,
+    'plans': plans,
     }
     return render(request, 'siteman/wohnung/innenputz.html', context)
 
@@ -693,8 +765,10 @@ def wohnung_estrich(request):
     display estrich information of the selected wohnung
     """
     wohnung = misc_functions.get_current_wohnung(request)
+    plans = models.WohnungPlan.objects.filter(wohnung=wohnung)
     context = {
     'wohnung' : wohnung,
+    'plans': plans,
     }
     return render(request, 'siteman/wohnung/estrich.html', context)
 
@@ -711,8 +785,10 @@ def wohnung_trockenbau(request):
     display trockenbau information of the selected wohnung
     """
     wohnung = misc_functions.get_current_wohnung(request)
+    plans = models.WohnungPlan.objects.filter(wohnung=wohnung)
     context = {
     'wohnung' : wohnung,
+    'plans': plans,
     }
     return render(request, 'siteman/wohnung/trockenbau.html', context)
 
@@ -729,8 +805,10 @@ def wohnung_maler(request):
     display maler information of the selected wohnung
     """
     wohnung = misc_functions.get_current_wohnung(request)
+    plans = models.WohnungPlan.objects.filter(wohnung=wohnung)
     context = {
     'wohnung' : wohnung,
+    'plans': plans,
     }
     return render(request, 'siteman/wohnung/maler.html', context)
 
@@ -747,8 +825,10 @@ def wohnung_fliesenleger(request):
     display fliesenleger information of the selected wohnung
     """
     wohnung = misc_functions.get_current_wohnung(request)
+    plans = models.WohnungPlan.objects.filter(wohnung=wohnung)
     context = {
     'wohnung' : wohnung,
+    'plans': plans,
     }
     return render(request, 'siteman/wohnung/fliesenleger.html', context)
 
@@ -765,8 +845,10 @@ def wohnung_bodenbelaege(request):
     display fliesenleger information of the selected wohnung
     """
     wohnung = misc_functions.get_current_wohnung(request)
+    plans = models.WohnungPlan.objects.filter(wohnung=wohnung)
     context = {
     'wohnung' : wohnung,
+    'plans': plans,
     }
     return render(request, 'siteman/wohnung/bodenbelaege.html', context)
 
@@ -783,8 +865,10 @@ def wohnung_schreiner(request):
     display schreiner/turen information of the selected wohnung
     """
     wohnung = misc_functions.get_current_wohnung(request)
+    plans = models.WohnungPlan.objects.filter(wohnung=wohnung)
     context = {
     'wohnung' : wohnung,
+    'plans': plans,
     }
     return render(request, 'siteman/wohnung/schreiner.html', context)
 
@@ -801,8 +885,10 @@ def wohnung_schlosser(request):
     display schlosser information of the selected wohnung
     """
     wohnung = misc_functions.get_current_wohnung(request)
+    plans = models.WohnungPlan.objects.filter(wohnung=wohnung)
     context = {
     'wohnung' : wohnung,
+    'plans': plans,
     }
     return render(request, 'siteman/wohnung/schlosser.html', context)
 
@@ -819,8 +905,10 @@ def wohnung_schliessanlage(request):
     display schliessanlage information of the selected wohnung
     """
     wohnung = misc_functions.get_current_wohnung(request)
+    plans = models.WohnungPlan.objects.filter(wohnung=wohnung)
     context = {
     'wohnung' : wohnung,
+    'plans': plans,
     }
     return render(request, 'siteman/wohnung/schliessanlage.html', context)
 

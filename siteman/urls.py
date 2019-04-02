@@ -55,6 +55,9 @@ urlpatterns = [
     path('haus_aussenanlagern', views.haus_aussenanlagern, name='haus_aussenanlagern'), 
     path('haus_aussenanlagern_update/<int:pk>', views.HausAussenanlagernUpdateView.as_view(), name='haus_aussenanlagern_update'),
 
+    path('wohnung_plans', views.wohnung_plans, name='wohnung_plans'),
+    path('upload_wohnung_plan/', views.upload_wohnung_plan, name='upload_wohnung_plan'),
+    path('upload_wohnung_plan/<component>', views.upload_wohnung_plan, name='upload_wohnung_plan'),
     path('set_current_wohnung/<int:wohnung_id>', views.set_current_wohnung, name='set_current_wohnung'),
     path('wohnung/delete/<int:pk>', views.wohnung_delete, name='wohnung_delete'), 
     path('wohnung_ubersicht', views.wohnung_ubersicht, name='wohnung_ubersicht'), 

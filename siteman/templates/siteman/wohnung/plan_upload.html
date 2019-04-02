@@ -1,0 +1,25 @@
+<!-- Elektro page template at haus level -->
+
+{% extends 'siteman/base_wohnung.html' %}
+
+{% block content%}
+    <div class="page-heading">
+        <h3 class="imp-heading"> Plan Upload: {{ wohnung }} </h3>
+    </div>
+    <div class="subcontainer card">
+            <h4 class="imp-heading">Add a new plan for this haus</h4>
+            <form action="{% url 'siteman:upload_wohnung_plan' components %}" enctype="multipart/form-data" method="POST">
+                {% csrf_token %}
+                <table>
+                    {{form.as_table}}
+                </table>
+                <div>
+                    <input type="hidden" name="wohnung" value="{{ wohnung.pk }}">
+                    <input type="hidden" name="components" value="{{ components }}">
+                    <input type="submit" value="Upload" class="btn btn-primary">
+                </div>                                            
+            </form>
+        </div>
+    
+
+{% endblock %}

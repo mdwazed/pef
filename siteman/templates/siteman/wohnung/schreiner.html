@@ -7,24 +7,48 @@
         <h3 class="imp-heading"> Schreiner: {{ wohnung }}</h3>
     </div>
     <div>
+        {% if wohnung.schreiner.wohnungstuer %}
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Wohnungstuer</h5>
                 <p>{{ wohnung.schreiner.wohnungstuer }}</p>
+                {% for plan in plans %}
+                {% if plan.components == 'schreiner-wohnungstuer' %}
+                    <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
+                {% endif %}
+            {% endfor %}
             </div>
         </div>
+        {% endif %}
+
+        {% if wohnung.schreiner.innentueren %}
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Innentueren</h5>
+                <h5 class="card-title">innentueren</h5>
                 <p>{{ wohnung.schreiner.innentueren }}</p>
+                {% for plan in plans %}
+                {% if plan.components == 'fenster-innentueren' %}
+                    <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
+                {% endif %}
+            {% endfor %}
             </div>
         </div>
+        {% endif %}
+
+        {% if wohnung.schreiner.sonstiges %}
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Sontiges</h5>
+                <h5 class="card-title">sonstiges</h5>
                 <p>{{ wohnung.schreiner.sonstiges }}</p>
+                {% for plan in plans %}
+                {% if plan.components == 'fenster-sonstiges' %}
+                    <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
+                {% endif %}
+            {% endfor %}
             </div>
         </div>
+        {% endif %}
+
         {% if wohnung.schreiner %}
         <div class="custom-btn-right-container">
             <a class="btn btn-primary" href="{% url 'siteman:wohnung_schreiner_update' wohnung.schreiner.pk %}">Update</a>

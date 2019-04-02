@@ -7,66 +7,160 @@
         <h3 class="imp-heading"> Sanitar: {{ wohnung }} </h3>
     </div>
     <div>
+        {% if wohnung.sanitaer.aussenzapfstelle %}
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Aussenzapfstelle</h5>
                 <p>{{ wohnung.sanitaer.aussenzapfstelle }}</p>
+            
+                {% for plan in plans %}
+                {% if plan.components == 'sanitaer-aussenzapfstelle' %}
+                    <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
+                {% endif %}
+            {% endfor %}
             </div>
         </div>
+        {% endif %}
+
+        {% if wohnung.sanitaer.dusche %}
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Dusche</h5>
                 <p>{{ wohnung.sanitaer.dusche }}</p>
+            
+                {% for plan in plans %}
+                {% if plan.components == 'sanitaer-dusche' %}
+                    <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
+                {% endif %}
+            {% endfor %}
             </div>
         </div>
+        {% endif %}
+
+        {% if wohnung.sanitaer.badewanne %}
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Badewanne</h5>
                 <p>{{ wohnung.sanitaer.badewanne }}</p>
+            
+                {% for plan in plans %}
+                {% if plan.components == 'sanitaer-badewanne' %}
+                    <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
+                {% endif %}
+            {% endfor %}
             </div>
         </div>
+        {% endif %}
+
+        {% if wohnung.sanitaer.waschbecken %}
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Waschbecken</h5>
                 <p>{{ wohnung.sanitaer.waschbecken }}</p>
             </div>
+            
+                {% for plan in plans %}
+                {% if plan.components == 'sanitaer-waschbecken' %}
+                    <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
+                {% endif %}
+            {% endfor %}
+            </div>
         </div>
+        {% endif %}
+
+
+        {% if wohnung.sanitaer.toilette %}
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Toilette</h5>
                 <p>{{ wohnung.sanitaer.toilette }}</p>
+            
+                {% for plan in plans %}
+                    {% if plan.components == 'sanitaer-toilette' %}
+                        <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
+                    {% endif %}
+                {% endfor %}
             </div>
         </div>
+        {% endif %}
+
+        {% if wohnung.sanitaer.waschmaschinenanschluss %}
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Waschmaschinenanschluss</h5>
                 <p>{{ wohnung.sanitaer.waschmaschinenanschluss }}</p>
+            
+                {% for plan in plans %}
+                {% if plan.components == 'sanitaer-waschmaschinenanschluss' %}
+                    <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
+                {% endif %}
+            {% endfor %}
             </div>
         </div>
+        {% endif %}
+
+        {% if wohnung.sanitaer.spuele %}
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Spuele</h5>
+                <h5 class="card-title">spuele</h5>
                 <p>{{ wohnung.sanitaer.spuele }}</p>
+            
+                {% for plan in plans %}
+                {% if plan.components == 'sanitaer-spuele' %}
+                    <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
+                {% endif %}
+            {% endfor %}
             </div>
         </div>
+        {% endif %}
+
+        {% if wohnung.sanitaer.spuelmaschinenanschluss %}
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Spuelmaschinenanschluss</h5>
                 <p>{{ wohnung.sanitaer.spuelmaschinenanschluss }}</p>
+            
+                {% for plan in plans %}
+                {% if plan.components == 'sanitaer-spuelmaschinenanschluss' %}
+                    <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
+                {% endif %}
+            {% endfor %}
             </div>
         </div>
+        {% endif %}
+
+        {% if wohnung.sanitaer.fussbodenheizung %}
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Fussbodenheizung</h5>
                 <p>{{ wohnung.sanitaer.fussbodenheizung }}</p>
+            
+                {% for plan in plans %}
+                {% if plan.components == 'sanitaer-fussbodenheizung' %}
+                    <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
+                {% endif %}
+            {% endfor %}
             </div>
         </div>
+        {% endif %}
+
+        {% if wohnung.sanitaer.sonstiges %}
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Sonstiges</h5>
                 <p>{{ wohnung.sanitaer.sonstiges }}</p>
+            
+                {% for plan in plans %}
+                {% if plan.components == 'sanitaer-sonstiges' %}
+                    <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
+                {% endif %}
+            {% endfor %}
             </div>
         </div>
+        {% endif %}
+
+
+        
       
         {% if wohnung.sanitaer %}
         <div class="custom-btn-right-container">

@@ -7,24 +7,49 @@
         <h3 class="imp-heading"> Schlosser: {{ wohnung }}</h3>
     </div>
     <div>
+        {% if wohnung.schlosser.wohnungstuer %}
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Wohnungstuer</h5>
                 <p>{{ wohnung.schlosser.wohnungstuer }}</p>
+                {% for plan in plans %}
+                {% if plan.components == 'schlosser-wohnungstuer' %}
+                    <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
+                {% endif %}
+            {% endfor %}
             </div>
         </div>
+        {% endif %}
+
+        {% if wohnung.schlosser.innentueren %}
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Innentueren</h5>
                 <p>{{ wohnung.schlosser.innentueren }}</p>
+                {% for plan in plans %}
+                {% if plan.components == 'schlosser-innentueren' %}
+                    <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
+                {% endif %}
+            {% endfor %}
             </div>
         </div>
+        {% endif %}
+
+        {% if wohnung.schlosser.sonstiges %}
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Sontiges</h5>
+                <h5 class="card-title">Sonstiges</h5>
                 <p>{{ wohnung.schlosser.sonstiges }}</p>
+                {% for plan in plans %}
+                {% if plan.components == 'schlosser-sonstiges' %}
+                    <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
+                {% endif %}
+            {% endfor %}
             </div>
         </div>
+        {% endif %}
+
+
         {% if wohnung.schlosser %}
         <div class="custom-btn-right-container">
             <a class="btn btn-primary" href="{% url 'siteman:wohnung_schlosser_update' wohnung.schlosser.pk %}">Update</a>

@@ -1,3 +1,5 @@
+<!-- fenster page template at wohnung level -->
+
 {% extends 'siteman/base_wohnung.html' %}
 
 {% block content%}
@@ -6,24 +8,51 @@
     <h3 class="imp-heading"> Fenster: {{ wohnung }} </h3>
 </div>
 <div>
+    {% if wohnung.fenster.fensterbaenke %}
     <div class="card">
         <div class="card-body">
             <h5 class="card-title">Fensterbanke</h5>
             <p>{{ wohnung.fenster.fensterbaenke }}</p>
+            {% for plan in plans %}
+                {% if plan.components == 'fenster-fensterbaenke' %}
+                    <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
+                {% endif %}
+            {% endfor %}
         </div>
+            
     </div>
+    {% endif %}
+
+    {% if wohnung.fenster.rolllaeden %}
     <div class="card">
         <div class="card-body">
             <h5 class="card-title">Rollladen</h5>
             <p>{{ wohnung.fenster.rolllaeden }}</p>
+        
+            {% for plan in plans %}
+                {% if plan.components == 'fenster-rolllaeden' %}
+                    <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
+                {% endif %}
+            {% endfor %}
         </div>
     </div>
+    {% endif %}
+
+    {% if wohnung.fenster.sonstiges %}
     <div class="card">
         <div class="card-body">
             <h5 class="card-title">Sonstiges</h5>
             <p>{{ wohnung.fenster.sonstiges }}</p>
+       
+            {% for plan in plans %}
+                {% if plan.components == 'fenster-sonstiges' %}
+                    <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
+                {% endif %}
+            {% endfor %}
         </div>
     </div>
+    {% endif %}
+
     
     {% if wohnung.fenster %}
     <div class="custom-btn-right-container">
