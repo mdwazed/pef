@@ -501,7 +501,7 @@ class Handwerker(models.Model):
 
 class Plan(models.Model):
     """
-    all pdf files related to haus goes here. 
+    all pdf files/image related to haus goes here. 
     catagorised as per components like erdbau, roh bau etc.
     """
     component_tuple = (
@@ -521,7 +521,7 @@ class Plan(models.Model):
     haus = models.ForeignKey(Haus, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     components = models.CharField(max_length=50, choices=component_tuple)
-    plan = models.FileField(null=True, upload_to='haus/plan_pdf/', blank=True, validators=[FileExtensionValidator(allowed_extensions=['pdf', 'jpg'])])
+    plan = models.FileField(null=True, upload_to='haus/plan_pdf/', validators=[FileExtensionValidator(allowed_extensions=['pdf', 'jpg'])])
 
     def __str__(self):
         return self.name
@@ -548,7 +548,7 @@ class WohnungPlan(models.Model):
     wohnung = models.ForeignKey(Wohnung, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     components = models.CharField(max_length=50,)
-    plan = models.FileField(null=True, upload_to='wohnung/plan_pdf/', blank=True, validators=[FileExtensionValidator(allowed_extensions=['pdf', 'jpg'])])
+    plan = models.FileField(null=True, upload_to='wohnung/plan_pdf/', validators=[FileExtensionValidator(allowed_extensions=['pdf', 'jpg'])])
 
     def __str__(self):
         return self.name
