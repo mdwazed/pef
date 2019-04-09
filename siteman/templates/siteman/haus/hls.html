@@ -1,0 +1,78 @@
+<!-- Hls page template at haus level -->
+
+{% extends 'siteman/base_haus.html' %}
+
+{% block content%}
+    <div class="page-heading">
+        <h3 class="imp-heading"> Sanitar: {{ haus }} </h3>
+    </div>
+    <div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Energiegwinnung</h5>
+                <p>{{ haus.hls.energiegwinnung }}</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Heizung</h5>
+                <p>{{ haus.hls.heizung }}</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Be und Entluftung</h5>
+                <p>{{ haus.hls.be_und_entluftung }}</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Verbauchserfassung</h5>
+                <p>{{ haus.hls.verbauchserfassung }}</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Klimatisierung</h5>
+                <p>{{ haus.hls.klimatisierung }}</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Kalt_und Warmwasser</h5>
+                <p>{{ haus.hls.kalt_und_warmwasser }}</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Zirkulationsleitung</h5>
+                <p>{{ haus.hls.zirkulationsleitung }}</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Entwasserung</h5>
+                <p>{{ haus.hls.entwasserung }}</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Wasserenthartung</h5>
+                <p>{{ haus.hls.wasserenthartung }}</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Sonstiges</h5>
+                <p>{{ haus.hls.sonstiges }}</p>
+            </div>
+        </div>
+        {% if haus.hls %}
+        <div class="custom-btn-right-container">
+            <a class="btn btn-primary" href="{% url 'siteman:haus_hls_update' haus.hls.pk %}">Update</a>
+        </div>
+        {% endif %}
+    </div>
+    
+
+{% endblock %}

@@ -41,7 +41,12 @@
         <div class="card">
             <div class="card-body">
                 <h5>Dach:</h5>
-                <p>{{ haus.dach.dach }}</p>
+                <h6>Hauptdach</h6>
+                <p>{{ haus.dach.hauptdach }}</p>
+                <h6>Dachterrassen</h6>
+                <p>{{ haus.dach.dachterrassen }}</p>
+                <h6>Spenglerarbeiten</h6>
+                <p>{{ haus.dach.spenglerarbeiten }}</p>
             </div>
         </div>
         <div class="card">
@@ -64,17 +69,30 @@
         <div class="card">
             <div class="card-body">
                 <h5>Elektro:</h5>
+                <h6>Elektro</h6>
                 <p>{{ haus.elektro.elektro }}</p>
+                <h6>Treppenhaus</h6>
+                <p>{{ haus.elektro.treppenhaus }}</p>
+                <h6>Keller</h6>
+                <p>{{ haus.elektro.keller }}</p>
+                <h6>Private_abstellraum</h6>
+                <p>{{ haus.elektro.private_abstellraum }}</p>
+                <h6>Tiefgarage</h6>
+                <p>{{ haus.elektro.tiefgarage }}</p>
+                <h6>Medientechnik</h6>
+                <p>{{ haus.elektro.medientechnik }}</p>
+                <h6>Freiflachen</h6>
+                <p>{{ haus.elektro.freiflachen }}</p>
             </div>
             
         </div>
         <div class="card">
             <div class="card-body">
-                <h5>Sanitar:</h5>
-                <h6>Heizung</h6>
-                <p>{{ haus.sanitaer.heizung }}</p>
-                <h6>Entwasserung</h6>
-                <p>{{ haus.sanitaer.entwasserung }}</p>
+                <h5>HLS:</h5>
+                <h6>Energiegwinnung</h6>
+                <p>{{ haus.hls.energiegwinnung }}</p>
+                <h6>heizung</h6>
+                <p>{{ haus.hls.heizung }}</p>
             </div>
         </div>
         <div class="card">
@@ -86,15 +104,7 @@
                 <p>{{ haus.innenputz.innenputz_wohnraueme }}</p>
             </div>
         </div>
-        <div class="card">
-            <div class="card-body">
-                <h5>Estrich:</h5>
-                <h6>Daemmplatten</h6>
-                <p>{{ haus.estrich.daemmplatten }}</p>
-                <h6>Estrich</h6>
-                <p>{{ haus.estrich.estrich }}</p>
-            </div>
-        </div>
+      
         <div class="card">
             <div class="card-body">
                 <h5>Trockenbau:</h5>
@@ -104,23 +114,6 @@
                 <p>{{ haus.trockenbau.decken }}</p>
             </div>
         </div>
-        <div class="card">
-            <div class="card-body">
-                <h5>Maler:</h5>
-                <h6>Tapete</h6>
-                <p>{{ haus.maler.tapete }}</p>
-                <h6>Farbe</h6>
-                <p>{{ haus.maler.farbe }}</p>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-body">
-                <h5>Aussenputz:</h5>
-                <h6>Aussenputz</h6>
-                <p>{{ haus.aussenputz.aussenputz }}</p>
-                <h6>Sockel</h6>
-                <p>{{ haus.aussenputz.sockel }}</p>
-            </div>
-        </div>      
+             
     </div>
 {% endblock %}

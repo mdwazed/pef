@@ -7,13 +7,13 @@
         <h3 class="imp-heading"> Schreiner: {{ wohnung }}</h3>
     </div>
     <div>
-        {% if wohnung.schreiner.wohnungstuer %}
+        {% if wohnung.turen.wohnungstur %}
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Wohnungstuer</h5>
-                <p>{{ wohnung.schreiner.wohnungstuer }}</p>
+                <h5 class="card-title">wohnungstur</h5>
+                <p>{{ wohnung.turen.wohnungstur }}</p>
                 {% for plan in plans %}
-                {% if plan.components == 'schreiner-wohnungstuer' %}
+                {% if plan.components == 'turen-wohnungstur' %}
                     <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
                 {% endif %}
             {% endfor %}
@@ -21,13 +21,13 @@
         </div>
         {% endif %}
 
-        {% if wohnung.schreiner.innentueren %}
+        {% if wohnung.turen.innenturen %}
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">innentueren</h5>
-                <p>{{ wohnung.schreiner.innentueren }}</p>
+                <h5 class="card-title">innenturen</h5>
+                <p>{{ wohnung.turen.innenturen }}</p>
                 {% for plan in plans %}
-                {% if plan.components == 'fenster-innentueren' %}
+                {% if plan.components == 'turen-innenturen' %}
                     <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
                 {% endif %}
             {% endfor %}
@@ -35,13 +35,13 @@
         </div>
         {% endif %}
 
-        {% if wohnung.schreiner.sonstiges %}
+        {% if wohnung.turen.sonstiges %}
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">sonstiges</h5>
-                <p>{{ wohnung.schreiner.sonstiges }}</p>
+                <h5 class="card-title">Sonstiges</h5>
+                <p>{{ wohnung.turen.sonstiges }}</p>
                 {% for plan in plans %}
-                {% if plan.components == 'fenster-sonstiges' %}
+                {% if plan.components == 'turen-sonstiges' %}
                     <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
                 {% endif %}
             {% endfor %}
@@ -49,9 +49,9 @@
         </div>
         {% endif %}
 
-        {% if wohnung.schreiner %}
+        {% if wohnung.turen %}
         <div class="custom-btn-right-container">
-            <a class="btn btn-primary" href="{% url 'siteman:wohnung_schreiner_update' wohnung.schreiner.pk %}">Update</a>
+            <a class="btn btn-primary" href="{% url 'siteman:wohnung_turen_update' wohnung.turen.pk %}">Update</a>
         </div>
         {% endif %}
     </div>

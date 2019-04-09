@@ -21,7 +21,7 @@ def home(request):
 def home_projekt(request):
     """
     display current project set in current session
-    give option to set another running project in surrent session
+    give option to set another running project in current session
     """
     # set selected project in session var if submitted
     if request.method == "POST":
@@ -145,7 +145,7 @@ def haus(request):
                 # save addl fields from default settings
                 haus.save()
             except Exception as e:
-                print('One or more haus components could not be created', e)    
+                print('One or more haus components could not be created.', e)    
             return HttpResponseRedirect(reverse('siteman:haus'))
         else:
             # print(forms.ValidationError)
@@ -334,23 +334,33 @@ class HausElektroUpdateView(UpdateView):
         return reverse('siteman:haus_elektro')
 
 
-def haus_sanitaer(request):
+def haus_hls(request):
     """
-    erdbau views of currently selected haus
+    HLS views of currently selected haus
     """
     haus = misc_functions.get_current_haus(request)
     context = {
     'haus' : haus,
     }
-    return render(request, 'siteman/haus/sanitaer.html', context)
+    return render(request, 'siteman/haus/hls.html', context)
 
-class HausSanitaerUpdateView(UpdateView):
-    model = models.Sanitaer
-    template_name = 'siteman/haus/sanitaer_update.html'
-    form_class = forms.SanitaerModelForm
+class HausHlsUpdateView(UpdateView):
+    model = models.Hls
+    template_name = 'siteman/haus/hls_update.html'
+    form_class = forms.HlsModelForm
 
     def get_success_url(self):
-        return reverse('siteman:haus_sanitaer')
+        return reverse('siteman:haus_hls')
+
+
+
+# class HausSanitaerUpdateView(UpdateView):
+#     model = models.Sanitaer
+#     template_name = 'siteman/haus/sanitaer_update.html'
+#     form_class = forms.SanitaerModelForm
+
+#     def get_success_url(self):
+#         return reverse('siteman:haus_sanitaer')
 
 
 def haus_innenputz(request):
@@ -479,23 +489,41 @@ class HausBodenbelaegeUpdateView(UpdateView):
     def get_success_url(self):
         return reverse('siteman:haus_bodenbelaege')
 
-def haus_schreiner(request):
+def haus_turen(request):
     """
-    erdbau views of currently selected haus
+    door relateed information fro haus
     """
     haus = misc_functions.get_current_haus(request)
     context = {
     'haus' : haus,
     }
-    return render(request, 'siteman/haus/schreiner.html', context)
+    return render(request, 'siteman/haus/turen.html', context)
 
-class HausSchreinerUpdateView(UpdateView):
-    model = models.Schreiner
-    template_name = 'siteman/haus/schreiner_update.html'
-    form_class = forms.SchreinerModelForm
+class HausTurenUpdateView(UpdateView):
+    model = models.Turen
+    template_name = 'siteman/haus/turen_update.html'
+    form_class = forms.turenModelForm
 
     def get_success_url(self):
-        return reverse('siteman:haus_schreiner')
+        return reverse('siteman:haus_turen')
+
+# def haus_schreiner(request):
+#     """
+#     erdbau views of currently selected haus
+#     """
+#     haus = misc_functions.get_current_haus(request)
+#     context = {
+#     'haus' : haus,
+#     }
+#     return render(request, 'siteman/haus/schreiner.html', context)
+
+# class HausSchreinerUpdateView(UpdateView):
+#     model = models.Schreiner
+#     template_name = 'siteman/haus/schreiner_update.html'
+#     form_class = forms.SchreinerModelForm
+
+#     def get_success_url(self):
+#         return reverse('siteman:haus_schreiner')
 
 def haus_schlosser(request):
     """
@@ -860,9 +888,9 @@ class WohnungBodenbelaegeUpdateView(UpdateView):
     def get_success_url(self):
         return reverse('siteman:wohnung_bodenbelaege')
 
-def wohnung_schreiner(request):
+def wohnung_turen(request):
     """
-    display schreiner/turen information of the selected wohnung
+    display turen information of the selected wohnung
     """
     wohnung = misc_functions.get_current_wohnung(request)
     plans = models.WohnungPlan.objects.filter(wohnung=wohnung)
@@ -870,15 +898,15 @@ def wohnung_schreiner(request):
     'wohnung' : wohnung,
     'plans': plans,
     }
-    return render(request, 'siteman/wohnung/schreiner.html', context)
+    return render(request, 'siteman/wohnung/turen.html', context)
 
-class WohnungSchreinerUpdateView(UpdateView):
-    model = models.Schreiner
-    template_name = 'siteman/wohnung/schreiner_update.html'
-    form_class = forms.WohnungSchreinerModelForm
+class WohnungTurenUpdateView(UpdateView):
+    model = models.Turen
+    template_name = 'siteman/wohnung/turen_update.html'
+    form_class = forms.WohnungTurenModelForm
 
     def get_success_url(self):
-        return reverse('siteman:wohnung_schreiner')
+        return reverse('siteman:wohnung_turen')
 
 def wohnung_schlosser(request):
     """

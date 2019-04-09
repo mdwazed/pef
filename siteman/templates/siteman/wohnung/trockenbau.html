@@ -35,6 +35,20 @@
         </div>
         {% endif %}
 
+        {% if wohnung.trockenbau.vorsatzschalen %}
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Vorsatzschalen</h5>
+                <p>{{ wohnung.trockenbau.vorsatzschalen }}</p>
+                {% for plan in plans %}
+                {% if plan.components == 'trockenbau-vorsatzschalen' %}
+                    <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
+                {% endif %}
+            {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
         {% if wohnung.trockenbau.sonstiges %}
         <div class="card">
             <div class="card-body">

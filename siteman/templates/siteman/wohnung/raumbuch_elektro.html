@@ -142,14 +142,14 @@
         </div>
         {% endif %}
 
-        {% if wohnung.raumbuch_elektro.tv_anschluss %}
+        {% if wohnung.raumbuch_elektro.sonstiges %}
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">tv_anschluss</h5>
-                <p>{{ wohnung.raumbuch_elektro.tv_anschluss }}</p>
+                <h5 class="card-title">sonstiges</h5>
+                <p>{{ wohnung.raumbuch_elektro.sonstiges }}</p>
             
                 {% for plan in plans %}
-                    {% if plan.components == 'raumbuch_elektro-tv_anschluss' %}
+                    {% if plan.components == 'raumbuch_elektro-sonstiges' %}
                         <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
                     {% endif %}
                 {% endfor %}
@@ -157,20 +157,7 @@
         </div>
         {% endif %}
 
-        {% if wohnung.raumbuch_elektro.telefon_anschluss %}
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">telefon_anschluss</h5>
-                <p>{{ wohnung.raumbuch_elektro.telefon_anschluss }}</p>
-            
-                {% for plan in plans %}
-                    {% if plan.components == 'raumbuch_elektro-telefon_anschluss' %}
-                        <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
-                    {% endif %}
-                {% endfor %}
-            </div>
-        </div>
-        {% endif %}
+
 
 
         {% if wohnung.raumbuch_elektro %}

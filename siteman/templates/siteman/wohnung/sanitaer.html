@@ -52,15 +52,15 @@
         </div>
         {% endif %}
 
-        {% if wohnung.sanitaer.waschbecken %}
+        {% if wohnung.sanitaer.waschtisch_im_bad %}
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Waschbecken</h5>
-                <p>{{ wohnung.sanitaer.waschbecken }}</p>
+                <h5 class="card-title">waschtisch_im_bad</h5>
+                <p>{{ wohnung.sanitaer.waschtisch_im_bad }}</p>
             </div>
             
                 {% for plan in plans %}
-                {% if plan.components == 'sanitaer-waschbecken' %}
+                {% if plan.components == 'sanitaer-waschtisch_im_bad' %}
                     <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
                 {% endif %}
             {% endfor %}
@@ -84,6 +84,36 @@
         </div>
         {% endif %}
 
+        {% if wohnung.sanitaer.heizkorper %}
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">heizkorper</h5>
+                <p>{{ wohnung.sanitaer.heizkorper }}</p>
+            
+                {% for plan in plans %}
+                    {% if plan.components == 'sanitaer-heizkorper' %}
+                        <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        {% if wohnung.sanitaer.waschtisch_im_duschbad_wc %}
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">waschtisch_im_duschbad_wc</h5>
+                <p>{{ wohnung.sanitaer.waschtisch_im_duschbad_wc }}</p>
+            
+                {% for plan in plans %}
+                    {% if plan.components == 'sanitaer-waschtisch_im_duschbad_wc' %}
+                        <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
         {% if wohnung.sanitaer.waschmaschinenanschluss %}
         <div class="card">
             <div class="card-body">
@@ -99,25 +129,10 @@
         </div>
         {% endif %}
 
-        {% if wohnung.sanitaer.spuele %}
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">spuele</h5>
-                <p>{{ wohnung.sanitaer.spuele }}</p>
-            
-                {% for plan in plans %}
-                {% if plan.components == 'sanitaer-spuele' %}
-                    <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
-                {% endif %}
-            {% endfor %}
-            </div>
-        </div>
-        {% endif %}
-
         {% if wohnung.sanitaer.spuelmaschinenanschluss %}
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Spuelmaschinenanschluss</h5>
+                <h5 class="card-title">spuelmaschinenanschluss</h5>
                 <p>{{ wohnung.sanitaer.spuelmaschinenanschluss }}</p>
             
                 {% for plan in plans %}
@@ -129,20 +144,6 @@
         </div>
         {% endif %}
 
-        {% if wohnung.sanitaer.fussbodenheizung %}
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Fussbodenheizung</h5>
-                <p>{{ wohnung.sanitaer.fussbodenheizung }}</p>
-            
-                {% for plan in plans %}
-                {% if plan.components == 'sanitaer-fussbodenheizung' %}
-                    <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
-                {% endif %}
-            {% endfor %}
-            </div>
-        </div>
-        {% endif %}
 
         {% if wohnung.sanitaer.sonstiges %}
         <div class="card">
@@ -159,9 +160,6 @@
         </div>
         {% endif %}
 
-
-        
-      
         {% if wohnung.sanitaer %}
         <div class="custom-btn-right-container">
             <a class="btn btn-primary" href="{% url 'siteman:wohnung_sanitaer_update' wohnung.sanitaer.pk %}">Update</a>

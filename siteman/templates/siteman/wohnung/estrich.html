@@ -7,28 +7,28 @@
         <h3 class="imp-heading"> Estrich:{{ wohnung }} </h3>
     </div>
     <div>
-        {% if wohnung.estrich.daemmplatten %}
+        {% if wohnung.estrich.fussbodenaufbau_wohnraume %}
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Daemplatten</h5>
-                <p>{{ wohnung.estrich.daemmplatten }}</p>
+                <h5 class="card-title">fussbodenaufbau_wohnraume</h5>
+                <p>{{ wohnung.estrich.fussbodenaufbau_wohnraume }}</p>
             </div>
                 {% for plan in plans %}
-                {% if plan.components == 'estrich-daemmplatten' %}
+                {% if plan.components == 'estrich-fussbodenaufbau_wohnraume' %}
                     <a href="{{ plan.plan.url }}">{{ plan.name }}</a></br>
                 {% endif %}
             {% endfor %}
         </div>
         {% endif %}
 
-        {% if wohnung.estrich.estrich %}
+        {% if wohnung.estrich.fussbodenaufbau_bad %}
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">estrich</h5>
-                <p>{{ wohnung.estrich.estrich }}</p>
+                <h5 class="card-title">fussbodenaufbau_bad</h5>
+                <p>{{ wohnung.estrich.fussbodenaufbau_bad }}</p>
             </div>
                 {% for plan in plans %}
-                {% if plan.components == 'estrich-estrich' %}
+                {% if plan.components == 'estrich-fussbodenaufbau_bad' %}
                     <a href="{{ plan.plan.url }}">{{ plan.name }}</a></br>
                 {% endif %}
             {% endfor %}

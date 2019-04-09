@@ -102,67 +102,96 @@ class RohbauModelForm(forms.ModelForm):
         self.fields['geschossdecken'].widget.attrs.update(cols='80', rows='5')
         self.fields['aussenwande_kellergeschoss'].widget.attrs.update(cols='80', rows='5')
         self.fields['aussenwande_eg_og_dg'].widget.attrs.update(cols='80', rows='5')
+        self.fields['wohnungstrenwande'].widget.attrs.update(cols='80', rows='5')
         self.fields['tragendeinnenwande'].widget.attrs.update(cols='80', rows='5')
         self.fields['nichttragendeinnenwande'].widget.attrs.update(cols='80', rows='5')
+        self.fields['horizontale_abdichtung'].widget.attrs.update(cols='80', rows='5')
+        self.fields['vertikale_abdictung'].widget.attrs.update(cols='80', rows='5')
         self.fields['tiefgaragenrampe'].widget.attrs.update(cols='80', rows='5')
-        self.fields['installationschachte'].widget.attrs.update(cols='80', rows='5')
-        self.fields['dach'].widget.attrs.update(cols='80', rows='5')
         self.fields['treppen'].widget.attrs.update(cols='80', rows='5')
         self.fields['balkon'].widget.attrs.update(cols='80', rows='5')
         self.fields['sonstiges'].widget.attrs.update(cols='80', rows='5')
     class Meta:
         model = models.Rohbau
-        fields = ['grundung', 'geschossdecken', 'aussenwande_kellergeschoss', 'aussenwande_eg_og_dg',
-        'tragendeinnenwande', 'nichttragendeinnenwande', 'tiefgaragenrampe', 'installationschachte', 'dach', 'treppen', 'balkon', 'sonstiges']
+        fields = ['grundung', 'geschossdecken', 'aussenwande_kellergeschoss', 'aussenwande_eg_og_dg', 'wohnungstrenwande', 
+        'tragendeinnenwande', 'nichttragendeinnenwande', 'horizontale_abdichtung', 'vertikale_abdictung', 'tiefgaragenrampe', 'treppen', 'balkon', 'sonstiges']
 
 class DachModelForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         # self.fields['projekt_name'].widget.attrs.update({'class': 'special'})
-        self.fields['dach'].widget.attrs.update(cols='80', rows='5')
+        self.fields['hauptdach'].widget.attrs.update(cols='80', rows='5')
+        self.fields['dachterrassen'].widget.attrs.update(cols='80', rows='5')
+        self.fields['spenglerarbeiten'].widget.attrs.update(cols='80', rows='5')
         self.fields['sonstiges'].widget.attrs.update(cols='80', rows='5')
     class Meta:
         model = models.Dach
-        fields = ['dach', 'sonstiges']
+        fields = ['hauptdach', 'dachterrassen', 'spenglerarbeiten','sonstiges']
 
 class FensterModelForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         # self.fields['projekt_name'].widget.attrs.update({'class': 'special'})
-        self.fields['algemeine_information'].widget.attrs.update(cols='80', rows='5')
-        self.fields['beschattung'].widget.attrs.update(cols='80', rows='5')
+        
         self.fields['kellergeschoss'].widget.attrs.update(cols='80', rows='5')
         self.fields['erdgeschoss'].widget.attrs.update(cols='80', rows='5')
         self.fields['regelgeschoss'].widget.attrs.update(cols='80', rows='5')
         self.fields['dachgeschoss'].widget.attrs.update(cols='80', rows='5')
         self.fields['treppenhaus'].widget.attrs.update(cols='80', rows='5')
         self.fields['tiefgarage'].widget.attrs.update(cols='80', rows='5')
+        self.fields['beschattung'].widget.attrs.update(cols='80', rows='5')
+        self.fields['fensterbaenke'].widget.attrs.update(cols='80', rows='5')
         self.fields['sonstiges'].widget.attrs.update(cols='80', rows='5')
     class Meta:
         model = models.Fenster
-        fields = [ 'algemeine_information', 'beschattung','kellergeschoss', 'erdgeschoss', 'regelgeschoss', 'dachgeschoss', 'treppenhaus',
-                    'tiefgarage', 'sonstiges']
+        fields = [ 'kellergeschoss', 'erdgeschoss', 'regelgeschoss', 'dachgeschoss', 'treppenhaus',
+                    'tiefgarage','beschattung', 'fensterbaenke', 'sonstiges']
 
 class ElektroModelForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         # self.fields['projekt_name'].widget.attrs.update({'class': 'special'})
         self.fields['elektro'].widget.attrs.update(cols='80', rows='5')
+        self.fields['treppenhaus'].widget.attrs.update(cols='80', rows='5')
+        self.fields['keller'].widget.attrs.update(cols='80', rows='5')
+        self.fields['private_abstellraum'].widget.attrs.update(cols='80', rows='5')
+        self.fields['tiefgarage'].widget.attrs.update(cols='80', rows='5')
+        self.fields['medientechnik'].widget.attrs.update(cols='80', rows='5')
+        self.fields['freiflachen'].widget.attrs.update(cols='80', rows='5')
         self.fields['sonstiges'].widget.attrs.update(cols='80', rows='5')
     class Meta:
         model = models.Elektro
-        fields = ['elektro', 'sonstiges']
+        fields = ['elektro', 'treppenhaus', 'keller', 'private_abstellraum', 'tiefgarage', 'medientechnik', 'freiflachen', 'sonstiges']
 
-class SanitaerModelForm(forms.ModelForm):
+class HlsModelForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # self.fields['projekt_name'].widget.attrs.update({'class': 'special'})
+        self.fields['energiegwinnung'].widget.attrs.update(cols='80', rows='5')
         self.fields['heizung'].widget.attrs.update(cols='80', rows='5')
+        self.fields['be_und_entluftung'].widget.attrs.update(cols='80', rows='5')
+        self.fields['verbauchserfassung'].widget.attrs.update(cols='80', rows='5')
+        self.fields['klimatisierung'].widget.attrs.update(cols='80', rows='5')
+        self.fields['kalt_und_warmwasser'].widget.attrs.update(cols='80', rows='5')
+        self.fields['zirkulationsleitung'].widget.attrs.update(cols='80', rows='5')
         self.fields['entwasserung'].widget.attrs.update(cols='80', rows='5')
+        self.fields['wasserenthartung'].widget.attrs.update(cols='80', rows='5')
         self.fields['sonstiges'].widget.attrs.update(cols='80', rows='5')
     class Meta:
-        model = models.Sanitaer
-        fields = ['heizung', 'entwasserung', 'sonstiges' ]
+        model = models.Hls
+        fields = ['energiegwinnung', 'heizung', 'be_und_entluftung', 'verbauchserfassung', 'klimatisierung', 'kalt_und_warmwasser',
+         'zirkulationsleitung', 'entwasserung', 'wasserenthartung', 'sonstiges']
+
+
+# class SanitaerModelForm(forms.ModelForm):
+#     def __init__(self, *args, **kwargs):
+#         super().__init__(*args, **kwargs)
+#         # self.fields['projekt_name'].widget.attrs.update({'class': 'special'})
+#         self.fields['heizung'].widget.attrs.update(cols='80', rows='5')
+#         self.fields['entwasserung'].widget.attrs.update(cols='80', rows='5')
+#         self.fields['sonstiges'].widget.attrs.update(cols='80', rows='5')
+#     class Meta:
+#         model = models.Sanitaer
+#         fields = ['heizung', 'entwasserung', 'sonstiges' ]
 
 class InnenputzModelForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
@@ -170,32 +199,37 @@ class InnenputzModelForm(forms.ModelForm):
         # self.fields['projekt_name'].widget.attrs.update({'class': 'special'})
         self.fields['innenputz_bad'].widget.attrs.update(cols='80', rows='5')
         self.fields['innenputz_wohnraueme'].widget.attrs.update(cols='80', rows='5')
+        self.fields['innenputz_treppenhauswande'].widget.attrs.update(cols='80', rows='5')
+        self.fields['innenputz_treppenhausdecken'].widget.attrs.update(cols='80', rows='5')
         self.fields['sonstiges'].widget.attrs.update(cols='80', rows='5')
     class Meta:
         model = models.Innenputz
-        fields = ['innenputz_bad', 'innenputz_wohnraueme', 'sonstiges']
+        fields = ['innenputz_bad', 'innenputz_wohnraueme', 'innenputz_treppenhauswande', 'innenputz_treppenhausdecken', 'sonstiges']
 
 class EstrichModelForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         # self.fields['projekt_name'].widget.attrs.update({'class': 'special'})
-        self.fields['daemmplatten'].widget.attrs.update(cols='80', rows='5')
-        self.fields['estrich'].widget.attrs.update(cols='80', rows='5')
+        self.fields['dammplatten'].widget.attrs.update(cols='80', rows='5')
+        self.fields['wohnraume'].widget.attrs.update(cols='80', rows='5')
+        self.fields['bader'].widget.attrs.update(cols='80', rows='5')
         self.fields['sonstiges'].widget.attrs.update(cols='80', rows='5')
     class Meta:
         model = models.Estrich
-        fields = ['daemmplatten', 'estrich', 'sonstiges' ]
+        fields = ['dammplatten', 'wohnraume', 'bader', 'sonstiges' ]
 
 class TrockenbauModelForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         # self.fields['projekt_name'].widget.attrs.update({'class': 'special'})
+        self.fields['installationsschachte'].widget.attrs.update(cols='80', rows='5')
         self.fields['wande'].widget.attrs.update(cols='80', rows='5')
         self.fields['decken'].widget.attrs.update(cols='80', rows='5')
+        self.fields['vorsatzschalen'].widget.attrs.update(cols='80', rows='5')
         self.fields['sonstiges'].widget.attrs.update(cols='80', rows='5')
     class Meta:
         model = models.Trockenbau
-        fields = ['wande', 'decken', 'sonstiges' ]
+        fields = ['installationsschachte', 'wande', 'decken', 'vorsatzschalen', 'sonstiges' ]
 
 class MalerModelForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
@@ -212,12 +246,13 @@ class AussenputzModelForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         # self.fields['projekt_name'].widget.attrs.update({'class': 'special'})
-        self.fields['aussenputz'].widget.attrs.update(cols='80', rows='5')
+        self.fields['unterputz'].widget.attrs.update(cols='80', rows='5')
+        self.fields['edelputz'].widget.attrs.update(cols='80', rows='5')
         self.fields['sockel'].widget.attrs.update(cols='80', rows='5')
         self.fields['sonstiges'].widget.attrs.update(cols='80', rows='5')
     class Meta:
         model = models.Aussenputz
-        fields = ['aussenputz', 'sockel', 'sonstiges' ]
+        fields = ['unterputz', 'edelputz', 'sockel', 'sonstiges' ]
 
 class FliesenlegerModelForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
@@ -235,29 +270,49 @@ class BodenbelaegeModelForm(forms.ModelForm):
         # self.fields['projekt_name'].widget.attrs.update({'class': 'special'})
         self.fields['treppenhaus'].widget.attrs.update(cols='80', rows='5')
         self.fields['tiefgarage'].widget.attrs.update(cols='80', rows='5')
+        self.fields['keller'].widget.attrs.update(cols='80', rows='5')
+        self.fields['technikraum'].widget.attrs.update(cols='80', rows='5')
         self.fields['sonstiges'].widget.attrs.update(cols='80', rows='5')
     class Meta:
         model = models.Bodenbelaege
-        fields = ['treppenhaus', 'tiefgarage', 'sonstiges' ]
+        fields = ['treppenhaus', 'tiefgarage', 'keller', 'technikraum', 'sonstiges' ]
 
-class SchreinerModelForm(forms.ModelForm):
+class turenModelForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         # self.fields['projekt_name'].widget.attrs.update({'class': 'special'})
         self.fields['haustuer'].widget.attrs.update(cols='80', rows='5')
+        self.fields['brandschutzturen'].widget.attrs.update(cols='80', rows='5')
+        self.fields['schleusenturen'].widget.attrs.update(cols='80', rows='5')
+        self.fields['kellerflurturen'].widget.attrs.update(cols='80', rows='5')
         self.fields['sonstiges'].widget.attrs.update(cols='80', rows='5')
     class Meta:
-        model = models.Schreiner
-        fields = ['haustuer', 'sonstiges']
+        model = models.Turen
+        fields = ['haustuer', 'brandschutzturen', 'schleusenturen', 'kellerflurturen', 'sonstiges']
+
+
+# class SchreinerModelForm(forms.ModelForm):
+#     def __init__(self, *args, **kwargs):
+#         super().__init__(*args, **kwargs)
+#         # self.fields['projekt_name'].widget.attrs.update({'class': 'special'})
+#         self.fields['haustuer'].widget.attrs.update(cols='80', rows='5')
+#         self.fields['sonstiges'].widget.attrs.update(cols='80', rows='5')
+#     class Meta:
+#         model = models.Schreiner
+#         fields = ['haustuer', 'sonstiges']
 
 class SchlosserModelForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['eingangstuer'].widget.attrs.update(cols='80', rows='5')
+        self.fields['treppenglander'].widget.attrs.update(cols='80', rows='5')
+        self.fields['balkongelander'].widget.attrs.update(cols='80', rows='5')
+        self.fields['absturzsicherungen'].widget.attrs.update(cols='80', rows='5')
+        self.fields['kellerabtrennungen'].widget.attrs.update(cols='80', rows='5')
+        self.fields['rollgittertor'].widget.attrs.update(cols='80', rows='5')
         self.fields['sonstiges'].widget.attrs.update(cols='80', rows='5')
     class Meta:
         model = models.Schlosser
-        fields = ['eingangstuer', 'sonstiges']
+        fields = ['treppenglander', 'balkongelander', 'absturzsicherungen', 'kellerabtrennungen', 'rollgittertor', 'sonstiges']
 
 class SchliessanlageModelForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
@@ -272,30 +327,30 @@ class SicherheitstechnikModelForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['alarmanlage'].widget.attrs.update(cols='80', rows='5')
-        self.fields['tuerschliesser'].widget.attrs.update(cols='80', rows='5')
+        self.fields['videouberwachung'].widget.attrs.update(cols='80', rows='5')
         self.fields['sicherheitsschloesser'].widget.attrs.update(cols='80', rows='5')
         self.fields['sonstiges'].widget.attrs.update(cols='80', rows='5')
     class Meta:
         model = models.Sicherheitstechnik
-        fields = ['alarmanlage', 'tuerschliesser', 'sicherheitsschloesser', 'sonstiges']
+        fields = ['alarmanlage', 'videouberwachung', 'sicherheitsschloesser', 'sonstiges']
 
 class AussenanlagernModelForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['terrassenbelaege'].widget.attrs.update(cols='80', rows='5')
-        self.fields['pflanzen'].widget.attrs.update(cols='80', rows='5')
+        self.fields['vegetationsflachen'].widget.attrs.update(cols='80', rows='5')
         self.fields['pflaster'].widget.attrs.update(cols='80', rows='5')
-        self.fields['grundflache'].widget.attrs.update(cols='80', rows='5')
         self.fields['wegeflachen'].widget.attrs.update(cols='80', rows='5')
         self.fields['mulleinhausung'].widget.attrs.update(cols='80', rows='5')
         self.fields['einfriedung'].widget.attrs.update(cols='80', rows='5')
-        self.fields['dachaufbau_tiefgarage_grundflache'].widget.attrs.update(cols='80', rows='5')
-        self.fields['dachaufbau_tiefgarage_park_wegeflache'].widget.attrs.update(cols='80', rows='5')
+        self.fields['dachaufbau_tiefgarage_befestigt'].widget.attrs.update(cols='80', rows='5')
+        self.fields['dachaufbau_tiefgarage_grun'].widget.attrs.update(cols='80', rows='5')
+        self.fields['feuerwehraufstellflachen'].widget.attrs.update(cols='80', rows='5')
         self.fields['sonstiges'].widget.attrs.update(cols='80', rows='5')
     class Meta:
         model = models.Aussenanlagern
-        fields = ['terrassenbelaege', 'pflanzen', 'pflaster', 'grundflache', 'wegeflachen', 'mulleinhausung', 'einfriedung',
-         'dachaufbau_tiefgarage_grundflache', 'dachaufbau_tiefgarage_park_wegeflache', 'sonstiges']
+        fields = ['terrassenbelaege', 'vegetationsflachen', 'pflaster', 'wegeflachen', 'mulleinhausung', 'einfriedung',
+         'dachaufbau_tiefgarage_befestigt', 'dachaufbau_tiefgarage_grun', 'feuerwehraufstellflachen', 'sonstiges']
 
 """
 ########################################################################
@@ -333,14 +388,15 @@ class WohnungFensterModelForm(forms.ModelForm):
     prefix = 'fenster'
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.fields['schwellen'].widget.attrs.update(cols='80', rows='5')
+        self.fields['sichtschutz'].widget.attrs.update(cols='80', rows='5')
         self.fields['fensterbaenke'].widget.attrs.update(cols='80', rows='5')
-        self.fields['rolllaeden'].widget.attrs.update(cols='80', rows='5')
         self.fields['sonstiges'].widget.attrs.update(cols='80', rows='5')
         
     class Meta:
         model = models.Fenster
      
-        fields = ['fensterbaenke', 'rolllaeden', 'sonstiges']
+        fields = ['schwellen', 'sichtschutz', 'fensterbaenke', 'sonstiges']
 
 
 class WohnungElektroModelForm(forms.ModelForm):
@@ -376,13 +432,12 @@ class WohnungRuambuchElektroModelForm(forms.ModelForm):
         self.fields['kinderzimmer'].widget.attrs.update(cols='80', rows='7')
         self.fields['abstellraum'].widget.attrs.update(cols='80', rows='7')
         self.fields['schalterprogramm'].widget.attrs.update(cols='80', rows='7')
-        self.fields['tv_anschluss'].widget.attrs.update(cols='80', rows='7')
-        self.fields['telefon_anschluss'].widget.attrs.update(cols='80', rows='7')
-        self.fields['internet_anschluss'].widget.attrs.update(cols='80', rows='7')
+        self.fields['sonstiges'].widget.attrs.update(cols='80', rows='7')
+        
     class Meta:
         model = models.Raumbuch_elektro
         fields = ['bad', 'kueche', 'flur', 'wohnzimmer', 'gaeste_wc', 'schlafzimmer',
-        'kinderzimmer','abstellraum','schalterprogramm','tv_anschluss','telefon_anschluss','internet_anschluss']
+        'kinderzimmer','abstellraum','schalterprogramm', 'sonstiges']
 
 class WohnungSanitaerModelForm(forms.ModelForm):
     """
@@ -396,17 +451,17 @@ class WohnungSanitaerModelForm(forms.ModelForm):
         self.fields['aussenzapfstelle'].widget.attrs.update(cols='80', rows='5')
         self.fields['dusche'].widget.attrs.update(cols='80', rows='5')
         self.fields['badewanne'].widget.attrs.update(cols='80', rows='5')
-        self.fields['waschbecken'].widget.attrs.update(cols='80', rows='5')
+        self.fields['waschtisch_im_bad'].widget.attrs.update(cols='80', rows='5')
         self.fields['toilette'].widget.attrs.update(cols='80', rows='5')
+        self.fields['heizkorper'].widget.attrs.update(cols='80', rows='5')
+        self.fields['waschtisch_im_duschbad_wc'].widget.attrs.update(cols='80', rows='5')
         self.fields['waschmaschinenanschluss'].widget.attrs.update(cols='80', rows='5')
-        self.fields['spuele'].widget.attrs.update(cols='80', rows='5')
         self.fields['spuelmaschinenanschluss'].widget.attrs.update(cols='80', rows='5')
-        self.fields['fussbodenheizung'].widget.attrs.update(cols='80', rows='5')
         self.fields['sonstiges'].widget.attrs.update(cols='80', rows='5')
     class Meta:
         model = models.Sanitaer
-        fields = ['aussenzapfstelle', 'dusche', 'badewanne', 'waschbecken', 'toilette',
-        'waschmaschinenanschluss', 'spuele', 'spuelmaschinenanschluss', 'fussbodenheizung', 'sonstiges' ]
+        fields = ['aussenzapfstelle', 'dusche', 'badewanne', 'waschtisch_im_bad', 'toilette',
+        'heizkorper', 'waschtisch_im_duschbad_wc', 'waschmaschinenanschluss', 'spuelmaschinenanschluss', 'sonstiges' ]
 
 class WohnungInnenputzModelForm(forms.ModelForm):
     """
@@ -433,12 +488,12 @@ class WohnungEstrichModelForm(forms.ModelForm):
     prefix = 'estrich'
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['daemmplatten'].widget.attrs.update(cols='80', rows='5')
-        self.fields['estrich'].widget.attrs.update(cols='80', rows='5')
+        self.fields['dammplatten'].widget.attrs.update(cols='80', rows='5')
+        # self.fields['estrich'].widget.attrs.update(cols='80', rows='5')
         self.fields['sonstiges'].widget.attrs.update(cols='80', rows='5')
     class Meta:
         model = models.Estrich
-        fields = ['daemmplatten', 'estrich', 'sonstiges' ]
+        fields = ['dammplatten', 'sonstiges' ]
 
 class WohnungTrockenbauModelForm(forms.ModelForm):
     """
@@ -451,10 +506,11 @@ class WohnungTrockenbauModelForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.fields['wande'].widget.attrs.update(cols='80', rows='5')
         self.fields['decken'].widget.attrs.update(cols='80', rows='5')
+        self.fields['vorsatzschalen'].widget.attrs.update(cols='80', rows='5')
         self.fields['sonstiges'].widget.attrs.update(cols='80', rows='5')
     class Meta:
         model = models.Trockenbau
-        fields = ['wande', 'decken', 'sonstiges' ]
+        fields = ['wande', 'decken', 'vorsatzschalen', 'sonstiges' ]
 
 class WohnungMalerModelForm(forms.ModelForm):
     """
@@ -513,21 +569,21 @@ class WohnungBodenbelaegeModelForm(forms.ModelForm):
         model = models.Bodenbelaege
         fields = ['bad', 'kueche', 'flur', 'wohnzimmer', 'gaeste_wc', 'schlafzimmer', 'kinderzimmer','abstellraum', 'sonstiges']
 
-class WohnungSchreinerModelForm(forms.ModelForm):
+class WohnungTurenModelForm(forms.ModelForm):
     """
     ACHTUNG: uploaded file objects for this fields refer to this objects by prefix-fieldname 
     as html name. Be very careful before changing the preifx and html name attributes of any field.
     """
 
-    prefix = 'schreiner'
+    prefix = 'turen'
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['wohnungstuer'].widget.attrs.update(cols='80', rows='5')
-        self.fields['innentueren'].widget.attrs.update(cols='80', rows='5')
+        self.fields['wohnungstur'].widget.attrs.update(cols='80', rows='5')
+        self.fields['innenturen'].widget.attrs.update(cols='80', rows='5')
         self.fields['sonstiges'].widget.attrs.update(cols='80', rows='5')
     class Meta:
-        model = models.Schreiner
-        fields = ['wohnungstuer', 'innentueren', 'sonstiges']
+        model = models.Turen
+        fields = ['wohnungstur', 'innenturen', 'sonstiges']
 
 class WohnungSchlosserModelForm(forms.ModelForm):
     """
@@ -538,12 +594,12 @@ class WohnungSchlosserModelForm(forms.ModelForm):
     prefix = 'schlosser'
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['wohnungstuer'].widget.attrs.update(cols='80', rows='5')
-        self.fields['innentueren'].widget.attrs.update(cols='80', rows='5')
+        # self.fields['wohnungstuer'].widget.attrs.update(cols='80', rows='5')
+        # self.fields['innentueren'].widget.attrs.update(cols='80', rows='5')
         self.fields['sonstiges'].widget.attrs.update(cols='80', rows='5')
     class Meta:
-        model = models.Schreiner
-        fields = ['wohnungstuer', 'innentueren', 'sonstiges']
+        model = models.Schlosser
+        fields = ['sonstiges']
 
 class WohnungSchliessanlageModelForm(forms.ModelForm):
     """

@@ -8,6 +8,34 @@
     <h3 class="imp-heading"> Fenster: {{ wohnung }} </h3>
 </div>
 <div>
+    {% if wohnung.fenster.schwellen %}
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">schwellen</h5>
+            <p>{{ wohnung.fenster.schwellen }}</p>
+            {% for plan in plans %}
+                {% if plan.components == 'fenster-schwellen' %}
+                    <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    {% if wohnung.fenster.sichtschutz %}
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">sichtschutz</h5>
+            <p>{{ wohnung.fenster.sichtschutz }}</p>
+            {% for plan in plans %}
+                {% if plan.components == 'fenster-sichtschutz' %}
+                    <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+    
     {% if wohnung.fenster.fensterbaenke %}
     <div class="card">
         <div class="card-body">
@@ -15,22 +43,6 @@
             <p>{{ wohnung.fenster.fensterbaenke }}</p>
             {% for plan in plans %}
                 {% if plan.components == 'fenster-fensterbaenke' %}
-                    <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
-                {% endif %}
-            {% endfor %}
-        </div>
-            
-    </div>
-    {% endif %}
-
-    {% if wohnung.fenster.rolllaeden %}
-    <div class="card">
-        <div class="card-body">
-            <h5 class="card-title">Rollladen</h5>
-            <p>{{ wohnung.fenster.rolllaeden }}</p>
-        
-            {% for plan in plans %}
-                {% if plan.components == 'fenster-rolllaeden' %}
                     <p><a href="{{ plan.plan.url }}">{{ plan.name }}</a></p>
                 {% endif %}
             {% endfor %}

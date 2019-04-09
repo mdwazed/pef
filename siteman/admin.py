@@ -1,7 +1,7 @@
 from django.contrib import admin
 from siteman.models import (Projekt, Haus, Wohnung, Architekt_plan, Rohbau, Fenster, Trockenbau, Elektro, Raumbuch_elektro, 
-    Sanitaer, Bodenbelaege, Fliesenleger, Sicherheitstechnik, Schlosser, Schreiner, Schliessanlage, Aussenputz, Aussenanlagern, 
-    Dach, Maler, Innenputz, Erdbau, Estrich, Handwerker, ChoiceFields, Plan)
+    Bodenbelaege, Fliesenleger, Sicherheitstechnik, Schlosser, Turen, Schliessanlage, Aussenputz, Aussenanlagern, Sanitaer,
+    Dach, Maler, Innenputz, Erdbau, Estrich, Handwerker, ChoiceFields, Plan, Hls)
 
 # Register your models here.
 admin.site.register(Projekt)
@@ -13,12 +13,13 @@ admin.site.register(Fenster)
 admin.site.register(Trockenbau)
 admin.site.register(Elektro)
 admin.site.register(Raumbuch_elektro)
+admin.site.register(Hls)
 admin.site.register(Sanitaer)
 admin.site.register(Bodenbelaege)
 admin.site.register(Fliesenleger)
 admin.site.register(Sicherheitstechnik)
 admin.site.register(Schlosser)
-admin.site.register(Schreiner)
+admin.site.register(Turen)
 admin.site.register(Schliessanlage)
 admin.site.register(Aussenputz)
 admin.site.register(Aussenanlagern)

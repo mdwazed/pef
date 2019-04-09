@@ -128,11 +128,12 @@ class Rohbau(Verantwortung):
     geschossdecken= models.TextField(null=True, blank=True)
     aussenwande_kellergeschoss = models.TextField(null=True, blank=True)
     aussenwande_eg_og_dg = models.TextField(null=True, blank=True)
+    wohnungstrenwande = models.TextField(null=True, blank=True)
     tragendeinnenwande = models.TextField(null=True, blank=True)
     nichttragendeinnenwande = models.TextField(null=True, blank=True)
+    horizontale_abdichtung = models.TextField(null=True, blank=True)
+    vertikale_abdictung = models.TextField(null=True, blank=True)
     tiefgaragenrampe = models.TextField(null=True, blank=True)    
-    installationschachte = models.TextField(null=True, blank=True)    
-    dach = models.TextField(null=True, blank=True)
     treppen = models.TextField(null=True, blank=True)
     balkon = models.TextField(null=True, blank=True)
     sonstiges = models.TextField(null=True, blank=True)
@@ -142,7 +143,9 @@ class Dach(Verantwortung):
     roof of the house
     """
     haus = models.OneToOneField(Haus, on_delete=models.CASCADE, null=True, blank=True)
-    dach = models.TextField(null= True, blank=True)
+    hauptdach = models.TextField(null= True, blank=True)
+    dachterrassen = models.TextField(null= True, blank=True)
+    spenglerarbeiten = models.TextField(null= True, blank=True)
     sonstiges = models.TextField(null=True, blank=True)
 
 
@@ -155,7 +158,6 @@ class Fenster(Verantwortung):
     haus = models.OneToOneField(Haus, on_delete=models.CASCADE, null=True, blank=True)
     wohnung = models.OneToOneField(Wohnung, on_delete=models.CASCADE, null=True, blank=True)
     # for haus
-    algemeine_information = models.TextField(null=True, blank=True)
     beschattung = models.TextField(null=True, blank=True)
     kellergeschoss = models.TextField(null=True, blank=True)
     erdgeschoss = models.TextField(null=True, blank=True)
@@ -163,10 +165,13 @@ class Fenster(Verantwortung):
     dachgeschoss = models.TextField(null=True, blank=True)
     treppenhaus = models.TextField(null=True, blank=True)
     tiefgarage = models.TextField(null=True, blank=True)
+    keller = models.TextField(null=True, blank=True)
 
     # for wohnung
+    schwellen = models.TextField(null=True, blank=True)
+    sichtschutz = models.TextField(null=True, blank=True)
+    # common to both
     fensterbaenke = models.TextField(null=True, blank=True)
-    rolllaeden = models.TextField(null=True, blank=True)
     sonstiges = models.TextField(null=True, blank=True)
 
     def __str__(self):
@@ -182,30 +187,66 @@ class Elektro(Verantwortung):
     """
     haus = models.OneToOneField(Haus, on_delete=models.CASCADE, null=True, blank=True)
     wohnung = models.OneToOneField(Wohnung, on_delete=models.CASCADE, null=True, blank=True)
+    # haus
     elektro = models.TextField(null=True, blank=True)
+    treppenhaus = models.TextField(null=True, blank=True)
+    keller = models.TextField(null=True, blank=True)
+    private_abstellraum = models.TextField(null=True, blank=True)
+    tiefgarage = models.TextField(null=True, blank=True)
+    medientechnik = models.TextField(null=True, blank=True)
+    freiflachen = models.TextField(null=True, blank=True)
+    # wohnung    
+    allgemein = models.TextField(null=True, blank=True)  
+    # common fro both
     sonstiges = models.TextField(null=True, blank=True)
 
 class Sanitaer(Verantwortung):
     """
-    sanitary requirements
+    sanitary requirements. related to wohnung only
     """
     haus = models.OneToOneField(Haus, on_delete=models.CASCADE, null=True, blank=True)
     wohnung = models.OneToOneField(Wohnung, on_delete=models.CASCADE, null=True, blank=True)
     # haus level
-    heizung = models.TextField(null=True, blank=True)
-    entwasserung = models.TextField(null=True, blank=True)
+
     # wohnung level
     aussenzapfstelle = models.TextField(null=True, blank=True)# 
     dusche = models.TextField(null=True, blank=True)
     badewanne = models.TextField(null=True, blank=True)
-    waschbecken = models.TextField(null=True, blank=True)
+    waschtisch_im_bad = models.TextField(null=True, blank=True)
     toilette = models.TextField(null=True, blank=True)
+    heizkorper = models.TextField(null=True, blank=True)
+    waschtisch_im_duschbad_wc = models.TextField(null=True, blank=True)
     waschmaschinenanschluss = models.TextField(null=True, blank=True)
-    spuele = models.TextField(null=True, blank=True)
     spuelmaschinenanschluss = models.TextField(null=True, blank=True)
+    # waschbecken = models.TextField(null=True, blank=True)
+    # toilette = models.TextField(null=True, blank=True)
+    
+    # spuele = models.TextField(null=True, blank=True)
+    
     # common to both
-    fussbodenheizung = models.TextField(null=True, blank=True)
+    # fussbodenheizung = models.TextField(null=True, blank=True)
     sonstiges = models.TextField(null=True, blank=True)
+
+
+class Hls(Verantwortung):
+    """
+    Heitzung, luftung and sanitar. related to haus only
+    """
+    haus = models.OneToOneField(Haus, on_delete=models.CASCADE, null=True, blank=True)
+    wohnung = models.OneToOneField(Wohnung, on_delete=models.CASCADE, null=True, blank=True)
+    #  haus level
+    energiegwinnung = models.TextField(null=True, blank=True)
+    heizung = models.TextField(null=True, blank=True)
+    be_und_entluftung = models.TextField(null=True, blank=True)
+    verbauchserfassung = models.TextField(null=True, blank=True)
+    klimatisierung = models.TextField(null=True, blank=True)
+    kalt_und_warmwasser = models.TextField(null=True, blank=True)
+    zirkulationsleitung = models.TextField(null=True, blank=True)
+    entwasserung = models.TextField(null=True, blank=True)
+    wasserenthartung = models.TextField(null=True, blank=True)
+    # common to both
+    sonstiges = models.TextField(null=True, blank=True)
+
 
 class Innenputz(Verantwortung):
     """
@@ -214,8 +255,15 @@ class Innenputz(Verantwortung):
     """
     haus = models.OneToOneField(Haus, on_delete=models.CASCADE, null=True, blank=True)
     wohnung = models.OneToOneField(Wohnung, on_delete=models.CASCADE, null=True, blank=True)
+    # for haus
     innenputz_bad = models.TextField(null=True, blank=True)
     innenputz_wohnraueme = models.TextField(null=True, blank=True)
+    innenputz_treppenhauswande = models.TextField(null=True, blank=True)
+    innenputz_treppenhausdecken = models.TextField(null=True, blank=True)
+    # wohnung
+    edelputz_bad = models.TextField(null=True, blank=True)
+    edelputz_wohnraume = models.TextField(null=True, blank=True)
+    # common to both
     sonstiges = models.TextField(null=True, blank=True)
 
 class Estrich(Verantwortung):
@@ -224,8 +272,14 @@ class Estrich(Verantwortung):
     """
     haus = models.OneToOneField(Haus, on_delete=models.CASCADE, null=True, blank=True)
     wohnung = models.OneToOneField(Wohnung, on_delete=models.CASCADE, null=True, blank=True)
-    daemmplatten = models.TextField(null=True, blank=True)
-    estrich = models.TextField(null=True, blank=True)
+    # for haus
+    dammplatten = models.TextField(null=True, blank=True)
+    wohnraume = models.TextField(null=True, blank=True)
+    bader = models.TextField(null=True, blank=True)
+    # wohnung
+    fussbodenaufbau_wohnraume = models.TextField(null=True, blank=True)
+    fussbodenaufbau_bad = models.TextField(null=True, blank=True)
+    # common to both
     sonstiges = models.TextField(null=True, blank=True)
 
 class Trockenbau(Verantwortung):
@@ -233,11 +287,16 @@ class Trockenbau(Verantwortung):
     dry wall. additional layer of wall/floor/ceiling.
     will be foreign key of both haus and wohnung
     """
-    # for haus and wohnung
     haus = models.OneToOneField(Haus, on_delete=models.CASCADE, null=True, blank=True)
     wohnung = models.OneToOneField(Wohnung, on_delete=models.CASCADE, null=True, blank=True)
+    # for haus
+    installationsschachte = models.TextField(null=True, blank=True)
+    # for wohnung
+    
+    # common to both
     wande = models.TextField(null=True, blank=True)
     decken = models.TextField(null=True, blank=True)
+    vorsatzschalen = models.TextField(null=True, blank=True)
     sonstiges = models.TextField(null=True, blank=True)
 
 class Maler(Verantwortung):
@@ -247,16 +306,18 @@ class Maler(Verantwortung):
     """
     haus = models.OneToOneField(Haus, on_delete=models.CASCADE, null=True, blank=True)
     wohnung = models.OneToOneField(Wohnung, on_delete=models.CASCADE, null=True, blank=True)
+    #for wohnung
     tapete = models.TextField(null=True, blank=True)
     farbe = models.TextField(null=True, blank=True)
     sonstiges = models.TextField(null=True, blank=True)
 
 class Aussenputz(Verantwortung):
     """
-    puter plaster
+    Outer plaster. applicable to haus only
     """
     haus = models.OneToOneField(Haus, on_delete=models.CASCADE, null=True, blank=True)
-    aussenputz = models.TextField(null=True, blank=True)
+    unterputz = models.TextField(null=True, blank=True)
+    edelputz = models.TextField(null=True, blank=True)
     sockel = models.TextField(null=True, blank=True)
     sonstiges = models.TextField(null=True, blank=True)
 
@@ -282,11 +343,13 @@ class Bodenbelaege(Verantwortung):
     """
     haus = models.OneToOneField(Haus, on_delete=models.CASCADE, null=True, blank=True)
     wohnung = models.OneToOneField(Wohnung, on_delete=models.CASCADE, null=True, blank=True)
-    # common for the building
+    # for the building/ haus
     treppenhaus = models.TextField(null=True, blank=True)
     tiefgarage = models.TextField(null=True, blank=True)    
+    keller = models.TextField(null=True, blank=True)    
+    technikraum = models.TextField(null=True, blank=True)    
 
-    # individual apartment 
+    # individual apartment/wohnung 
     bad = models.TextField(null=True, blank=True)
     kueche = models.TextField(null=True, blank=True)
     flur = models.TextField(null=True, blank=True)
@@ -295,21 +358,42 @@ class Bodenbelaege(Verantwortung):
     schlafzimmer = models.TextField(null=True, blank=True)
     kinderzimmer = models.TextField(null=True, blank=True)
     abstellraum = models.TextField(null=True, blank=True)
+    # Common to both
     sonstiges = models.TextField(null=True, blank=True)
 
-class Schreiner(Verantwortung):
+# class Schreiner(Verantwortung):
+#     """
+#     wood related work for haus and wohnung
+#     addressed as turn somewhere
+#     """
+#     haus = models.OneToOneField(Haus, on_delete=models.CASCADE, null=True, blank=True)
+#     wohnung = models.OneToOneField(Wohnung, on_delete=models.CASCADE, null=True, blank=True)
+#     # haus level
+#     haustuer = models.TextField(null=True, blank=True)
+#     #  wohnung level
+#     wohnungstuer = models.TextField(null=True, blank=True)
+#     innentueren = models.TextField(null=True, blank=True)
+#     sonstiges = models.TextField(null=True, blank=True)
+
+class Turen(Verantwortung):
     """
-    wood related work for haus and wohnung
-    addressed as turn somewhere
+    doors of haus and wohnung
     """
     haus = models.OneToOneField(Haus, on_delete=models.CASCADE, null=True, blank=True)
     wohnung = models.OneToOneField(Wohnung, on_delete=models.CASCADE, null=True, blank=True)
     # haus level
     haustuer = models.TextField(null=True, blank=True)
-    #  wohnung level
-    wohnungstuer = models.TextField(null=True, blank=True)
-    innentueren = models.TextField(null=True, blank=True)
+    brandschutzturen = models.TextField(null=True, blank=True)
+    schleusenturen = models.TextField(null=True, blank=True)
+    kellerflurturen = models.TextField(null=True, blank=True)
+    #wohnung
+    wohnungstur = models.TextField(null=True, blank=True)
+    innenturen = models.TextField(null=True, blank=True)
+    # common
     sonstiges = models.TextField(null=True, blank=True)
+    
+
+
 
 class Schlosser(Verantwortung):
     """
@@ -318,10 +402,15 @@ class Schlosser(Verantwortung):
     haus = models.OneToOneField(Haus, on_delete=models.CASCADE, null=True, blank=True)
     wohnung = models.OneToOneField(Wohnung, on_delete=models.CASCADE, null=True, blank=True)
     # haus
-    eingangstuer = models.TextField(null=True, blank=True)
+    treppenglander = models.TextField(null=True, blank=True)
+    balkongelander = models.TextField(null=True, blank=True)
+    absturzsicherungen = models.TextField(null=True, blank=True)
+    kellerabtrennungen = models.TextField(null=True, blank=True)
+    rollgittertor = models.TextField(null=True, blank=True)
     # wohnung
-    wohnungstuer = models.TextField(null=True, blank=True)
-    innentueren = models.TextField(null=True, blank=True)
+    # wohnungstuer = models.TextField(null=True, blank=True)
+    # innentueren = models.TextField(null=True, blank=True)
+    # Common to both
     sonstiges = models.TextField(null=True, blank=True)
 
 class Schliessanlage(Verantwortung):
@@ -330,8 +419,10 @@ class Schliessanlage(Verantwortung):
     """
     haus = models.OneToOneField(Haus, on_delete=models.CASCADE, null=True, blank=True)
     wohnung = models.OneToOneField(Wohnung, on_delete=models.CASCADE, null=True, blank=True)
+    # for haus
     schliessplan = models.TextField(null=True, blank=True)
     # innenbaenke = models.TextField(null=True, blank=True)
+    # common to both
     sonstiges = models.TextField(null=True, blank=True)
 
 
@@ -341,27 +432,29 @@ class Sicherheitstechnik(Verantwortung):
     """
     haus = models.OneToOneField(Haus, on_delete=models.CASCADE, null=True, blank=True)
     wohnung = models.OneToOneField(Wohnung, on_delete=models.CASCADE, null=True, blank=True)
+    # for haus
     alarmanlage = models.TextField(null=True, blank=True)
-    tuerschliesser = models.TextField(null=True, blank=True)
+    videouberwachung = models.TextField(null=True, blank=True)
     sicherheitsschloesser = models.TextField(null=True, blank=True)
-    schliesssystem = models.FileField(null=True, upload_to='static/pdf', blank=True)
+    # schliesssystem = models.FileField(null=True, upload_to='static/pdf', blank=True)
+    # Common to both
     sonstiges = models.TextField(null=True, blank=True)
 
 
 class Aussenanlagern(Verantwortung):
     """
-    outside facilities of the haus
+    outside facilities of the haus. related to haus only
     """
     haus = models.OneToOneField(Haus, on_delete=models.CASCADE, null=True, blank=True)
     terrassenbelaege = models.TextField(null=True, blank=True)
-    pflanzen = models.TextField(null=True, blank=True)
+    vegetationsflachen = models.TextField(null=True, blank=True)
     pflaster = models.TextField(null=True, blank=True)
-    grundflache = models.TextField(null=True, blank=True)
     wegeflachen = models.TextField(null=True, blank=True)
     mulleinhausung = models.TextField(null=True, blank=True)
     einfriedung = models.TextField(null=True, blank=True)
-    dachaufbau_tiefgarage_grundflache = models.TextField(null=True, blank=True)
-    dachaufbau_tiefgarage_park_wegeflache = models.TextField(null=True, blank=True)
+    dachaufbau_tiefgarage_befestigt = models.TextField(null=True, blank=True)
+    dachaufbau_tiefgarage_grun = models.TextField(null=True, blank=True)
+    feuerwehraufstellflachen = models.TextField(null=True, blank=True)
     sonstiges = models.TextField(null=True, blank=True)
 
 
@@ -380,9 +473,6 @@ class Raumbuch_elektro(Verantwortung):
     kinderzimmer = models.TextField(null=True, blank=True)
     abstellraum = models.TextField(null=True, blank=True)
     schalterprogramm = models.TextField(null=True, blank=True)
-    tv_anschluss = models.TextField(null=True, blank=True)
-    telefon_anschluss = models.TextField(null=True, blank=True)
-    internet_anschluss = models.TextField(null=True, blank=True)
     sonstiges = models.TextField(null=True, blank=True)
 
 
@@ -416,6 +506,7 @@ class Plan(models.Model):
     """
     component_tuple = (
             ('ar', 'Architeckt'),
+            ('gp', 'Gesamtplanung'),
             ('eb', 'Erdbau'),
             ('rb', 'Rohbau'),
             ('fen', 'Fenster'),
