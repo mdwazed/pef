@@ -1,0 +1,6 @@
+{% extends 'siteman_base_template.html' %}
+
+{% block content %}
+  <p>Logged out!</p>  
+  <a href="{% url 'login'%}?next={% url 'siteman:home' %}">Click here to login again.</a>
+{% endblock %}

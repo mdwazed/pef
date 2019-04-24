@@ -18,6 +18,14 @@
             </div>
             <div class="head-line">
                 <h1>PEF Baustellenmanagement</h1>
+            </div>
+            <div class="login-link">
+              {% if user.is_authenticated %}
+                <p>Logged in as: {{ user.get_username }}</p>
+                <p><a href="{% url 'logout' %}">Log out</a></p>
+              {% else %}
+                <p><a href="{% url 'login' %}?next={{request.path}}">Log in</a></p>
+              {% endif %}
             </div>            
         </div>
         <div class="top-nav">

@@ -2,8 +2,11 @@
 
 {% block content%}
     <h3> Home </h3>
+
     <p>Basic information about currently running projects</p>
     <p>Some statistics</p>
-
+    {% if user.is_authenticated %}
+        <p>current user permission {{ perms.siteman }}</p>
+    {% endif %}
 
 {% endblock %}

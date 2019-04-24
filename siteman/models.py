@@ -69,7 +69,7 @@ class Verantwortung(models.Model):
 
 class ChoiceFields(models.Model):
     """
-    all choice should come from this table
+    all choice should come from this table. catagorised as per option_types
     """
     option_types = (
         ('sl', '--select--'),
@@ -80,7 +80,7 @@ class ChoiceFields(models.Model):
         ('dach', 'dach'),
         ('fenster_beschattung', 'fenster_beschattung'),
         )
-    option = models.CharField(max_length=5, unique=True, default='sl')
+    option = models.CharField(max_length=20, unique=True, default='sl')
     display = models.CharField(max_length=50, default='--select--')
     option_type = models.CharField(max_length=50, choices= option_types)
     
@@ -495,6 +495,7 @@ class Handwerker(models.Model):
     anschrift = models.CharField(max_length=200, null=True, blank=True)
     telephone = models.CharField(max_length=20, null=True, blank=True)
     email = models.CharField(max_length=100, null=True, blank=True)
+    gewerk_type = models.CharField(max_length=20, default='default_gewerk')
 
     def __str__(self):
         return self.unternehmen

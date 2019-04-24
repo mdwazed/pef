@@ -6,6 +6,8 @@ from django.shortcuts import render, get_object_or_404, get_list_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.views.generic import DetailView, ListView, UpdateView
+from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.mixins import PermissionRequiredMixin
 
 from . import models, forms, misc_functions, default_creator
 from .components import Haus_fl
@@ -18,6 +20,8 @@ import os
 def home(request):
     return render(request, 'siteman/home.html')
 
+
+@login_required
 def home_projekt(request):
     """
     display current project set in current session
@@ -37,6 +41,7 @@ def home_projekt(request):
     }
     return render(request, 'siteman/home_projekt.html', context)
 
+@permission_required('siteman.change_projekt')
 def projekt(request):
     """
     Add/edit project related information from projekt details page
@@ -63,7 +68,7 @@ def projekt(request):
 ##############################################################################
 """
 
-
+@permission_required('siteman.view_plan')
 def plans(request):
     """
     display all plans related to a haus 
@@ -77,6 +82,7 @@ def plans(request):
     }
     return render(request,'siteman/haus/plans.html', context)
 
+@permission_required('siteman.add_plan')
 def upload_plan(request):
     haus = misc_functions.get_current_haus(request)
 
@@ -103,6 +109,7 @@ def upload_plan(request):
     }
     return render(request, 'siteman/haus/plan_upload.html', context)
 
+@permission_required('siteman.add_haus')
 def haus(request):
     """
     display list of haus associated with selected project
@@ -177,6 +184,7 @@ def set_current_haus(request, haus_id, redirect):
     elif redirect == 'wohnungen':
         return HttpResponseRedirect(reverse('siteman:haus_wohnungen'))
 
+@permission_required('siteman.view_haus')
 def haus_ubersicht(request):
     """
     display summary information of the selected haus
@@ -187,7 +195,7 @@ def haus_ubersicht(request):
     }
     return render(request, 'siteman/haus/ubersicht.html', context)
 
-
+@permission_required('siteman.add_wohnung')
 def haus_wohnungen(request):
     """
     list all wohnung of current haus and
@@ -229,6 +237,7 @@ def haus_wohnungen(request):
     }
     return render(request, 'siteman/haus/wohnungen.html', context)
 
+@permission_required('siteman.delete_haus')
 def haus_delete(request, pk):
     """
     delete the corrasponsing house and all associated components of currently selected project.
@@ -240,7 +249,7 @@ def haus_delete(request, pk):
     except Exception as e:
         return HttpResponse("failed to delete objets" + str(e))
 
-
+@permission_required('siteman.view_rohbau')
 def haus_rohbau(request):
     """
     description of rohbau of currently selected haus 
@@ -252,7 +261,8 @@ def haus_rohbau(request):
     }
     return render(request, 'siteman/haus/rohbau.html', context)
 
-class HausRohbauUpdateView(UpdateView):
+class HausRohbauUpdateView(PermissionRequiredMixin, UpdateView):
+    permission_required = 'siteman.change_rohbau'
     model = models.Rohbau
     template_name = 'siteman/haus/rohbau_update.html'
     form_class = forms.RohbauModelForm
@@ -260,6 +270,7 @@ class HausRohbauUpdateView(UpdateView):
     def get_success_url(self):
         return reverse('siteman:haus_rohbau')
 
+@permission_required('siteman.view_erdbau')
 def haus_erdbau(request):
     """
     erdbau views of currently selected haus
@@ -271,6 +282,9 @@ def haus_erdbau(request):
     return render(request, 'siteman/haus/erdbau.html', context)
 
 class HausErdbauUpdateView(UpdateView):
+    """
+    erdbau update view 
+    """
     model = models.Erdbau
     template_name = 'siteman/haus/erdbau_update.html'
     form_class = forms.ErdbauModelForm
@@ -278,10 +292,10 @@ class HausErdbauUpdateView(UpdateView):
     def get_success_url(self):
         return reverse('siteman:haus_erdbau')
 
-
+@permission_required('siteman.view_dach')
 def haus_dach(request):
     """
-    erdbau views of currently selected haus
+    dach views of currently selected haus
     """
     haus = misc_functions.get_current_haus(request)
     context = {
@@ -297,9 +311,10 @@ class HausDachUpdateView(UpdateView):
     def get_success_url(self):
         return reverse('siteman:haus_dach')
 
+@permission_required('siteman.view_fenster')
 def haus_fenster(request):
     """
-    erdbau views of currently selected haus
+    fenster views of currently selected haus
     """
     haus = misc_functions.get_current_haus(request)
     context = {
@@ -315,6 +330,7 @@ class HausFensterUpdateView(UpdateView):
     def get_success_url(self):
         return reverse('siteman:haus_fenster')
 
+@permission_required('siteman.view_elektro')
 def haus_elektro(request):
     """
     erdbau views of currently selected haus
@@ -333,7 +349,7 @@ class HausElektroUpdateView(UpdateView):
     def get_success_url(self):
         return reverse('siteman:haus_elektro')
 
-
+@permission_required('siteman.view_hls')
 def haus_hls(request):
     """
     HLS views of currently selected haus
@@ -362,7 +378,7 @@ class HausHlsUpdateView(UpdateView):
 #     def get_success_url(self):
 #         return reverse('siteman:haus_sanitaer')
 
-
+@permission_required('siteman.view_innenputz')
 def haus_innenputz(request):
     """
     erdbau views of currently selected haus
@@ -381,6 +397,7 @@ class HausInnenputzUpdateView(UpdateView):
     def get_success_url(self):
         return reverse('siteman:haus_innenputz')
 
+@permission_required('siteman.view_estrich')
 def haus_estrich(request):
     """
     erdbau views of currently selected haus
@@ -399,6 +416,7 @@ class HausEstrichUpdateView(UpdateView):
     def get_success_url(self):
         return reverse('siteman:haus_estrich')
 
+@permission_required('siteman.view_trockenbau')
 def haus_trockenbau(request):
     """
     erdbau views of currently selected haus
@@ -417,6 +435,7 @@ class HausTrockenbauUpdateView(UpdateView):
     def get_success_url(self):
         return reverse('siteman:haus_trockenbau')
 
+@permission_required('siteman.view_maler')
 def haus_maler(request):
     """
     erdbau views of currently selected haus
@@ -435,6 +454,7 @@ class HausMalerUpdateView(UpdateView):
     def get_success_url(self):
         return reverse('siteman:haus_maler')
 
+@permission_required('siteman.view_aussenputz')
 def haus_aussenputz(request):
     """
     erdbau views of currently selected haus
@@ -453,6 +473,7 @@ class HausAussenputzUpdateView(UpdateView):
     def get_success_url(self):
         return reverse('siteman:haus_aussenputz')
 
+@permission_required('siteman.view_fliesenleger')
 def haus_fliesenleger(request):
     """
     erdbau views of currently selected haus
@@ -471,6 +492,7 @@ class HausFliesenlegerUpdateView(UpdateView):
     def get_success_url(self):
         return reverse('siteman:haus_fliesenleger')
 
+@permission_required('siteman.view_bodelbelaege')
 def haus_bodenbelaege(request):
     """
     erdbau views of currently selected haus

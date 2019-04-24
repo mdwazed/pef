@@ -7,7 +7,7 @@ from . import models
 
 class Haus_fl:
     """
-    haus class for front layer. this class is different from the .model.Haus class.
+    haus class for front layer. this class is different from the .models.Haus class.
     all haus object instantiate from this class for further modification.
     
     """

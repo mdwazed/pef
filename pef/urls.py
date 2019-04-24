@@ -20,9 +20,11 @@ from django.conf.urls.static import static
 # from django.shortcuts import include
 
 urlpatterns = [
-    path('admin/', admin.site.urls, name=admin),
-    path('siteman/', include('siteman.urls')),
+    path('admin/', admin.site.urls, name='admin'),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('siteman/', include('siteman.urls'), name='home'),
 ]
+
 
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
